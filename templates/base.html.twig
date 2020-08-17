@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <!--Bootstrap css-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <!--Bootstrap js-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- Materialize icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    {% endblock %}
+</head>
+<body>
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo"><i class="material-icons">directions_boat</i>Welcome to PHP Island</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a class="waves-effect waves-light btn"><i class="material-icons">person</i></a></li>
+                <li><a class="waves-effect waves-light btn"><i class="material-icons">notifications</i></a></li>
+                <li><a class="waves-effect waves-light btn"><i class="material-icons">settings</i></a></li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li>
+                        <a class="waves-effect waves-light btn" href="{{ path('app_logout') }}"><i class="material-icons">rowing</i></a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+
+{% block body %}
+{% endblock %}
+
+</div>
+{% block javascripts %}{% endblock %}
+</body>
 </html>
