@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,11 +30,13 @@ class UserRegistrationType extends AbstractType
                 'second_options' => ['label' => 'Repeat Password'],
             ])
             ->add('email', EmailType::class)
+
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success float-right'
                 ]
             ])
+            ->add('profilePic', FileType::class)
         ;
     }
 

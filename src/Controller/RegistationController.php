@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserRegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -38,6 +39,22 @@ class RegistationController extends AbstractController
 
 
             $entity_manager = $this->getDoctrine()->getManager();
+            /**
+             * @var UploadedFile $file
+             */
+            $file = $form['profilePic']->getData();
+
+
+            if ($file) {
+                /*give file a name*/
+                $filename = md5(uniqid()) . '.' . $file->guessClientExtension();
+                /*Store it somewhere*/
+                $file->move(
+                    $this->getParameter('uploads_dir'),
+                    $filename
+                );
+                $user->setProfilePic($filename);
+            }
             $entity_manager->persist($user);
             $entity_manager->flush();
 

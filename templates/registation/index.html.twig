@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form(form) }}
+    <div class="main_body registration_form" style="padding:150px;">
+        {{ form(form) }}
+    <br>
+    <a class="waves-effect waves-dark btn float-right" href="{{ path('app_login') }}">Log in</a>
+    </div>
 {% endblock %}
