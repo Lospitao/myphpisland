@@ -1,21 +1,28 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 
     <meta charset="UTF-8">
+
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-        <!--Bootstrap css-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <!--Bootstrap js-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js">
+
+
+        <!--Jquery, popper and Bootstrap js-->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <!-- Materialize icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--CSS stylesheet-->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
 
     {% endblock %}
 </head>
@@ -23,7 +30,10 @@
 
     <nav>
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo"><i class="material-icons">directions_boat</i>Welcome to PHP Island</a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="#!" class="brand-logo"><img src="{{ '/uploads/' ~ app.user.profilePic }}" alt="" style="min-width:30px;
+	                    width: 3.8%;"></a>
+            {% endif %}
             <ul class="right hide-on-med-and-down">
                 <li><a class="waves-effect waves-light btn"><i class="material-icons">person</i></a></li>
                 <li><a class="waves-effect waves-light btn"><i class="material-icons">notifications</i></a></li>
@@ -33,7 +43,6 @@
                         <a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Logout</a>
                     </li>
                 {% endif %}
-
             </ul>
         </div>
     </nav>
