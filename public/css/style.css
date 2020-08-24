@@ -1,0 +1,76 @@
+body {
+    line-height: 17px;
+    background-color: #c7ecee;
+}
+
+.column {
+    background-color: #dff9fb;
+    padding: 10px;
+    border: 1px solid #D3D3D3;
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px #D3D3D3;
+
+}
+
+.exercise_details {
+    width: 35%;
+    float: left;
+    position: relative;
+    margin-left: 2%;
+    margin-top: 5%;
+    height: 560px;
+}
+
+.solution_ide {
+    width: 50%;
+    float: right;
+    margin-bottom: 20px;
+    position: relative;
+    margin-left: 0;
+    margin-right: 5%;
+    margin-top: 5%;
+    height: 425px;
+}
+
+.sample_tests {
+    width: 50%;
+    float: right;
+    margin-bottom: 5px;
+    position: relative;
+    margin-left: 0;
+    margin-right: 5%;
+    margin-top: 2%;
+    height: 75px;
+}
+
+
+.nav-item {
+    background-color: #7ed6df;
+    border-color: #0D47A1;
+    border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem;
+
+}
+.nav-item a{
+    color: #1a237e;
+}
+
+.nav-item a.active {
+    background-color: #22a6b3;
+    color: #1a237e;
+}
+
+.nav-item a.active:hover {
+    background-color: #22a6b3;
+    color: #1a237e;
+}
+
+.nav-item a:hover{
+    color: #1a237e;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    background-color: #22a6b3;
+    border-color: #dee2e6 #dee2e6;
+    color: #1a237e;
+}
