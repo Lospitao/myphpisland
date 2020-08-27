@@ -2,54 +2,68 @@
 
 
 {% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kata view</title>
 
-<div class="exercise_details column">
-    <ul class="nav nav-tabs" role="tablist" id="profileTabs">
-        <li class="nav-item">
-            <a class="nav-link active" href="#challenge_div" aria-controls="challenge_div" role="tab" data-toggle="tab">Challenge</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#output_div" aria-controls="output_div" role="tab" data-toggle="tab">Output</a>
-        </li>
-    </ul>
 
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="challenge_div">
-            <p>Write a function called that takes a string of parentheses, and determines if the order
-                of the parentheses is valid. The function should return true if the string is valid, and false
-                if it's invalid.</p>
-            <h5>Examples</h5>
-            <code>
-                "()"              =>  true
-                ")(()))"          =>  false
-                "("               =>  false
-                "(())((()())())"  =>  true
-            </code>
-            <h5>Constraints</h5>
-            <code>0 <= input.length <= 100</code>
+
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
+</head>
+<body>
+<div class="screen">
+    <!-- Description section -->
+    <section class="description card">
+        <div class="card-content">
+            <span class="card-title">Descripción</span>
+            {% include 'practice/components/kata-description.html.twig' %}
         </div>
-
-        <div role="tabpanel" class="tab-pane fade" id="output_div">
-            <h5>Your results will be shown here.</h5>
+    </section>
+    <!-- Code editor section -->
+    <section class="code-editor card">
+        <div class="card-content">
+            <span class="card-title">Editor de Código</span>
+            {% include 'practice/components/code-editor.html.twig' %}
+        </div>
+    </section>
+    <!-- Sample test -->
+    <section class="sample-test card">
+        <div class="card-content">
+            <span class="card-title">Test de ejemplo</span>
+            {% include 'practice/components/sample_test.html.twig'%}
+        </div>
+    </section>
+    <footer class="footer">
+        <p>Este es un pie increible.</p>
+    </footer>
+</div>
+<section class="modals">
+    <!-- Modal Structure -->
+    <div id="modal-success-message" class="modal success-message">
+        <div class="modal-content">
+            <h4>¡Yo-ho-ho!</h4>
+            <p>¡Esa es la respuesta correcta!</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Continuar</a>
         </div>
     </div>
-
-</div>
-
-<div class="solution_ide column">
-    <h3>Aquí va el editor</h3>
-</div>
-
-<div class="sample_tests column">
-    <div id="preview-comment">
-    <h3>Aquí va la respuesta tras el submit</h3>
+    <!-- Modal Structure -->
+    <div id="modal-fail-message" class="modal fail-message">
+        <div class="modal-content">
+            <h4>¡Por el amor de una madre!</h4>
+            <p>¡Los dioses acaban de matar aun mono de tres cabezas!</p>
+            <p>Revisa el código fuente.</p>
+        </div>
     </div>
-</div>
-
-
-
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+</section>
+</body>
 {% endblock %}
 
 

@@ -1,76 +1,72 @@
-body {
-    line-height: 17px;
-    background-color: #c7ecee;
+:root {
+    --blue-color: #1E90FF;
 }
-
-.column {
-    background-color: #dff9fb;
-    padding: 10px;
-    border: 1px solid #D3D3D3;
-    border-radius: 5px;
-    box-shadow: 2px 2px 1px #D3D3D3;
+/*****************
+General components
+ *****************/
+.card {
 
 }
 
-.exercise_details {
-    width: 35%;
+.card .card-content {
+    padding: 5px;
+}
+
+.modal .success-message {
+
+}
+.screen {
+    width: 1366px;
+    height: 768px;
+    margin: auto;
+}
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}
+/**
+Description component
+ */
+.card.description {
+    width: 500px;
+    height: 650px;
+    margin: 5px;
     float: left;
-    position: relative;
-    margin-left: 2%;
-    margin-top: 5%;
-    height: 560px;
+}
+/**
+Code editor component
+ */
+.card.code-editor {
+    width: 844px;
+    height: 400px;
+    margin: 5px;
+    float: left;
 }
 
-.solution_ide {
-    width: 50%;
+.card.code-editor .code {
+    height: 307px;
+}
+
+.card.code-editor .btn.execute-test  {
     float: right;
-    margin-bottom: 20px;
-    position: relative;
-    margin-left: 0;
-    margin-right: 5%;
-    margin-top: 5%;
-    height: 425px;
+    background-color: var(--blue-color);
+}
+/**
+Sample test component
+ */
+.card.sample-test {
+    width: 844px;
+    height: 240px;
+    margin: 5px;
+    float: left;
 }
 
-.sample_tests {
-    width: 50%;
-    float: right;
-    margin-bottom: 5px;
-    position: relative;
-    margin-left: 0;
-    margin-right: 5%;
-    margin-top: 2%;
-    height: 75px;
+.card.sample-test .code {
+    height: 190px;
 }
 
-
-.nav-item {
-    background-color: #7ed6df;
-    border-color: #0D47A1;
-    border-top-left-radius: 0.4rem;
-    border-top-right-radius: 0.4rem;
-
-}
-.nav-item a{
-    color: #1a237e;
-}
-
-.nav-item a.active {
-    background-color: #22a6b3;
-    color: #1a237e;
-}
-
-.nav-item a.active:hover {
-    background-color: #22a6b3;
-    color: #1a237e;
-}
-
-.nav-item a:hover{
-    color: #1a237e;
-}
-
-.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
-    background-color: #22a6b3;
-    border-color: #dee2e6 #dee2e6;
-    color: #1a237e;
+.footer {
+    text-align: center;
 }
