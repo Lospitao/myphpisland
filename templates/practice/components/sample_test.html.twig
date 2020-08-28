@@ -3,7 +3,7 @@
 <script type="text/javascript" src="{{ asset('js/default.js') }}"></script>
 <link rel="stylesheet" href={{ asset('plugins/codemirror/lib/codemirror.css') }}>
 <!--Language Plugin-->
-<script src="{{ asset('plugins/codemirror/mode/htmlmixed/htmlmixed.js.js') }}"></script>
+<script src="{{ asset('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
 <script src="{{ asset('plugins/codemirror/mode/xml/xml.js') }}"></script>
 <script src="{{ asset('plugins/codemirror/mode/javascript/javascript.js') }}"></script>
 <script src="{{ asset('plugins/codemirror/mode/css/css.js') }}"></script>
@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="{{ asset('plugins/codemirror/addon/hint/show-hint.css') }}">
 <!--Theme plugins-->
 <link rel="stylesheet" href="{{ asset('plugins/codemirror/theme/eclipse.css') }}">
-
 
 
 <textarea class="code">
@@ -35,4 +34,5 @@
             $this->revTest(comp($a1, $a2), false);
         }
     }
-                </textarea>
+</textarea>
+

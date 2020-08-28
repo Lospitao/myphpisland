@@ -5,7 +5,7 @@
 <script type="text/javascript" src="{{ asset('js/default.js') }}"></script>
 <link rel="stylesheet" href={{ asset('plugins/codemirror/lib/codemirror.css') }}>
 <!--Language Plugin-->
-<script src="{{ asset('plugins/codemirror/mode/htmlmixed/htmlmixed.js.js') }}"></script>
+<script src="{{ asset('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
 <script src="{{ asset('plugins/codemirror/mode/xml/xml.js') }}"></script>
 <script src="{{ asset('plugins/codemirror/mode/javascript/javascript.js') }}"></script>
 <script src="{{ asset('plugins/codemirror/mode/css/css.js') }}"></script>
@@ -20,7 +20,7 @@
 <!--Theme plugins-->
 <link rel="stylesheet" href="{{ asset('plugins/codemirror/theme/eclipse.css') }}">
 
-{% block body %}
+
     <textarea class="code">
 public function testBasics() {
     $a1 = [121, 144, 19, 161, 19, 144, 19, 11];
@@ -32,6 +32,6 @@ public function testBasics() {
 }
     </textarea>
     <button class="btn modal-trigger execute-test" data-target="modal-success-message">Ejecutar test</button>
-{% endblock %}
+
 
 
