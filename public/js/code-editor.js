@@ -1,21 +1,19 @@
+$(document).ready(function() {
+    $('.code').each(function (index) {
 
-    $(document).ready(function() {
 
-        var codeElementCodeEditor = $('.code-editor .code')[0];
-
-            var editorCodeEditor = CodeMirror.fromTextArea(codeElementCodeEditor, {
-                lineNumbers: true,
-                mode: {
-                    name: 'php',
-                    startOpen: true,
-                },
-                mime: "application/x-httpd-php",
-                theme: "eclipse",
-                extraKeys: {"Ctrl-Space": "autocomplete",}
-            });
+        CodeMirror.fromTextArea(this, {
+            lineNumbers: true,
+            mode: {
+                name: 'php',
+                startOpen: true,
+            },
+            mime: "application/x-httpd-php",
+            theme: "eclipse",
+            extraKeys: {"Ctrl-Space": "autocomplete",}
         });
-
-
+    });
+});
 
 /********************************************************
     //when form submitted

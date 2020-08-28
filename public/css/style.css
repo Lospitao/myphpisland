@@ -64,7 +64,8 @@ Sample test component
 }
 
 .card.sample-test .code {
-    height: 190px;
+    height: 150px;
+    max-height: 140px;
 }
 
 .footer {
