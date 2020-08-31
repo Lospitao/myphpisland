@@ -27,6 +27,12 @@ General components
     background-color: var(--blue-color);
 }
 /**
+Title Component
+*/
+.card.title {
+    width:1384px;
+}
+/**
 Description component
  */
 .card.description {

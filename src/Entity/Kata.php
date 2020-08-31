@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ChallengeRepository::class)
  */
-class Challenge
+class Kata
 {
     /**
      * @ORM\Id()
@@ -41,6 +41,11 @@ class Challenge
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $kata_title;
 
     public function getId(): ?int
     {
@@ -103,6 +108,18 @@ class Challenge
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getKataTitle(): ?string
+    {
+        return $this->kata_title;
+    }
+
+    public function setKataTitle(string $kata_title): self
+    {
+        $this->kata_title = $kata_title;
 
         return $this;
     }

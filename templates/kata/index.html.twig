@@ -19,25 +19,31 @@
 </head>
 <body>
 <div class="screen">
+    <!-- Title section -->
+    <section class="title card">
+        <div class="card-content">
+            <span class="card-title">Aquí va el título de la Kata</span>
+        </div>
+    </section>
     <!-- Description section -->
     <section class="description card">
         <div class="card-content">
             <span class="card-title">Descripción</span>
-            {% include 'practice/components/kata-description.html.twig' %}
+            {% include 'kata/components/kata-description.html.twig' %}
         </div>
     </section>
     <!-- Code editor section -->
     <section class="code-editor card">
         <div class="card-content">
             <span class="card-title">Editor de Código</span>
-            {% include 'practice/components/code-editor.html.twig' %}
+            {% include 'kata/components/code-editor.html.twig' %}
         </div>
     </section>
     <!-- Sample test -->
     <section class="sample-test card">
         <div class="card-content">
             <span class="card-title">Test de ejemplo</span>
-            {% include 'practice/components/sample_test.html.twig' %}
+            {% include 'kata/components/sample_test.html.twig' %}
         </div>
     </section>
     <footer class="footer">
