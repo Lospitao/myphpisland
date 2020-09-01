@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ChallengeRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Uid\Uuid;
 /**
  * @ORM\Entity(repositoryClass=ChallengeRepository::class)
  */
@@ -46,6 +46,13 @@ class Kata
      * @ORM\Column(type="string", length=255)
      */
     private $kata_title;
+
+    /**
+     * @ORM\Column(type="guid")
+     */
+    private $uuid;
+
+
 
     public function getId(): ?int
     {
@@ -123,4 +130,19 @@ class Kata
 
         return $this;
     }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+
+    }
+
+    public function setUuid(string $uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+
 }
