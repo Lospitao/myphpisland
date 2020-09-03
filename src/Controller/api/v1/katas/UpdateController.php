@@ -4,14 +4,13 @@ namespace App\Controller\api\v1\katas;
 
 
 use App\Entity\Kata;
-use App\Repository\ChallengeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 
 
-Class UpdateController extends ChallengeRepository {
+Class UpdateController extends AbstractController {
     /**
      * @Route("/api/v1/katas/{uuid}", name="UpdateController")
      */
