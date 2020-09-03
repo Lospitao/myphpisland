@@ -39,9 +39,10 @@ class KataController extends AbstractController
         $entity_manager->persist($kata);
         $entity_manager->flush();
 
-        return $this->redirectToRoute('katas_editor');
+        return $this->redirectToRoute('katas_editor', ['uuid' => $kata_uuid]);
 
     }
+
 
 
 

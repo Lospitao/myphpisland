@@ -26,7 +26,7 @@ class RegistationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $data = $form->getData();
+
             $username = $user->getUsername();
             $password = $user->getPassword();
 
