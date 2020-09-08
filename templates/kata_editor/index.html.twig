@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block body %}
 <!DOCTYPE html>
 <html lang="en">
@@ -21,14 +19,15 @@
     <!-- Title section -->
     <section class="title card">
         <div class="card-content">
-            <textarea name="kata-title" placeholder="Título de la kata" ></textarea>
+            <p></p>
+            <textarea id="title" name="kata-title" placeholder="Título de la kata" data-uuid={{ uuid }}></textarea>
         </div>
     </section>
     <!-- Description section -->
     <section class="description card">
         <div class="card-content">
             <span class="card-title">Descripción</span>
-            <textarea name="kata-description" placeholder="Descripción de la kata"></textarea>
+            <textarea id="description" name="kata-description" placeholder="Descripción de la kata" data-uuid={{ uuid }}> </textarea>
         </div>
     </section>
     <!-- Code editor section -->
