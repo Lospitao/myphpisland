@@ -13,34 +13,33 @@ class KataController extends AbstractController
 
 {
     /**
-     * @Route("/katas", name="kata")
+     * @Route("/katas/create", name="katas_create" )
      */
-    public function index()
+    public function katascreate()
     {
+        $kata = new Kata;
+        $uuid = Uuid::v4();
+        $kata->setUuid($uuid);
+        $kata->setCreatedAt(new \DateTime());
+        $entity_manager = $this->getDoctrine()->getManager();
+        $entity_manager->persist($kata);
+        $entity_manager->flush();
 
+        return $this->redirectToRoute('katas_editor', [
+            'uuid' => $uuid]);
+    }
+
+    /**
+     * @Route("/katas/{uuid}", name="kata" )
+     */
+    public function index($uuid)
+    {
 
 
         return $this->render('kata/index.html.twig', [
             'controller_name' => 'KataController',
 
         ]);
-    }
-
-    /**
-     * @Route("/katas/create", name="katas_create")
-     */
-    public function katascreate()
-    {
-        $kata = new Kata;
-        $kata_uuid = Uuid::v4();
-        $kata->setUuid($kata_uuid);
-        $kata->setCreatedAt(new \DateTime());
-        $entity_manager = $this->getDoctrine()->getManager();
-        $entity_manager->persist($kata);
-        $entity_manager->flush();
-
-        return $this->redirectToRoute('katas_editor', ['uuid' => $kata_uuid]);
-
     }
 
 
