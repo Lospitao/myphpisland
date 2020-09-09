@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('.code').each(function (index) {
 
 
-        CodeMirror.fromTextArea(this, {
+       var editor = CodeMirror.fromTextArea(this, {
             lineNumbers: true,
             mode: {
                 name: 'php',

@@ -25,6 +25,8 @@ Class UpdateController extends AbstractController {
 
         $title=$request->request->get('title');
         $description=$request->request->get('description');
+        $editorCode=$request->request->get('editorCode');
+        $sampleTest=$request->request->get('sampleTest');
         if($uuid) {
             if ($title) {
                 $kata->setKataTitle($title);
@@ -32,6 +34,13 @@ Class UpdateController extends AbstractController {
             if ($description) {
                 $kata->setDescription($description);
             }
+            if ($editorCode) {
+                $kata->setEditorCode($editorCode);
+            }
+            if ($sampleTest) {
+                $kata->setTestCode($sampleTest);
+            }
+
             $kata->setUpdatedAt(new \DateTime());
 
             $entity_manager = $this->getDoctrine()->getManager();
@@ -39,8 +48,17 @@ Class UpdateController extends AbstractController {
             $entity_manager->persist($kata);
             $entity_manager->flush();
 
-            $response = new JsonResponse(['data' => $kata]);
+            $response = new JsonResponse([
+                'data' => $kata,
+                'title' => $title,
+                'description' => $description,
+                'editorCode' => $editorCode
+            ]);
+
             return $response;
+
         }
     }
+
 }
+
