@@ -8,8 +8,8 @@ $(document).ready(function() {
     let updateKataWebService = 'https://localhost:8000/api/v1/katas/' + uuid +'/editor';
 
 
-    $('.title').focusout(function() {
-        let title_text = $('[name="kata-title"]').val();
+    $('#title').focusout(function() {
+        let title_text = $('#title').val();
         $.ajax({
             url : updateKataWebService,
             data : {
@@ -28,12 +28,54 @@ $(document).ready(function() {
         })
     });
 
-    $('.description').focusout(function() {
-        let description = $('[name="kata-description"]').val();
+    $('#description').focusout(function() {
+        let description = $('#description').val();
         $.ajax({
             url : updateKataWebService,
             data : {
                 'description' : description,
+            },
+            type : 'PATCH',
+            dataType : 'json',
+            success: function (data) {
+                console.log('Submission was successful.')
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        })
+    });
+
+    $('#code-editor').focusout(function() {
+        let editorCode = $('#code-editor').val();
+
+        $.ajax({
+            url : updateKataWebService,
+            data : {
+                'editorCode' : editorCode,
+            },
+            type : 'PATCH',
+            dataType : 'json',
+            success: function (data) {
+                console.log('Submission was successful.')
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        })
+    });
+
+    $('#sample-test').focusout(function() {
+        let sampleTest = $('#sample-test').val();
+
+        $.ajax({
+            url : updateKataWebService,
+            data : {
+                'sampleTest' : sampleTest,
             },
             type : 'PATCH',
             dataType : 'json',
