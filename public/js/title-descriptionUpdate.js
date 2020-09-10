@@ -5,7 +5,7 @@ $(document).ready(function() {
     let title = document.getElementById("title");
     let uuid = title.getAttribute("data-uuid")
 
-    let updateKataWebService = 'https://localhost:8000/api/v1/katas/' + uuid +'/editor';
+    let updateKataWebService = 'https://localhost:8000/api/v1/katas/' + uuid;
 
 
     $('#title').focusout(function() {
@@ -47,9 +47,9 @@ $(document).ready(function() {
             },
         })
     });
-
-    $('#code-editor').focusout(function() {
-        let editorCode = $('#code-editor').val();
+/*
+    $('.code-editor .CodeMirror').blur(function() {
+        let editorCode = $('.CodeMirror #code-editor').val();
 
         $.ajax({
             url : updateKataWebService,
@@ -69,8 +69,8 @@ $(document).ready(function() {
         })
     });
 
-    $('#sample-test').focusout(function() {
-        let sampleTest = $('#sample-test').val();
+    $('.sample-test .CodeMirror').blur(function() {
+        let sampleTest = $('.CodeMirror #sample-test').val();
 
         $.ajax({
             url : updateKataWebService,
@@ -89,7 +89,7 @@ $(document).ready(function() {
             },
         })
     });
-
+*/
 });
 
 
