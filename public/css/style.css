@@ -30,10 +30,7 @@ General components
 Title Component
 */
 .card.title {
-    width:1360px;
-}
-.card.title textarea{
-    border:none
+    width:1384px;
 }
 /**
 Description component
@@ -43,13 +40,6 @@ Description component
     height: 650px;
     margin: 5px;
     float: left;
-}
-.card.description textarea{
-    width: 470px;
-    height: 590px;
-    margin: 5px;
-    float: left;
-    border: none;
 }
 /**
 Code editor component
@@ -80,17 +70,10 @@ Sample test component
 }
 
 .card.sample-test .code {
-    height: 130px;
-    max-height: 160px;
-}
-.card.sample-test .CodeMirror-scroll {
-    height: 130px;
+    height: 150px;
     max-height: 140px;
 }
-.card.sample-test .CodeMirror.cm-s-eclipse {
-    height: 130px;
-    max-height: 140px;
-}
+
 .footer {
     text-align: center;
 }
