@@ -22,14 +22,15 @@
     <!-- Title section -->
     <section class="title card">
         <div class="card-content">
-            <span class="card-title">Aquí va el título de la Kata</span>
+            <span class="card-title">{{ title }}</span>
         </div>
     </section>
     <!-- Description section -->
     <section class="description card">
         <div class="card-content">
-            <span class="card-title">Descripción</span>
-            {% include 'kata/components/kata-description.html.twig' %}
+            <span class="card-title"></span>
+            <code>{{ description }}</code>
+
         </div>
     </section>
     <!-- Code editor section -->

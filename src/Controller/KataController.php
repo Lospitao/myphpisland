@@ -34,11 +34,22 @@ class KataController extends AbstractController
      */
     public function index($uuid)
     {
+        $kata = $this->getDoctrine()
+            ->getRepository(Kata::class)
+            ->findOneBy(['uuid' => $uuid]);
+
+        $title= $kata->getKataTitle();
+        $description = $kata->getDescription();
+        $codeEditor = $kata->getEditorCode();
+        $sampleTest = $kata->getTestCode();
 
 
         return $this->render('kata/index.html.twig', [
             'controller_name' => 'KataController',
-
+            'title' => $title,
+            'description' => $description,
+            'codeEditor' => $codeEditor,
+            'sampleTest' => $sampleTest,
         ]);
     }
 

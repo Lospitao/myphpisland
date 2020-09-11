@@ -80,7 +80,7 @@ Sample test component
 }
 
 .card.sample-test .code {
-    height: 130px;
+    height: 160px;
     max-height: 160px;
 }
 .card.sample-test .CodeMirror-scroll {
@@ -91,6 +91,7 @@ Sample test component
     height: 130px;
     max-height: 140px;
 }
+
 .footer {
     text-align: center;
 }
