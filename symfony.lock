@@ -84,6 +84,9 @@
     "egulias/email-validator": {
         "version": "2.1.19"
     },
+    "erusev/parsedown": {
+        "version": "1.7.4"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -517,6 +520,9 @@
         "version": "v4.0.0"
     },
     "twig/extra-bundle": {
+        "version": "v3.0.5"
+    },
+    "twig/markdown-extra": {
         "version": "v3.0.5"
     },
     "twig/twig": {
