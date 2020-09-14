@@ -25,16 +25,22 @@ Class TestExecutionsController extends AbstractController {
         $sampleTest = $kata->getTestCode();
 
         if ($editorCode == $sampleTest) {
-            $answer ="You are right";
+            $isTestPassed = true;
+            $title = "Passed test";
+            $message= "You are right";
         }
 
-        else $answer="keep trying";
+        else {
+            $isTestPassed = false;
+            $title = "Test Failed";
+            $message= "Keep trying";
+        }
 
         $response = new JsonResponse([
-            'data' => $kata,
-            'editorCode' => $editorCode,
-            'sampleTest' => $sampleTest,
-            'answer' => $answer
+            'isTestPassed' => $isTestPassed,
+            'title' => $title,
+            'message' => $message,
+
         ]);
 
         return $response;

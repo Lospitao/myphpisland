@@ -33,8 +33,10 @@ $(document).ready(function() {
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
+
                 },
                 error: function (data) {
+
                 },
             })
         }
