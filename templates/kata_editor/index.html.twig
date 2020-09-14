@@ -6,12 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Kata view</title>
-
-    <script>
-        $(document).ready(function(){
-            $('.modal').modal();
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('js/title-description-editorPage.js') }}"></script>
 
 </head>
 <body>
@@ -19,7 +14,6 @@
     <!-- Title section -->
     <section class="title card">
         <div class="card-content">
-            <p></p>
             <textarea id="title" name="kata-title" placeholder="Título de la kata" data-uuid={{ uuid }}></textarea>
         </div>
     </section>
@@ -48,28 +42,7 @@
         <p>Este es un pie increible.</p>
     </footer>
 </div>
-<section class="modals">
-    <!-- Modal Structure -->
-    <div id="modal-success-message" class="modal success-message">
-        <div class="modal-content">
-            <h4>¡Yo-ho-ho!</h4>
-            <p>¡Esa es la respuesta correcta!</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Continuar</a>
-        </div>
-    </div>
-    <!-- Modal Structure -->
-    <div id="modal-fail-message" class="modal fail-message">
-        <div class="modal-content">
-            <h4>¡Por el amor de una madre!</h4>
-            <p>¡Los dioses acaban de matar aun mono de tres cabezas!</p>
-            <p>Revisa el código fuente.</p>
-        </div>
-    </div>
-</section>
+
 </body>
 {% endblock %}
-
-
 

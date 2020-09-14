@@ -50,6 +50,7 @@ class KataController extends AbstractController
             'description' => $description,
             'codeEditor' => $codeEditor,
             'sampleTest' => $sampleTest,
+            'uuid' => $uuid,
         ]);
     }
 

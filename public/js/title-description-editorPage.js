@@ -47,49 +47,6 @@ $(document).ready(function() {
             },
         })
     });
-/*
-    $('.code-editor .CodeMirror').blur(function() {
-        let editorCode = $('.CodeMirror #code-editor').val();
-
-        $.ajax({
-            url : updateKataWebService,
-            data : {
-                'editorCode' : editorCode,
-            },
-            type : 'PATCH',
-            dataType : 'json',
-            success: function (data) {
-                console.log('Submission was successful.')
-                console.log(data);
-            },
-            error: function (data) {
-                console.log('An error occurred.');
-                console.log(data);
-            },
-        })
-    });
-
-    $('.sample-test .CodeMirror').blur(function() {
-        let sampleTest = $('.CodeMirror #sample-test').val();
-
-        $.ajax({
-            url : updateKataWebService,
-            data : {
-                'sampleTest' : sampleTest,
-            },
-            type : 'PATCH',
-            dataType : 'json',
-            success: function (data) {
-                console.log('Submission was successful.')
-                console.log(data);
-            },
-            error: function (data) {
-                console.log('An error occurred.');
-                console.log(data);
-            },
-        })
-    });
-*/
 });
 
 
