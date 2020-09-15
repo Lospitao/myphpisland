@@ -33,10 +33,17 @@ $(document).ready(function() {
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
+                    console.log('Submission was successful.')
+                    console.log(data);
 
+                    if(data.isTestPassed) {
+                        return $('#modal-success-message').modal('open');
+                    }
+                    else return $('#modal-fail-message').modal('open');
                 },
                 error: function (data) {
-
+                    console.log('An error occurred.');
+                    console.log(data);
                 },
             })
         }
