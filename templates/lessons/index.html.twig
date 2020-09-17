@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson view</title>
+</head>
+<body>
+<div class="screen">
+    <!-- Title section -->
+    <section class="title card">
+        <div class="card-content">
+            <span id="title" class="card-title" data-uuid={{ uuid }}>{{ lessonTitle }}</span>
+        </div>
+    </section>
+    <!-- List of Katas section -->
+    <section class="available-katas card">
+        <div class="card-content">
+            <span class="card-title">Katas</span>
+            <p>Listado de katas disponibles para incluir en la lección</p>
+            {% include 'lessons/components/availableKatas.html.twig' %}
+        </div>
+    </section>
+    <!-- Ordered List of Lesson Katas section -->
+    <section class="lesson-katas card">
+        <div class="card-content">
+            <span class="card-title">Katas de la lección</span>
+            <p>Puedes arrastrar las katas para cambiar el orden o eliminar una kata</p>
+            {% include 'lessons/components/lessonKatas.html.twig' %}
+        </div>
+    </section>
+</body>
+{% endblock %}

@@ -15,9 +15,6 @@ class KataEditorController extends AbstractController
     public function index($uuid)
     {
 
-
-
-
         return $this->render('kata_editor/index.html.twig', [
             'controller_name' => 'KataEditorController',
             'uuid' => $uuid,
