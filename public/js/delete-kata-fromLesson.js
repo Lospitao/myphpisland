@@ -1,21 +1,23 @@
-
 $(document).ready(function() {
 
     let title = document.getElementById("title");
-    let uuid = title.getAttribute("data-uuid")
+    let uuid = title.getAttribute("data-uuid");
 
-    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid;
+    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas' ;
 
 
 
-    $('#title').focusout(function() {
-        let title_text = $('#title').val();
+    $('deleteKataFromLesson').click(function() {
+
+        let kataUuid = $(this).attr("data-uuid");
+        console.log(kataUuid);
+
         $.ajax({
             url : updateLessonWebService,
             data : {
-                'title' : title_text,
+                'kataUuid' : kataUuid,
             },
-            type : 'PATCH',
+            type : 'POST',
             dataType : 'json',
             success: function (data) {
                 console.log('Submission was successful.');
@@ -27,5 +29,6 @@ $(document).ready(function() {
                 console.log(data);
             },
         })
+
     });
 });

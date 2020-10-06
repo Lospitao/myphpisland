@@ -45,8 +45,6 @@ Class UpdateController extends AbstractController {
                 $kata->setUpdatedAt(new \DateTime());
             }
 
-
-
             $entity_manager = $this->getDoctrine()->getManager();
 
             $entity_manager->persist($kata);

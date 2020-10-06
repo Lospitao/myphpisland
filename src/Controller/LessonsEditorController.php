@@ -13,22 +13,31 @@ class LessonsEditorController extends AbstractController
      */
     public function index($uuid)
     {
-        $availableKatas = array();
-        //Todas las katas
+
+        $availableKatas = [];
+
+
+        //All katas
         $katasArray = $this->getDoctrine()
             ->getRepository(Kata::class)
             ->findAll();
-        //Iteración dentro del array de katas
+        //Iteration inside katas array
         foreach($katasArray as $kata) {
-            //Obtener el título cada
+        //Get kata title
             $title = $kata->getKataTitle();
-            array_push($availableKatas, $title);
+            $kata_uuid = $kata->getUuid();
+
+            array_push($availableKatas, [
+                'title' => $title,
+                'katasUuid' => $kata_uuid,
+            ]);
 
         }
         return $this->render('lessons_editor/index.html.twig', [
             'controller_name' => 'LessonsEditorController',
-            'uuid' => $uuid,
+            'lesson_uuid' => $uuid,
             'availableKatas'=> $availableKatas,
+            'kata_uuid' => $kata_uuid,
         ]);
     }
 }

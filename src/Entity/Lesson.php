@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LessonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Lesson
      * @ORM\Column(type="guid", nullable=true)
      */
     private $uuid;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Kata", inversedBy="lesson")
+     */
+    private $kata;
+
+    public function __construct()
+    {
+        $this->kata = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +64,34 @@ class Lesson
     public function setUuid(?string $uuid): self
     {
         $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Kata[]
+     */
+    public function getKata(): Collection
+    {
+        return $this->kata;
+    }
+
+    public function addKatum(Kata $katum): self
+    {
+        if (!$this->kata->contains($katum)) {
+            $this->kata[] = $katum;
+            $katum->addLesson($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKatum(Kata $katum): self
+    {
+        if ($this->kata->contains($katum)) {
+            $this->kata->removeElement($katum);
+            $katum->removeLesson($this);
+        }
 
         return $this;
     }

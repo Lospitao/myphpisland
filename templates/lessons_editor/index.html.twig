@@ -10,13 +10,15 @@
     <meta charset="UTF-8">
     <title>Lesson view</title>
     <script type="text/javascript" src="{{ asset('js/lesson-title-editorPage.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/add-kata-toLesson.js') }}"></script>
+
 </head>
 <body>
 <div class="screen">
     <!-- Title section -->
     <section class="title card">
         <div class="card-content">
-            <textarea id="title" name="lesson-title" placeholder="Título de la lección" data-uuid={{ uuid }}></textarea>
+            <textarea id="title" name="lesson-title" placeholder="Título de la lección" data-uuid={{ lesson_uuid }}></textarea>
         </div>
     </section>
     <!-- List of Katas section -->

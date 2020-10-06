@@ -8,12 +8,11 @@ use App\Entity\Lesson;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-Class LessonUpdateController extends AbstractController
+Class LessonTitleUpdateController extends AbstractController
 {
     /**
-     * @Route("api/v1/lessons/{uuid}", name="LessonUpdateController")
+     * @Route("api/v1/lessons/{uuid}", name="LessonTitleUpdateController")
      * @param $uuid
      * @return JsonResponse
      */

@@ -2,9 +2,14 @@
 
     <ul>
         {% for availableKata in availableKatas %}
-            <li><h5>{{ availableKata }}<i class="tiny material-icons">add_circle</i></h5></li>
+            <li><h5>
+                    {{ availableKata['title'] }}
+                    <a href="#">
+                        <i class="tiny material-icons addAvailableKataToLesson" data-uuid={{ availableKata['katasUuid'] }} >add_circle</i>
+                    </a>
+                </h5>
+            </li>
         {% endfor %}
+
     </ul>
-
-
 </div>
