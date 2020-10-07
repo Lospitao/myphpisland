@@ -1,4 +1,14 @@
 
 <div id="lessonKatasList">
-
+    <ul>
+        {% for lessonKatas in lessonKatasArray %}
+            <li><h5>
+                    {{ lessonKatas['title'] }}
+                    <a href="#">
+                        <i class="tiny material-icons addAvailableKataToLesson">clear</i>
+                    </a>
+                </h5>
+            </li>
+        {% endfor %}
 </div>
+
