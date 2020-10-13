@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Page</title>
+</head>
+<body>
+
+<div class="screen">
+    <!-- Information section -->
+    <section class="information card">
+        <div class="card-content">
+            <img src="{{ '/uploads/' ~ app.user.profilePic }}" alt="">
+            <div class="info">
+                <h5>Nombre de usuario: {{ app.user.username }}</h5>
+                <h5>Correo electrónico: {{ app.user.email }}</h5>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Password section -->
+    <section class="password card">
+        <div class="card-content">
+
+        </div>
+    </section>
+
+    <!-- Social section -->
+    <section class="social card">
+        <div class="card-content">
+
+        </div>
+    </section>
+
+</div>
+{% endblock %}

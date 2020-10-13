@@ -1,0 +1,65 @@
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+
+}
+
+.card .card-content {
+    padding: 5px;
+}
+
+.screen {
+    width: 1366px;
+    height: 768px;
+    margin: auto;
+}
+
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}
+/**
+Informtion Component
+*/
+.card.information {
+    width:1360px;
+}
+.card.information img{
+    min-width:35px;
+    width: 10%;
+    border:none;
+    border-radius: 8%;
+}
+.card.information .info{
+    position: absolute;
+    top: 20px; left: 180px;
+}
+/**
+Password component
+ */
+.card.password {
+    width: 1360px;
+}
+.card.password textarea{
+    width: 1360px;
+    height: 590px;
+    margin: 5px;
+    float: left;
+    border: none;
+}
+/**
+Social component
+ */
+.card.social {
+    width: 1360px;
+
+}
+
+
+

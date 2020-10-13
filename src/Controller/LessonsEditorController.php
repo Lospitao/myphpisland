@@ -32,16 +32,24 @@ class LessonsEditorController extends AbstractController
                 'katasUuid' => $kata_uuid,
             ]);
         }
-
+        //Create array where each kata title and uuid will be stored
         $lessonKatasArray = [];
         //get lesson through uuid
         $lesson = $this->getDoctrine()
             ->getRepository(Lesson::class)
             ->findOneBy(['uuid' => $uuid]);
+        //get kata related to lesson
         $lessonKatas = $lesson->getKata();
+        //iteration inside lessonKatas
         foreach($lessonKatas as $lessonKata) {
-            $title = $lessonKata->getKataTitle();
-            array_push($lessonKatasArray, ['title' => $title]);
+        //get kata title
+            $lessonKatasTitle = $lessonKata->getKataTitle();
+        //get kata uuid
+            $lessonKatasUuid = $lessonKata->getUuid();
+        //Push both into the array previously created
+            array_push($lessonKatasArray, [
+                'title' => $lessonKatasTitle
+            ]);
         }
 
 

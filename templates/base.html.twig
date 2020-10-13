@@ -27,6 +27,8 @@
         <!--CSS stylesheet-->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/katas.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/lessons.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/profilepage.css') }}">
+
 
 
 
@@ -38,8 +40,8 @@
     <nav class="menu logged-user">
         <div class="nav-wrapper">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="#!" class="brand-logo"><img src="{{ '/uploads/' ~ app.user.profilePic }}" alt="" style="min-width:30px;
-	                    width: 3.8%;"></a>
+                <a href="#!" class="avatar"><img src="{{ '/uploads/' ~ app.user.profilePic }}" alt="" style="min-width:30px;
+	                    width: 2.6%;"></a>
             {% endif %}
             <ul class="right hide-on-med-and-down">
                 <li><a class="waves-effect waves-light btn"><i class="material-icons">person</i></a></li>

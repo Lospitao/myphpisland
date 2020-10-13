@@ -21,6 +21,7 @@ class KataController extends AbstractController
         $uuid = Uuid::v4();
         $kata->setUuid($uuid);
         $kata->setCreatedAt(new \DateTime());
+        $kata->setUpdatedAt(new \DateTime());
 
         $entity_manager = $this->getDoctrine()->getManager();
         $entity_manager->persist($kata);
