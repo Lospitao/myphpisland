@@ -16,8 +16,13 @@ class ProfilePageController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @Route("/profile_page/{username}", name="profile_page")
      */
-    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder, $username)
+    public function updatePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, $username)
     {
+        //Get user through usernames
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['username' => $username]);
+
         return $this->render('profile_page/index.html.twig', [
             'controller_name' => 'ProfilePageController',
         ]);
