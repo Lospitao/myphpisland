@@ -45,10 +45,11 @@ Password component
  */
 .card.password {
     width: 1360px;
-    height: 200px;
+    height: 290px;
+    text-align: center;
 }
-.card.password textarea{
-    width: 1000px;
+.card.password input{
+    width: 500px;
 }
 /**
 Social component

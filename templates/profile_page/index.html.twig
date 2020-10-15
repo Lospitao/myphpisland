@@ -5,7 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile Page</title>
+    <script type="text/javascript" src="{{ asset('js/update-password.js') }}"></script>
 </head>
+
 <body>
 
 <div class="screen">
@@ -14,8 +16,8 @@
         <div class="card-content">
             <img src="{{ '/uploads/' ~ app.user.profilePic }}" alt="">
             <div class="info">
-                <h5>Nombre de usuario: {{ app.user.username }}</h5>
-                <h5>Correo electrónico: {{ app.user.email }}</h5>
+                <h5 id="username" class={{ app.user.username }}>Username: {{ app.user.username }}</h5>
+                <h5>Email: {{ app.user.email }}</h5>
             </div>
 
         </div>
@@ -24,9 +26,14 @@
     <!-- Password section -->
     <section class="password card">
         <div class="card-content">
-            <textarea name="current_password" id="current_password">Current Password</textarea>
-            <textarea name="new_password" id="new_password" >New Password</textarea>
-            <textarea name="repeat_password" id="repeat_password">Repeeat Password</textarea>
+            <label for="current_password">Current password</label><br>
+               <input type="password" name="current_password" id="current_password" autofocus required><br>
+            <label for="new_password">New password</label><br>
+                <input type="password" name="new_password" id="new_password" required><br>
+            <label for="repeat_password">Repeat password</label><br>
+                <input type="password" name="repeat_password" id="repeat_password" required><br>
+            <a id="update_password" class="waves-effect waves-dark btn float-right" href="#">Update password</a>
+
         </div>
     </section>
 
