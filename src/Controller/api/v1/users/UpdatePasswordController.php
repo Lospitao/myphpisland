@@ -25,30 +25,31 @@ Class UpdatePasswordController extends AbstractController {
         //Get password registered in DataBase
         $registered_password = $user->getPassword();
         //Get password input values
-        $current_password = $request->request->get('current_password');
-        $new_password = $request->request->get('new_password');
-        $repeat_password = $request->request->get('repeat_password');
+        $currentPassword = $request->request->get('current_password');
+        $newPassword = $request->request->get('new_password');
+        $repeatPassword = $request->request->get('repeat_password');
         //If current_password is registered password
-        If ($passwordEncoder->isPasswordValid($user, $current_password)) {
+        $isPasswordValid =$passwordEncoder->isPasswordValid($user, $currentPassword);
+        If ($isPasswordValid) {
                 //If repeat password == new password
-                if ($new_password == $repeat_password) {
+                if ($newPassword == $repeatPassword) {
                     //Encode new password
-                    $encoded_new_password = $passwordEncoder->encodePassword($user, $new_password);
+                    $encodedNewPassword = $passwordEncoder->encodePassword($user, $newPassword);
                     //Set password to new password
-                    $user->setPassword($encoded_new_password);
+                    $user->setPassword($encodedNewPassword);
                     //Set success message
-                    $result_message = "¡Bien hecho pirata! Has cambiado la contraseña con éxito";
+                    $resultMessage = "¡Bien hecho pirata! Has cambiado la contraseña con éxito";
                     //Persist to database
                     $entity_manager = $this->getDoctrine()->getManager();
                     $entity_manager->persist($user);
                     $entity_manager->flush();
                 }
-                else $result_message = "Repite la misma contraseña";
+                else $resultMessage = "Repite la misma contraseña";
         }
-        else $result_message = "La contraseña actual especificada no existe";
+        else $resultMessage = "La contraseña actual especificada no existe";
 
         $response = new JsonResponse([
-            'result_message' => $result_message,
+            'result_message' => $resultMessage,
         ]);
 
         return $response;
