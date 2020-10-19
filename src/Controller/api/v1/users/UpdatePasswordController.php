@@ -22,21 +22,14 @@ Class UpdatePasswordController extends AbstractController {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->findOneBy(['username' => $username]);
-        $name = $user->getName();
         //Get password registered in DataBase
         $registered_password = $user->getPassword();
         //Get password input values
         $current_password = $request->request->get('current_password');
         $new_password = $request->request->get('new_password');
         $repeat_password = $request->request->get('repeat_password');
-        /*
-        //Encode password specified in current password field
-        $encoded_current_password = $passwordEncoder->encodePassword($user, $current_password);
-        //Encode password specified in new password field
-        $encoded_new_password = $passwordEncoder->encodePassword($user, $new_password);
-        */
         //If current_password is registered password
-        If ($current_password->passwordEncoder->isPasswordValid($user, $registered_password)) {
+        If ($passwordEncoder->isPasswordValid($user, $current_password)) {
                 //If repeat password == new password
                 if ($new_password == $repeat_password) {
                     //Encode new password
