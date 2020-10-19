@@ -39,10 +39,11 @@ Class AddKataToLessonController extends AbstractController
 
                 $lesson->addKatum($kata);
 
+                //add kata to lesson (lesson-kata table in DB)
                 $entity_manager = $this->getDoctrine()->getManager();
-
                 $entity_manager->persist($lesson);
                 $entity_manager->flush();
+
 
                 $response = new JsonResponse();
                 $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);

@@ -12,15 +12,12 @@ $(document).ready(function() {
 
 
         let kataUuid = $(this).attr("data-uuid");
-        let kataToBeAdded = $("#relevantKata").text();
-        console.log(kataToBeAdded);
+        let kataToBeAdded = $("#relevantKAta").text();
+
+        console.log("kataToBeAdded: " + kataToBeAdded);
 
         $.ajax({
-            statusCode: {
-                204: function() {
-                    $( "#lessonKatasList" ).append("<li>" + kataToBeAdded + "</li>");
-                }
-            },
+
             url : updateLessonWebService,
             data : {
                 'kataUuid' : kataUuid,
@@ -30,11 +27,13 @@ $(document).ready(function() {
             dataType : 'json',
             success: function (data) {
                 console.log('Submission was successful.');
-                console.log(data)
+
+                $( "#lessonKatasList" ).append(kataToBeAdded+"<a>" + "<i class=\"tiny material-icons addAvailableKataToLesson\">" + "clear" + "</i>" + "</a>" );
+
             },
             error: function (data) {
                 console.log('An error occurred.');
-                console.log(data);
+
             },
         })
     });

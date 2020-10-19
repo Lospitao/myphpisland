@@ -14,7 +14,7 @@ class LessonsEditorController extends AbstractController
      */
     public function index($uuid)
     {
-
+    //Load Available katas as index is loaded
         $availableKatas = [];
         //All katas
         $katasArray = $this->getDoctrine()
@@ -32,14 +32,17 @@ class LessonsEditorController extends AbstractController
                 'katasUuid' => $kata_uuid,
             ]);
         }
+    //Load Katas that are already in the lesson as index is loaded
         //Create array where each kata title and uuid will be stored
         $lessonKatasArray = [];
         //get lesson through uuid
         $lesson = $this->getDoctrine()
             ->getRepository(Lesson::class)
             ->findOneBy(['uuid' => $uuid]);
-        //get kata related to lesson
+
+        //get kata collection related to lesson
         $lessonKatas = $lesson->getKata();
+
         //iteration inside lessonKatas
         foreach($lessonKatas as $lessonKata) {
         //get kata title
@@ -48,7 +51,8 @@ class LessonsEditorController extends AbstractController
             $lessonKatasUuid = $lessonKata->getUuid();
         //Push both into the array previously created
             array_push($lessonKatasArray, [
-                'title' => $lessonKatasTitle
+                'title' => $lessonKatasTitle,
+                'uuid' => $lessonKatasUuid,
             ]);
         }
 
@@ -59,6 +63,7 @@ class LessonsEditorController extends AbstractController
             'availableKatas'=> $availableKatas,
             'kata_uuid' => $kata_uuid,
             'lessonKatasArray'=> $lessonKatasArray,
+            'lessonKatas' => $lessonKatas
         ]);
     }
 }

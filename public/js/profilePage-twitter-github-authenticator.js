@@ -7,24 +7,39 @@ $(document).ready(function() {
 
 
 
-    $('#update_password').click(function() {
-        let current_password = $('#current_password').val();
-        let new_password = $('#new_password').val();
-        let repeat_password = $('#repeat_password').val();
+    $('#github-link').click(function() {
+
+        $.ajax({
+            url : 'https://github.com/login/oauth/authorize',
+            data : {
+
+            },
+            type : 'FETCH',
+            dataType : 'json',
+            success: function (data) {
+                console.log('Submission was successful.');
+                console.log(data)
+                alert(data['result_message'])
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        })
+    });
+
+    $('#twitter.link').click(function() {
+
         $.ajax({
             url : updateLessonWebService,
             data : {
-                'username' : username,
-                'current_password' : current_password,
-                'new_password' : new_password,
-                'repeat_password' : repeat_password,
+
             },
             type : 'POST',
             dataType : 'json',
             success: function (data) {
                 console.log('Submission was successful.');
-                console.log(data);
-                alert(data['result_message']);
+                console.log(data)
             },
             error: function (data) {
                 console.log('An error occurred.');
@@ -33,3 +48,4 @@ $(document).ready(function() {
         })
     });
 });
+
