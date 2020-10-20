@@ -1,10 +1,10 @@
-<div id="availableKatasList">
+<div class="availableKatasList">
     <ul>
         {% for availableKata in availableKatas %}
 
-                <li id="relevantKata">
+                <li class="relevantKata">
                     {{ availableKata['title'] }}
-                    <a><i class="tiny material-icons addAvailableKataToLesson"  data-uuid={{ availableKata['katasUuid'] }} >add_circle</i></a>
+                    <a><i  class="tiny material-icons addAvailableKataToLesson"  data-title="{{ availableKata['title'] }}" data-uuid="{{ availableKata['katasUuid'] }}" >add_circle</i></a>
                 </li>
 
         {% endfor %}

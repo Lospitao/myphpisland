@@ -12,9 +12,10 @@ $(document).ready(function() {
 
 
         let kataUuid = $(this).attr("data-uuid");
-        let kataToBeAdded = $("#relevantKAta").text();
+        let kataToBeAdded = $(this).attr("data-title");
+        let removingKata = $(this).parent().parent();
 
-        console.log("kataToBeAdded: " + kataToBeAdded);
+
 
         $.ajax({
 
@@ -22,14 +23,16 @@ $(document).ready(function() {
             data : {
                 'kataUuid' : kataUuid,
                 'kataToBeAdded' : kataToBeAdded,
+
             },
             type : 'POST',
             dataType : 'json',
-            success: function (data) {
+            success: function (data, thisParameter) {
                 console.log('Submission was successful.');
+                let newLessonKata = kataToBeAdded + "<a>" + "<i class=\"tiny material-icons addAvailableKataToLesson\">" + "clear" + "</i>" + "</a>"+ "<br>";
 
-                $( "#lessonKatasList" ).append(kataToBeAdded+"<a>" + "<i class=\"tiny material-icons addAvailableKataToLesson\">" + "clear" + "</i>" + "</a>" );
-
+                $( ".lessonKatasList" ).append(newLessonKata);
+                $(removingKata).remove();
             },
             error: function (data) {
                 console.log('An error occurred.');
