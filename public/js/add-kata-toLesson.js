@@ -27,7 +27,7 @@ $(document).ready(function() {
             },
             type : 'POST',
             dataType : 'json',
-            success: function (data, thisParameter) {
+            success: function (data) {
                 console.log('Submission was successful.');
                 let newLessonKata = kataToBeAdded + "<a>" + "<i class=\"tiny material-icons addAvailableKataToLesson\">" + "clear" + "</i>" + "</a>"+ "<br>";
 

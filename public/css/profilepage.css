@@ -29,6 +29,7 @@ Informtion Component
 */
 .card.information {
     width:1360px;
+    height: 150px;
 }
 .card.information img{
     min-width:35px;

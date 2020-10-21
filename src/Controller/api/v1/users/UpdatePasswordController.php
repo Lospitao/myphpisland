@@ -38,18 +38,18 @@ Class UpdatePasswordController extends AbstractController {
                     //Set password to new password
                     $user->setPassword($encodedNewPassword);
                     //Set success message
-                    $resultMessage = "¡Bien hecho pirata! Has cambiado la contraseña con éxito";
+                    $result_message = "¡Bien hecho pirata! Has cambiado la contraseña con éxito";
                     //Persist to database
                     $entity_manager = $this->getDoctrine()->getManager();
                     $entity_manager->persist($user);
                     $entity_manager->flush();
                 }
-                else $resultMessage = "Repite la misma contraseña";
+                else $result_message = "Repite la misma contraseña";
         }
-        else $resultMessage = "La contraseña actual especificada no existe";
+        else $result_message = "La contraseña actual especificada no existe";
 
         $response = new JsonResponse([
-            'result_message' => $resultMessage,
+            'result_message' => $result_message,
         ]);
 
         return $response;

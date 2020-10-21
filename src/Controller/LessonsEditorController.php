@@ -17,6 +17,7 @@ class LessonsEditorController extends AbstractController
     //Load Katas that are already in the lesson as index is loaded
         //Create array where each kata title and uuid will be stored
         $lessonKatasArray = [];
+        $availableKatas = [];
         //get lesson through uuid
         $lesson = $this->getDoctrine()
             ->getRepository(Lesson::class)
@@ -32,10 +33,10 @@ class LessonsEditorController extends AbstractController
             //get kata uuid
             $lessonKatasUuid = $lessonKata->getUuid();
             //Push both into the array previously created
-            array_push($lessonKatasArray, [
+            $lessonKatasArray[$lessonKatasUuid]= [
                 'title' => $lessonKatasTitle,
                 'uuid' => $lessonKatasUuid,
-            ]);
+            ];
         }
 
     //Load Available katas as index is loaded
@@ -50,14 +51,15 @@ class LessonsEditorController extends AbstractController
             $title = $kata->getKataTitle();
         //Get Kata uuid
             $kata_uuid = $kata->getUuid();
-        //Push title and uuid of kata into availableKatas
-            array_push($availableKatas, [
-                'title' => $title,
-                'katasUuid' => $kata_uuid,
-            ]);
+        //If Kata is inside of lesson katas, remove it from availableKatas
+            if(!array_key_exists($kata_uuid, $lessonKatasArray)) {
+                //Push title and uuid of kata into availableKatas
+                $availableKatas[$kata_uuid] = [
+                    'title' => $title,
+                    'uuid' => $kata_uuid,
+                ];
+            }
         }
-
-
 
 
         return $this->render('lessons_editor/index.html.twig', [
