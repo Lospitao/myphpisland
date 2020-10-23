@@ -2,9 +2,6 @@
 
 namespace App\Controller\api\v1\lessons;
 
-
-
-
 use App\Entity\Kata;
 use App\Entity\Lesson;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,9 +41,7 @@ Class AddKataToLessonController extends AbstractController
                 $entity_manager->persist($lesson);
                 $entity_manager->flush();
 
-                //eliminate from availableKatasList the removing Kata
-
-
+                //set response
                 $response = new JsonResponse();
                 $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
                 return $response;

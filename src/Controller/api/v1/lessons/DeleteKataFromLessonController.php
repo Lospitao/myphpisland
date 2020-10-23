@@ -2,10 +2,8 @@
 
 namespace App\Controller\api\v1\lessons;
 
-
-
-
 use App\Entity\Kata;
+use App\Entity\Lesson;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -20,25 +18,38 @@ Class DeleteKataFromLessonController extends AbstractController
      */
     function DeleteKataFromLessonController (Request $request, $uuid)
     {
-        $kata_uuid =$request->request->get('kataUuid');
-        $kata = $this->getDoctrine()
+
+        //get kata uuid
+        $kata_uuid = $request->request->get('kataUuid');
+        //get kata to be added
+        $kata= $this->getDoctrine()
             ->getRepository(Kata::class)
             ->findOneBy(['uuid' => $kata_uuid]);
+        //get lesson to be updated
+        $lesson = $this->getDoctrine()
+            ->getRepository(Lesson::class)
+            ->findOneBy(['uuid' => $uuid]);
+        //Check if lesson exists
+        if ($lesson) {
+            //check if kata exists
+            if ($kata) {
 
-        $title = $kata->getKataTitle();
+                $lesson->removeKatum($kata);
 
-        array_push($lessonKatas, [
-            'title' => $title,
-            'katasUuid' => $kata_uuid,
-        ]);
-
-        $response = new JsonResponse([
-            'lesson_uuid' => $uuid,
-            'kata_uuid' => $kata_uuid,
-            'title' => $title,
-            'lessonKatas' => $lessonKatas,
-        ]);
-
-        return $response;
+                //remove kata from lesson in DB
+                $entity_manager = $this->getDoctrine()->getManager();
+                $entity_manager->remove($kata);
+                $entity_manager->flush();
+                //set response
+                $response = new JsonResponse();
+                $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
+                return $response;
+            }
+            else {
+                $response = new JsonResponse();
+                $response->setStatusCode(JsonResponse::HTTP_BAD_REQUEST);
+                return $response;
+            }
+        }
     }
 }
