@@ -1,7 +1,6 @@
 <div class="availableKatasList">
-    <ul>
+    <ul class="availableKatas">
         {% for availableKata in availableKatas %}
-
                 <li class="relevantKata">
                     {{ availableKata['title'] }}
                     <a href="#"><i class="tiny material-icons addAvailableKataToLesson"  data-title="{{ availableKata['title'] }}" data-uuid="{{ availableKata['uuid'] }}" >add_circle</i></a>

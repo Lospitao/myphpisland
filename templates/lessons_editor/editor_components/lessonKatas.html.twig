@@ -3,10 +3,8 @@
     <ul class="lessonKatas">
         {% for lessonKatas in lessonKatasArray %}
             <li>
-                    {{ lessonKatas['title'] }}
-                    <a href="#">
-                        <i class="tiny material-icons removeKataFromLesson" data-title="{{ lessonKatas['title'] }}" data-uuid="{{ lessonKatas['uuid'] }}">clear</i>
-                    </a>    
+                {{ lessonKatas['title'] }}
+                <a href="#"><i class="tiny material-icons removeKataFromLesson" data-title="{{ lessonKatas['title'] }}" data-uuid="{{ lessonKatas['uuid'] }}">clear</i></a>
             </li>
         {% endfor %}
     </ul>
