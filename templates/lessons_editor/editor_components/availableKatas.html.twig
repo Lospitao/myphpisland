@@ -1,9 +1,9 @@
 <div class="availableKatasList">
     <ul class="availableKatas">
         {% for availableKata in availableKatas %}
-                <li class="relevantKata">
+                <li>
                     {{ availableKata['title'] }}
-                    <a href="#"><i class="tiny material-icons addAvailableKataToLesson"  data-title="{{ availableKata['title'] }}" data-uuid="{{ availableKata['uuid'] }}" >add_circle</i></a>
+                    <a href="#"><i class="tiny material-icons availableKata"  data-title="{{ availableKata['title'] }}" data-uuid="{{ availableKata['uuid'] }}" >add_circle</i></a>
                 </li>
 
         {% endfor %}

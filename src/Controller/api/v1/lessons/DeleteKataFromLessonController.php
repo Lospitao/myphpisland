@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 Class DeleteKataFromLessonController extends AbstractController
 {
     /**
-     * @Route("api/v1/lessons/{uuid}/katas", name="DeleteKataFromLessonController")
+     * @Route("api/v1/lessons/{uuid}/lessonkatas", name="DeleteKataFromLessonController")
      * @param $uuid,
      * @return JsonResponse
      */
@@ -20,7 +20,7 @@ Class DeleteKataFromLessonController extends AbstractController
     {
 
         //get kata uuid
-        $kata_uuid = $request->request->get('kataUuid');
+        $kata_uuid = $request->request->get('kataToBeRemovedUuid');
         //get kata to be added
         $kata= $this->getDoctrine()
             ->getRepository(Kata::class)
@@ -38,7 +38,7 @@ Class DeleteKataFromLessonController extends AbstractController
 
                 //remove kata from lesson in DB
                 $entity_manager = $this->getDoctrine()->getManager();
-                $entity_manager->remove($kata);
+                $entity_manager->persist($lesson);
                 $entity_manager->flush();
                 //set response
                 $response = new JsonResponse();
@@ -52,4 +52,5 @@ Class DeleteKataFromLessonController extends AbstractController
             }
         }
     }
+
 }

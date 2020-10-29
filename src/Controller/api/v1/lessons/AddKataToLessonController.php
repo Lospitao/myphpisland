@@ -19,7 +19,7 @@ Class AddKataToLessonController extends AbstractController
     function AddKataToLessonController (Request $request, $uuid)
     {
         //get kata uuid
-        $kata_uuid =$request->request->get('kataUuid');
+        $kata_uuid =$request->request->get('kataToBeAddedUuid');
         //get kata to be added
         $kata= $this->getDoctrine()
             ->getRepository(Kata::class)
