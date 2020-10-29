@@ -21,10 +21,10 @@ function addKataEvent (kataUuid, kataToBeAdded, removingKata) {
             $( ".lessonKatas" ).append(newLessonKata);
             $('.removeKataFromLesson[data-uuid="'+kataUuid+'"]').click(function() {
                let kataToBeRemovedFromLesson = $(this).attr("data-title");
-               console.log("kataToBeRemovedFromLesson: ");
-               console.log(kataToBeRemovedFromLesson);
                 removeKataEvent(kataUuid, kataToBeRemovedFromLesson, removingKata);
             });
+            console.log("removingKata");
+            console.log(removingKata);
             $(removingKata).remove();
         },
         error: function (data) {
@@ -32,13 +32,14 @@ function addKataEvent (kataUuid, kataToBeAdded, removingKata) {
         },
     })
 }
+
 function addAvailableKataToLessonEventToClickEvents() {
 
     $('.addAvailableKataToLesson').click(function() {
         let kataUuid = $(this).attr("data-uuid");
         let kataToBeAdded = $(this).attr("data-title");
         let removingKata = $(this).parent().parent();
-        addKataEvent(kataUuid, kataToBeAdded, removingKata );
+        addKataEvent(kataUuid, kataToBeAdded, removingKata);
     });
 }
 

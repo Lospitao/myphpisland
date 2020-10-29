@@ -21,8 +21,6 @@ function removeKataEvent (kataUuid, kataToBeRemovedFromLesson, removingKata) {
             $( ".availableKatas" ).append(kataToRemoveFromLesson);
             $('.addAvailableKataToLesson[data-uuid="'+kataUuid+'"]').click(function() {
                 let kataToBeAdded = $(this).attr("data-title");
-                console.log("kataToBeAdded: ");
-                console.log(kataToBeAdded);
                 addKataEvent(kataUuid, kataToBeAdded, removingKata);
             });
             $(removingKata).remove();
@@ -32,13 +30,14 @@ function removeKataEvent (kataUuid, kataToBeRemovedFromLesson, removingKata) {
         },
     })
 }
+
 function removeKataFromLessonEventToClickEvents() {
 
     $('.removeKataFromLesson').click(function() {
         let kataUuid = $(this).attr("data-uuid");
         let kataToBeRemovedFromLesson = $(this).attr("data-title");
         let removingKata = $(this).parent().parent();
-        removeKataEvent(kataUuid, kataToBeRemovedFromLesson, removingKata );
+        removeKataEvent(kataUuid, kataToBeRemovedFromLesson, removingKata);
     });
 }
 
