@@ -1,4 +1,4 @@
-function addKataEvent (kataUuid, kataToBeAdded, removingKata) {
+function addKataEvent(kataToBeAddedUuid, kataToBeAddedTitle, kataToRemoveFromAvailable) {
     //Select element with id title (lesson title textarea)
     let title = document.getElementById("title");
     //get lesson uuid
@@ -10,22 +10,22 @@ function addKataEvent (kataUuid, kataToBeAdded, removingKata) {
 
         url : updateLessonWebService,
         data : {
-            'kataUuid' : kataUuid,
-            'kataToBeAdded' : kataToBeAdded,
+            'kataToBeAddedUuid' : kataToBeAddedUuid,
+            'kataToBeAddedTitle' : kataToBeAddedTitle,
         },
         type : 'POST',
         dataType : 'json',
         success: function (data) {
             console.log('Submission was successful.');
-            let newLessonKata = `<li >${kataToBeAdded}<a href="#"><i class="tiny material-icons removeKataFromLesson" data-title="${kataToBeAdded}" data-uuid="${kataUuid}">clear</i></a></li>`;
+            let newLessonKata = `<li >${kataToBeAddedTitle}<a href="#"><i class="tiny material-icons lessonKata" data-title="${kataToBeAddedTitle}" data-uuid="${kataToBeAddedUuid}">clear</i></a></li>`;
             $( ".lessonKatas" ).append(newLessonKata);
-
-            $('.removeKataFromLesson[data-uuid="'+kataUuid+'"]').click(function() {
-               let kataToBeRemovedFromLesson = $(this).attr("data-title");
-                let removingKata = $('.removeKataFromLesson[data-uuid="'+kataUuid+'"]').parent().parent();
-                removeKataEvent(kataUuid, kataToBeRemovedFromLesson, removingKata);
+            $('.lessonKata[data-uuid="'+kataToBeAddedUuid+'"]').click(function() {
+               let kataTitleToBeRemovedFromLesson = $(this).attr("data-title");
+               let kataToBeRemovedUuid = $(this).attr("data-uuid");
+               let kataToRemoveFromLesson = $('.lessonKata[data-uuid="'+kataToBeAddedUuid+'"]').parent().parent();
+                removeKataEvent(kataToBeRemovedUuid, kataTitleToBeRemovedFromLesson, kataToRemoveFromLesson);
             });
-            $(removingKata).remove();
+            $(kataToRemoveFromAvailable).remove();
         },
         error: function (data) {
             console.log('An error occurred.');
@@ -33,16 +33,17 @@ function addKataEvent (kataUuid, kataToBeAdded, removingKata) {
     })
 }
 
-function addAvailableKataToLessonEventToClickEvents() {
+function addAvailableKataToLessonEvent() {
 
-    $('.addAvailableKataToLesson').click(function() {
-        let kataUuid = $(this).attr("data-uuid");
-        let kataToBeAdded = $(this).attr("data-title");
-        let removingKata = $(this).parent().parent();
-        addKataEvent(kataUuid, kataToBeAdded, removingKata);
+    $('.availableKata').click(function() {
+        let kataToBeAddedUuid = $(this).attr("data-uuid");
+        let kataToBeAddedTitle = $(this).attr("data-title");
+        let kataToRemoveFromAvailable = $(this).parent().parent();
+        addKataEvent(kataToBeAddedUuid, kataToBeAddedTitle, kataToRemoveFromAvailable);
+
     });
 }
 
 $(document).ready(function() {
-    addAvailableKataToLessonEventToClickEvents();
+    addAvailableKataToLessonEvent();
 });
