@@ -3,7 +3,7 @@ function removeKataEvent(kataToBeRemovedUuid, kataTitleToBeRemovedFromLesson, ka
     let title= document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/lessonkatas' ;
+    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas/' + kataToBeRemovedUuid ;
 
 
     $.ajax({
@@ -13,7 +13,7 @@ function removeKataEvent(kataToBeRemovedUuid, kataTitleToBeRemovedFromLesson, ka
             'kataToBeRemovedUuid' : kataToBeRemovedUuid,
             'kataTitleToBeRemovedFromLesson' : kataTitleToBeRemovedFromLesson,
         },
-        type : 'POST',
+        type : 'DELETE',
         dataType : 'json',
         success: function (data) {
             console.log('Submission was successful.');
