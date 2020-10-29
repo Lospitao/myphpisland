@@ -21,6 +21,7 @@ function removeKataEvent (kataUuid, kataToBeRemovedFromLesson, removingKata) {
             $( ".availableKatas" ).append(kataToRemoveFromLesson);
             $('.addAvailableKataToLesson[data-uuid="'+kataUuid+'"]').click(function() {
                 let kataToBeAdded = $(this).attr("data-title");
+                let removingKata = $('.addAvailableKataToLesson[data-uuid="'+kataUuid+'"]').parent().parent();
                 addKataEvent(kataUuid, kataToBeAdded, removingKata);
             });
             $(removingKata).remove();

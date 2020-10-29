@@ -19,12 +19,12 @@ function addKataEvent (kataUuid, kataToBeAdded, removingKata) {
             console.log('Submission was successful.');
             let newLessonKata = `<li >${kataToBeAdded}<a href="#"><i class="tiny material-icons removeKataFromLesson" data-title="${kataToBeAdded}" data-uuid="${kataUuid}">clear</i></a></li>`;
             $( ".lessonKatas" ).append(newLessonKata);
+
             $('.removeKataFromLesson[data-uuid="'+kataUuid+'"]').click(function() {
                let kataToBeRemovedFromLesson = $(this).attr("data-title");
+                let removingKata = $('.removeKataFromLesson[data-uuid="'+kataUuid+'"]').parent().parent();
                 removeKataEvent(kataUuid, kataToBeRemovedFromLesson, removingKata);
             });
-            console.log("removingKata");
-            console.log(removingKata);
             $(removingKata).remove();
         },
         error: function (data) {
