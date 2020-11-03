@@ -1,0 +1,55 @@
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+
+}
+
+.card .card-content {
+    padding: 5px;
+}
+
+.screen {
+    width: 1366px;
+    height: 768px;
+    margin: auto;
+}
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}
+/**
+Title Component
+*/
+.card.title {
+    width:1360px;
+}
+.card.title textarea{
+    border:none
+}
+/**
+Ambient Sound Component
+*/
+.card.ambient-sound {
+    width: 680px;
+    float: left;
+}
+/**
+Dialog Component
+*/
+.card.dialog {
+    width: 680px;
+    float: right;
+}
+/**
+Background Image Component
+*/
+.card.background-image {
+    margin-top: 140px;
+    height: 400px;
+}

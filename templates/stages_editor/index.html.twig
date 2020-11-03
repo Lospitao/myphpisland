@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Stage view</title>
+    </head>
+    <body>
+    <div class="screen">
+        <!-- Title section -->
+        <section class="title card">
+            <div class="card-content">
+                <span id="title" class="card-title">
+                     <textarea id="title" name="stage-title" placeholder="Título del escenario" data-uuid="{{ stageUuid }}"></textarea>
+                </span>
+            </div>
+        </section>
+        <!-- Ambient Sound section -->
+        <section class="ambient-sound card">
+            <div class="card-content">
+                <span class="card-title">Sonido ambiente</span>
+                <input value="Archivo" type="submit" name="Archivo" data-uuid="{{ stageUuid }}">
+                <p>Pulsar para subir archivo de sonido ambiente</p>
+            </div>
+        </section>
+        <!-- Dialog section -->
+        <section class="dialog card">
+            <div class="card-content">
+                <span class="card-title">Diálogo</span>
+                <input value="Archivo" type="submit" name="Archivo" data-uuid="{{ stageUuid }}">
+                <p>Pulsar para subir un diálogo</p>
+            </div>
+        </section>
+        <!-- Stage Background Image -->
+        <section class="background-image card">
+            <div class="card-content">
+                <input value="Archivo" type="submit" name="Archivo" data-uuid="{{ stageUuid }}">
+                <p>Pulsar para subir un fondo de escenario</p>
+                <span class="card-title">Fondo de escenario</span>
+            </div>
+        </section>
+        <footer class="footer">
+            <p>Este es un pie increible.</p>
+        </footer>
+    </div>
+    </body>
+{% endblock %}

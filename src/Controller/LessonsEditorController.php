@@ -14,7 +14,7 @@ class LessonsEditorController extends AbstractController
      */
     public function index($uuid)
     {
-    //Load Katas that are already in the lesson as index is loaded
+
         //Create array where each kata title and uuid will be stored
         $lessonKatasArray = [];
         $availableKatas = [];
