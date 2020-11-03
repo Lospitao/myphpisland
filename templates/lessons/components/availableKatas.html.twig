@@ -1,10 +1,12 @@
-<div id="availableKatasList">
-
-    <ul>
+<div class="availableKatasList">
+    <ul class="availableKatas">
         {% for availableKata in availableKatas %}
-            <li><h5>{{ availableKata }}<i class="tiny material-icons">add_circle</i></h5></li>
+            <li>
+                <a href="{{ path('kata', {'uuid': ( availableKata['uuid'] ) }) }}" class="availableKatas" data-title="{{ availableKata['title'] }}" data-uuid="{{ availableKata['uuid'] }}">
+                {{ availableKata['title'] }}
+                </a>
+            </li>
+
         {% endfor %}
     </ul>
-
-
 </div>
