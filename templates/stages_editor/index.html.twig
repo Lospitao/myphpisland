@@ -9,6 +9,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Stage view</title>
+        <script type="text/javascript" src="{{ asset('js/stage-title-update.js') }}"></script>
     </head>
     <body>
     <div class="screen">
@@ -16,7 +17,8 @@
         <section class="title card">
             <div class="card-content">
                 <span id="title" class="card-title">
-                     <textarea id="title" name="stage-title" placeholder="Título del escenario" data-uuid="{{ stageUuid }}"></textarea>
+                     <label for="title"></label>
+                    <textarea id="stage-title" name="stage-title" placeholder="Título del escenario" data-uuid="{{ stageUuid }}"></textarea>
                 </span>
             </div>
         </section>
