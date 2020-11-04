@@ -17,7 +17,7 @@
         <section class="title card">
             <div class="card-content">
                 <span id="title" class="card-title">
-                     <label for="title"></label>
+                     <label for="stage-title"></label>
                     <textarea id="stage-title" name="stage-title" placeholder="Título del escenario" data-uuid="{{ stageUuid }}"></textarea>
                 </span>
             </div>
@@ -26,24 +26,33 @@
         <section class="ambient-sound card">
             <div class="card-content">
                 <span class="card-title">Sonido ambiente</span>
-                <input value="Archivo" type="submit" name="Archivo" data-uuid="{{ stageUuid }}">
+                <label for="uploadSound" class="btn">Selecciona un archivo</label>
+                <input id="uploadSound" type="file" name="uploadSound" style="visibility:hidden;">
                 <p>Pulsar para subir archivo de sonido ambiente</p>
+                <label for="uploadSoundButton" class="btn">Enviar</label>
+                <input id="uploadSoundButton" style="visibility:hidden;" type="submit" data-uuid="{{ stageUuid }}">
             </div>
         </section>
         <!-- Dialog section -->
         <section class="dialog card">
             <div class="card-content">
                 <span class="card-title">Diálogo</span>
-                <input value="Archivo" type="submit" name="Archivo" data-uuid="{{ stageUuid }}">
+                <label for="uploadDialog" class="btn">Selecciona un archivo</label>
+                <input id="uploadDialog" type="file" name="uploadDialog" style="visibility:hidden;">
                 <p>Pulsar para subir un diálogo</p>
+                <label for="uploadDialogButton" class="btn">Enviar</label>
+                <input id="uploadDialogButton" style="visibility:hidden;" type="submit" data-uuid="{{ stageUuid }}">
             </div>
         </section>
         <!-- Stage Background Image -->
         <section class="background-image card">
             <div class="card-content">
-                <input value="Archivo" type="submit" name="Archivo" data-uuid="{{ stageUuid }}">
-                <p>Pulsar para subir un fondo de escenario</p>
                 <span class="card-title">Fondo de escenario</span>
+                <label for="uploadBackgroundImage" class="btn">Selecciona un archivo</label>
+                <input id="uploadBackgroundImage"  type="file" name="uploadBackgroundImage" style="visibility:hidden;">
+                <p>Pulsar para subir un fondo de escenario</p>
+                <label for="uploadBackgroundImageButton" class="btn">Enviar</label>
+                <input id="uploadBackgroundImageButton" style="visibility:hidden;" type="submit" data-uuid="{{ stageUuid }}">
             </div>
         </section>
         <footer class="footer">
