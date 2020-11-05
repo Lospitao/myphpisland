@@ -1,3 +1,5 @@
+<!--Code Mirror Instance-->
+<script type="text/javascript" src="{{ asset('js/sample-test-kataPage.js') }}"></script>
 <!--Code Mirror plugins-->
 <script type="text/javascript" src="{{ asset('plugins/codemirror/lib/codemirror.js') }}"></script>
 <link rel="stylesheet" href={{ asset('plugins/codemirror/lib/codemirror.css') }}>
@@ -18,21 +20,5 @@
 <link rel="stylesheet" href="{{ asset('plugins/codemirror/theme/eclipse.css') }}">
 
 
-<textarea class="code">
-
-    class AreTheyTheSameTest extends TestCase
-    {
-        private function revTest($actual, $expected) {
-            $this->assertEquals($expected, $actual);
-        }
-        public function testBasics() {
-            $a1 = [121, 144, 19, 161, 19, 144, 19, 11];
-            $a2 = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19];
-            $this->revTest(comp($a1, $a2), true);
-            $a1 = [121, 144, 19, 161, 19, 144, 19, 11];
-            $a2 = [11*21, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19];
-            $this->revTest(comp($a1, $a2), false);
-        }
-    }
-</textarea>
+<textarea name="sample-test" class="sample-test code view" id="sample-test">{{ sampleTest }}</textarea>
 

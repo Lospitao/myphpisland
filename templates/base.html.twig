@@ -22,36 +22,45 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link rel="stylesheet" href={{ asset('css/materialize-social.css') }}>
+        <!--Font Awesome -->
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Materialize icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--CSS stylesheet-->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-        <script type="text/javascript" src="{{ asset('js/code-editor.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/Kata.js') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/stages.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/katas.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/lessons.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/profilepage.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
+
+
+
+
 
     {% endblock %}
 </head>
 <body>
-
-    <nav class="menu logged-user">
-        <div class="nav-wrapper">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="#!" class="brand-logo"><img src="{{ '/uploads/' ~ app.user.profilePic }}" alt="" style="min-width:30px;
-	                    width: 3.8%;"></a>
-            {% endif %}
-            <ul class="right hide-on-med-and-down">
-                <li><a class="waves-effect waves-light btn"><i class="material-icons">person</i></a></li>
-                <li><a class="waves-effect waves-light btn"><i class="material-icons">notifications</i></a></li>
-                <li><a class="waves-effect waves-light btn"><i class="material-icons">settings</i></a></li>
+    <div class="base">
+        <nav class="menu logged-user">
+            <div class="nav-wrapper">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li>
-                        <a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Logout</a>
-                    </li>
+                    <a href="#!" class="avatar"><img src="{{ '/uploads/' ~ app.user.profilePic }}" alt=""></a>
                 {% endif %}
-            </ul>
-        </div>
-    </nav>
-
+                <ul class="right hide-on-med-and-down">
+                    <li><a class="waves-effect waves-light btn"><i class="material-icons">person</i></a></li>
+                    <li><a class="waves-effect waves-light btn"><i class="material-icons">notifications</i></a></li>
+                    <li><a class="waves-effect waves-light btn"><i class="material-icons">settings</i></a></li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li>
+                            <a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
 {% block body %}
 
 {% endblock %}

@@ -8,12 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Json;
+
 
 
 Class UpdateController extends AbstractController {
     /**
-     * @Route("api/v1/katas/{uuid}/editor", name="UpdateController")
+     * @Route("api/v1/katas/{uuid}", name="UpdateController")
      * @param $uuid
      * @return JsonResponse
      */
@@ -30,18 +30,20 @@ Class UpdateController extends AbstractController {
         if($uuid) {
             if ($title) {
                 $kata->setKataTitle($title);
+                $kata->setUpdatedAt(new \DateTime());
             }
             if ($description) {
                 $kata->setDescription($description);
+                $kata->setUpdatedAt(new \DateTime());
             }
             if ($editorCode) {
                 $kata->setEditorCode($editorCode);
+                $kata->setUpdatedAt(new \DateTime());
             }
             if ($sampleTest) {
                 $kata->setTestCode($sampleTest);
+                $kata->setUpdatedAt(new \DateTime());
             }
-
-            $kata->setUpdatedAt(new \DateTime());
 
             $entity_manager = $this->getDoctrine()->getManager();
 

@@ -1,0 +1,64 @@
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+
+}
+
+.card .card-content {
+    padding: 5px;
+}
+
+.modal .success-message {
+
+}
+.screen {
+    width: 1366px;
+    height: 768px;
+    margin: auto;
+}
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}
+/**
+Title Component
+*/
+.card.title {
+    width:1360px;
+}
+.card.title textarea{
+    border:none
+}
+/**
+Available Katas Component
+*/
+.card.available-katas {
+    width: 670px;
+    height: 680px;
+    margin: 5px;
+    float: left;
+}
+.card.available-katas li {
+    border-top: #0c0c0d;
+    border-bottom: #0c0c0d;
+}
+.card.available-katas li i {
+    float: right;
+
+
+}
+/**
+Ordered Lesson Katas List
+*/
+.card.lesson-katas {
+    width: 670px;
+    height: 680px;
+    margin: 5px;
+    float: right;
+}

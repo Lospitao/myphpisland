@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Page</title>
+    <script type="text/javascript" src="{{ asset('js/update-password.js') }}"></script>
+
+</head>
+
+<body>
+
+<div class="screen">
+    <!-- Information section -->
+    <section class="information card">
+        <div class="card-content">
+            <img src="{{ '/uploads/' ~ app.user.profilePic }}" alt="">
+            <div class="info">
+                <h5 id="username" class={{ app.user.username }}>Username: {{ app.user.username }}</h5>
+                <h5>Email: {{ app.user.email }}</h5>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Password section -->
+    <section class="password card">
+        <div class="card-content">
+            <label for="current_password">Current password</label><br>
+               <input type="password" name="current_password" id="current_password" autofocus required><br>
+            <label for="new_password">New password</label><br>
+                <input type="password" name="new_password" id="new_password" required><br>
+            <label for="repeat_password">Repeat password</label><br>
+                <input type="password" name="repeat_password" id="repeat_password" required><br>
+            <a id="update_password" class="waves-effect waves-dark btn float-right" href="#">Update password</a>
+        </div>
+    </section>
+
+    <!-- Social section -->
+    <section class="social card">
+        <div class="card-content">
+            <a
+                    id="github-link"
+                    class="waves-effect waves-light btn-large social github"
+                    href="https://github.com/login/oauth/authorize?redirect_uri=https://localhost:8000/profile_page/{{ app.user.username }}"
+                    SameSite=None
+                    Secure
+            >
+                <i class="fa fa-github"></i> Sign in with github</a>
+            <br><br><br>
+            <a id="twitter.link" class="waves-effect waves-light btn-large social twitter" >
+                <i class="fa fa-twitter"></i> Sign in with twitter</a>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

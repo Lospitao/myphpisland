@@ -2,7 +2,7 @@
     --blue-color: #1E90FF;
 }
 /*****************
-General components
+General editor_components
  *****************/
 .card {
 
@@ -30,7 +30,10 @@ General components
 Title Component
 */
 .card.title {
-    width:1384px;
+    width:1360px;
+}
+.card.title textarea{
+    border:none
 }
 /**
 Description component
@@ -40,6 +43,13 @@ Description component
     height: 650px;
     margin: 5px;
     float: left;
+}
+.card.description textarea{
+    width: 470px;
+    height: 590px;
+    margin: 5px;
+    float: left;
+    border: none;
 }
 /**
 Code editor component
@@ -70,7 +80,15 @@ Sample test component
 }
 
 .card.sample-test .code {
-    height: 150px;
+    height: 160px;
+    max-height: 160px;
+}
+.card.sample-test .CodeMirror-scroll {
+    height: 130px;
+    max-height: 140px;
+}
+.card.sample-test .CodeMirror.cm-s-eclipse {
+    height: 130px;
     max-height: 140px;
 }
 

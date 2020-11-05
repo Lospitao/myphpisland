@@ -1,0 +1,94 @@
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+
+}
+
+.card .card-content {
+    padding: 5px;
+}
+
+.screen {
+    width: 1366px;
+    height: 768px;
+    margin: auto;
+}
+
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}
+/**
+Informtion Component
+*/
+.card.information {
+    width:1360px;
+    height: 150px;
+}
+.card.information img{
+    min-width:35px;
+    width: 10%;
+    border:none;
+    border-radius: 8%;
+}
+.card.information .info{
+    position: absolute;
+    top: 20px; left: 180px;
+}
+/**
+Password component
+ */
+.card.password {
+    width: 1360px;
+    height: 340px;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.card.password input{
+    width: 500px;
+}
+/**
+Social component
+ */
+.card.social {
+    width: 1360px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+    padding: 0 15px;
+}
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+pre{
+    padding: 16px 20px 0px;
+    background: #eee;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.info{
+    font-size: 1.3rem;
+    text-align: center;
+}
+

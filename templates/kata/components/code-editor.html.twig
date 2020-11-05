@@ -1,5 +1,6 @@
 
-<title>Start the challenge</title>
+<!--Code Mirror Instance-->
+<script type="text/javascript" src="{{ asset('js/code-editor-kataPage.js') }}"></script>
 <!--Code Mirror plugins-->
 <script type="text/javascript" src="{{ asset('plugins/codemirror/lib/codemirror.js') }}"></script>
 <link rel="stylesheet" href={{ asset('plugins/codemirror/lib/codemirror.css') }}>
@@ -20,18 +21,8 @@
 <link rel="stylesheet" href="{{ asset('plugins/codemirror/theme/eclipse.css') }}">
 
 
-    <textarea class="code">
+<textarea name="code-editor" class="code-editor code view" id="code-editor">{{ codeEditor }}</textarea>
 
-public function testBasics() {
-    $a1 = [121, 144, 19, 161, 19, 144, 19, 11];
-    $a2 = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19];
-    $this->revTest(comp($a1, $a2), true);
-    $a1 = [121, 144, 19, 161, 19, 144, 19, 11];
-    $a2 = [11*21, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19];
-    $this->revTest(comp($a1, $a2), false);
-}
-    </textarea>
-    <button class="btn modal-trigger execute-test" data-target="modal-success-message">Ejecutar test</button>
 
 
 

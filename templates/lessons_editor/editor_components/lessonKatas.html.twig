@@ -1,0 +1,12 @@
+
+<div class="lessonKatasList">
+    <ul class="lessonKatas">
+        {% for lessonKatas in lessonKatasArray %}
+            <li>
+                {{ lessonKatas['title'] }}
+                <a href="#"><i class="tiny material-icons lessonKata" data-title="{{ lessonKatas['title'] }}" data-uuid="{{ lessonKatas['uuid'] }}">clear</i></a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+

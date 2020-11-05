@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ChallengeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 /**
@@ -18,17 +20,17 @@ class Kata
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $editorCode;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $testCode;
 
@@ -51,8 +53,15 @@ class Kata
      * @ORM\Column(type="guid")
      */
     private $uuid;
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Lesson", mappedBy="kata")
+     */
+    private $lesson;
 
-
+    public function __construct()
+    {
+        $this->lesson = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,6 +149,34 @@ class Kata
     public function setUuid(string $uuid): self
     {
         $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Lesson[]
+     */
+    public function getLesson(): Collection
+    {
+        return $this->lesson;
+    }
+
+    public function addLesson(Lesson $lesson): self
+    {
+        if (!$this->lesson->contains($lesson)) {
+            $this->lesson[] = $lesson;
+            $lesson->addKatum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesson(Lesson $lesson): self
+    {
+        if ($this->lesson->contains($lesson)) {
+            $this->lesson->removeElement($lesson);
+            $lesson->removeKatum($this);
+        }
 
         return $this;
     }
