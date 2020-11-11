@@ -24,7 +24,7 @@ Class TestExecutionsController extends AbstractController {
         $editorCode=$request->request->get('code');
         $sampleTest = $kata->getTestCode();
 
-        if ($editorCode == $sampleTest) {
+        if ($editorCode === $sampleTest) {
             $isTestPassed = true;
             $title = "Passed test";
             $message= "You are right";
@@ -40,6 +40,8 @@ Class TestExecutionsController extends AbstractController {
             'isTestPassed' => $isTestPassed,
             'title' => $title,
             'message' => $message,
+            'editorCode' => $editorCode,
+            'sampleTest' => $sampleTest
 
         ]);
 
