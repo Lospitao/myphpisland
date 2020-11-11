@@ -24,7 +24,6 @@ $(document).ready(function() {
             success: function (data) {
                 console.log('Submission was successful.');
                 console.log(data);
-                alert(data['laura']);
 
             },
             error: function (data) {
