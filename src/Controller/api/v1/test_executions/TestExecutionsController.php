@@ -4,6 +4,7 @@ namespace App\Controller\api\v1\test_executions;
 
 
 use App\Entity\Kata;
+use PhpunitExecutionFromPhp\TestExecutor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,18 @@ Class TestExecutionsController extends AbstractController {
 
         $editorCode=$request->request->get('code');
         $sampleTest = $kata->getTestCode();
+
+        $projectRoot = $this->get('kernel')->getProjectDir();
+
+        $temporaryFilesPath = $projectRoot . DIRECTORY_SEPARATOR . 'tmp' ;
+        if ( ! is_dir($temporaryFilesPath) && ! mkdir($temporaryFilesPath)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $temporaryFilesPath));
+        }
+
+        // Execute test
+        $phpunitShellPath = $projectRoot . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'phpunit';
+        $phpunitBootstrapShellPath = $projectRoot . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+        $testExecutor = new TestExecutor($temporaryFilesPath, $phpunitShellPath, $phpunitBootstrapShellPath);
 
         if ($editorCode == $sampleTest) {
             $isTestPassed = true;
