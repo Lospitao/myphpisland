@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     uploads_dir: '%kernel.project_dir%/public/uploads/'
-
+    stage_resources_dir: '%kernel.project_dir%/public/resources/stages'
 services:
     # default configuration for services in *this* file
     _defaults:

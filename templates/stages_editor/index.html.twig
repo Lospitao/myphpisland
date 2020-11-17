@@ -26,33 +26,24 @@
         <section class="ambient-sound card">
             <div class="card-content">
                 <span class="card-title">Sonido ambiente</span>
-                <label for="uploadSound" class="btn">Selecciona un archivo</label>
-                <input id="uploadSound" type="file" name="uploadSound" style="visibility:hidden;">
+                {{ form(ambientSoundUploadForm) }}
                 <p>Pulsar para subir archivo de sonido ambiente</p>
-                <label for="uploadSoundButton" class="btn">Enviar</label>
-                <input id="uploadSoundButton" style="visibility:hidden;" type="submit" data-uuid="{{ stageUuid }}">
             </div>
         </section>
         <!-- Dialog section -->
         <section class="dialog card">
             <div class="card-content">
                 <span class="card-title">Diálogo</span>
-                <label for="uploadDialog" class="btn">Selecciona un archivo</label>
-                <input id="uploadDialog" type="file" name="uploadDialog" style="visibility:hidden;">
+                {{ form(dialogUploadForm) }}
                 <p>Pulsar para subir un diálogo</p>
-                <label for="uploadDialogButton" class="btn">Enviar</label>
-                <input id="uploadDialogButton" style="visibility:hidden;" type="submit" data-uuid="{{ stageUuid }}">
             </div>
         </section>
         <!-- Stage Background Image -->
         <section class="background-image card">
             <div class="card-content">
                 <span class="card-title">Fondo de escenario</span>
-                <label for="uploadBackgroundImage" class="btn">Selecciona un archivo</label>
-                <input id="uploadBackgroundImage"  type="file" name="uploadBackgroundImage" style="visibility:hidden;">
+                {{ form(backgroundImageUploadForm) }}
                 <p>Pulsar para subir un fondo de escenario</p>
-                <label for="uploadBackgroundImageButton" class="btn">Enviar</label>
-                <input id="uploadBackgroundImageButton" style="visibility:hidden;" type="submit" data-uuid="{{ stageUuid }}">
             </div>
         </section>
         <footer class="footer">

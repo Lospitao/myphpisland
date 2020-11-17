@@ -1,15 +1,11 @@
-function updateStageTitle() {
-    let title = document.getElementById("stage-title");
-    let stageUuid = title.getAttribute("data-uuid")
 
-    let updateLessonWebService = 'https://localhost:8000/api/v1/stages/' + stageUuid;
-
+function uploadStageAmbientSound(stageUuid, updateStageWebService) {
 
     $.ajax({
 
-        url : updateLessonWebService,
+        url : updateStageWebService,
         data : {
-
+            stageUuid: stageUuid,
         },
         type : 'PATCH',
         dataType : 'file',
@@ -18,27 +14,73 @@ function updateStageTitle() {
         },
         error: function (data) {
             console.log('An error occurred.');
+            console.log(data);
         },
     })
 }
 
-function uploadStageAmbientSound() {
-    $('#uploadSoundButton').click(function() {
-        let stageUuid = $(this).getAttribute("data-uuid");
+function uploadStageDialog(stageUuid, updateStageWebService) {
+    $.ajax({
+
+        url : updateStageWebService,
+        data : {
+            stageUuid: stageUuid,
+        },
+        type : 'PATCH',
+        dataType : 'file',
+        success: function (data) {
+            console.log('Submission was successful.');
+        },
+        error: function (data) {
+            console.log('An error occurred.');
+            console.log(data);
+        },
+    })
+}
+
+function uploadStageBackgroundImage(stageUuid, updateStageWebService) {
+    $.ajax({
+
+        url : updateStageWebService,
+        data : {
+            stageUuid: stageUuid,
+        },
+        type : 'PATCH',
+        dataType : 'file',
+        success: function (data) {
+            console.log('Submission was successful.');
+        },
+        error: function (data) {
+            console.log('An error occurred.');
+            console.log(data);
+        },
+    })
+}
+
+function uploadStageAmbientSoundEvent(stageUuid, updateStageWebService) {
+    $('#uploadSoundButton').change(function() {
+        uploadStageAmbientSound(stageUuid);
     });
 }
-function uploadStageDialog() {
-    $('#uploadDialogButton').click(function() {
-        let stageUuid = $(this).getAttribute("data-uuid");
+
+function uploadStageDialogEvent(stageUuid, updateStageWebService) {
+    $('#uploadDialogButton').change(function() {
+        uploadStageDialog(stageUuid);
+
     });
 }
-function uploadStageBackgroundImage() {
-    $('#uploadBackgroundImageButton').click(function() {
-        let stageUuid = $(this).getAttribute("data-uuid");
+
+function uploadStageBackgroundImageEvent(stageUuid, updateStageWebService) {
+    $('#uploadBackgroundImageButton').change(function() {
+        uploadStageBackgroundImage(stageUuid);
     });
 }
+
 $(document).ready(function() {
-    uploadStageAmbientSound();
-    uploadStageDialog();
-    uploadStageBackgroundImage();
+    let title = document.getElementById("stage-title");
+    let stageUuid = title.getAttribute("data-uuid");
+    let updateStageWebService = 'https://localhost:8000/api/v1/stages/' + stageUuid;
+    uploadStageAmbientSoundEvent(stageUuid, updateStageWebService);
+    uploadStageDialogEvent(stageUuid, updateStageWebService);
+    uploadStageBackgroundImageEvent(stageUuid, updateStageWebService);
 });
