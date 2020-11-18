@@ -47,6 +47,27 @@ $(document).ready(function() {
             },
         })
     });
+    $('#kata-test.code').focusout(function() {
+        let kata_test_code = $('#kata-test.code').val();
+        $.ajax({
+            url : updateKataWebService,
+            data : {
+                'kataTestCode' : kata_test_code,
+            },
+            type : 'PATCH',
+            dataType : 'json',
+            success: function (data) {
+                console.log('Submission was successful.')
+                console.log(data);
+
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        })
+    });
+
 });
 
 
