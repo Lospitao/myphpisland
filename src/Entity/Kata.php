@@ -58,6 +58,11 @@ class Kata
      */
     private $lesson;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $kata_test_code;
+
     public function __construct()
     {
         $this->lesson = new ArrayCollection();
@@ -177,6 +182,18 @@ class Kata
             $this->lesson->removeElement($lesson);
             $lesson->removeKatum($this);
         }
+
+        return $this;
+    }
+
+    public function getKataTestCode(): ?string
+    {
+        return $this->kata_test_code;
+    }
+
+    public function setKataTestCode(?string $kata_test_code): self
+    {
+        $this->kata_test_code = $kata_test_code;
 
         return $this;
     }
