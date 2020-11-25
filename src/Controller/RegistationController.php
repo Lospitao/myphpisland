@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistationController extends AbstractController
 {
+    private $appKernel;
+
     /**
      * @Route("/register", name="register")
      * @param Request $request
@@ -48,11 +50,13 @@ class RegistationController extends AbstractController
             if ($file) {
                 /*give file a name*/
                 $filename = md5(uniqid()) . '.' . $file->guessClientExtension();
+                /*specify directory route*/
+                $routeName=$this->getParameter('user_profile_pics_dir');
+                /*include variable in route*/
+                $destinationPath =  str_replace('username', $username, $routeName);
                 /*Store it somewhere*/
-                $file->move(
-                    $this->getParameter('uploads_dir'),
-                    $filename
-                );
+                $file->move($destinationPath,
+                $filename);
                 $user->setProfilePic($filename);
             }
             $entity_manager->persist($user);
