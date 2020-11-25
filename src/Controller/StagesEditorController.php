@@ -20,7 +20,10 @@ class StagesEditorController extends AbstractController
      */
     public function index(Request $request, $stageUuid)
     {
-        //Get kata to be updated
+        function alert($message) {
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
+        //Get stage to be updated
         $stage = $this->getDoctrine()
             ->getRepository(Stage::class)
             ->findOneBy(['uuid' => $stageUuid]);
@@ -42,11 +45,13 @@ class StagesEditorController extends AbstractController
             $ambientSoundFile = $ambientSoundUploadForm['ambient_sound']->getData();
 
                 /*give file a name*/
-                $ambientSoundFileName = md5(uniqid()) . '.' . $ambientSoundFile->guessClientExtension();
-
+                $ambientSoundFileName = 'ambient.' . $ambientSoundFile->guessClientExtension();
+                /*specify directory route*/
+                $ambientRouteName=$this->getParameter('stage_resources_ambient_dir');
+                $ambientDestinationPath =  str_replace('stageUuid', $stageUuid, $ambientRouteName);
                 /*Store it somewhere*/
                 $ambientSoundFile->move(
-                    $this->getParameter('stage_resources_dir'),
+                    $ambientDestinationPath,
                     $ambientSoundFileName
                 );
                 $stage->setAmbientSound($ambientSoundFileName);
@@ -54,6 +59,7 @@ class StagesEditorController extends AbstractController
             $entity_manager = $this->getDoctrine()->getManager();
             $entity_manager->persist($stage);
             $entity_manager->flush();
+            alert("Yo-Ho-Ho! Archivo subido correctamente");
             }
 
         //If Background Image File is submitted
@@ -65,20 +71,24 @@ class StagesEditorController extends AbstractController
             $backgroundImageFile = $backgroundImageUploadForm['background_image']->getData();
             //If there is a file
                 /*give file a name*/
-                $backgroundImageFileName = md5(uniqid()) . '.' . $backgroundImageFile->guessClientExtension();
+                $backgroundImageFileName =  'background-image.' . $backgroundImageFile->guessClientExtension();
+            /*specify directory route*/
+            $backgroundImageRouteName=$this->getParameter('stage_resources_background_images_dir');
+            $backgroundImageDestinationPath =  str_replace('stageUuid', $stageUuid, $backgroundImageRouteName);
                 /*Store it somewhere*/
                 $backgroundImageFile->move(
-                    $this->getParameter('stage_resources_dir'),
+                    $backgroundImageDestinationPath,
                     $backgroundImageFileName
                 );
                 $stage->setBackgroundImage($backgroundImageFileName);
             $entity_manager = $this->getDoctrine()->getManager();
             $entity_manager->persist($stage);
             $entity_manager->flush();
+            alert("Yo-Ho-Ho! Archivo subido correctamente");
         }
 
         //If dialog File is submitted
-        if ($dialogUploadForm->isSubmitted()) {
+        else if ($dialogUploadForm->isSubmitted()) {
             //Get Ambient Sound File
             /**
              * @var UploadedFile $dialogFile
@@ -86,17 +96,22 @@ class StagesEditorController extends AbstractController
             $dialogFile = $dialogUploadForm['dialog']->getData();
             //If there is a file
                 /*give file a name*/
-                $dialogFileName = md5(uniqid()) . '.' . $dialogFile->guessClientExtension();
+                $dialogFileName = 'dialog.' . $dialogFile->guessClientExtension();
+                /*specify directory route*/
+                $dialogRouteName=$this->getParameter('stage_resources_dialog_dir');
+                $dialogDestinationPath =  str_replace('stageUuid', $stageUuid, $dialogRouteName);
                 /*Store it somewhere*/
                 $dialogFile->move(
-                    $this->getParameter('stage_resources_dir'),
+                    $dialogDestinationPath,
                     $dialogFileName
                 );
                 $stage->setDialog($dialogFileName);
             $entity_manager = $this->getDoctrine()->getManager();
             $entity_manager->persist($stage);
             $entity_manager->flush();
+            alert("Yo-Ho-Ho! Archivo subido correctamente");
         }
+        
 
         return $this->render('stages_editor/index.html.twig', [
             'controller_name' => 'StagesEditorController',

@@ -25,12 +25,27 @@ class StagesController extends AbstractController
             'stageUuid' => $stageUuid]);
     }
     /**
-     * @Route("/stages/", name="stages")
+     * @Route("/stages/{stageUuid}", name="stages")
+     * @param $stageUuid
      */
-    public function index()
+    public function index($stageUuid)
     {
+        //Get stage to be updated
+        $stage = $this->getDoctrine()
+            ->getRepository(Stage::class)
+            ->findOneBy(['uuid' => $stageUuid]);
+        //Get stage title
+        $stageTitle= $stage->getTitle();
+        $stageAmbientSound =$stage->getAmbientSound();
+        $stageDialog=$stage->getDialog();
+        $stageBackgroundImage=$stage->getBackgroundImage();
         return $this->render('stages/index.html.twig', [
             'controller_name' => 'StagesController',
+            'stageUuid' => $stageUuid,
+            'stageTitle' => $stageTitle,
+            'stageAmbientSound' => $stageAmbientSound,
+            'stageDialog' => $stageDialog,
+            'stageBackgroundImage' => $stageBackgroundImage,
         ]);
     }
 }
