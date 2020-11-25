@@ -15,7 +15,7 @@
     <!-- Information section -->
     <section class="information card">
         <div class="card-content">
-            <img src="{{ '/uploads/' ~ app.user.profilePic }}" alt="">
+            <img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
             <div class="info">
                 <h5 id="username" class={{ app.user.username }}>Username: {{ app.user.username }}</h5>
                 <h5>Email: {{ app.user.email }}</h5>
