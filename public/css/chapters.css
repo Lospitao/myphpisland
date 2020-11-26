@@ -1,0 +1,45 @@
+/*
+Stage save page
+ */
+.screen.stage.save .card.ambient-sound {
+    position: unset;
+    float: left;
+}
+
+.screen.stage.save .card.dialogue-sound {
+    position: unset;
+    float: left;
+}
+
+.screen.stage.save .card.background-stage {
+    clear: both;
+}
+
+/**
+ Chapter
+ */
+
+.screen.chapter.edit .card.stages {
+    position: unset;
+    width: 672px;
+    height: 250px;
+    float: left;
+    margin: 5px;
+    overflow: auto;
+}
+
+.screen.chapter.edit .card.lessons {
+    position: unset;
+    width: 672px;
+    height: 250px;
+    float: left;
+    margin: 5px;
+    overflow: auto;
+}
+
+.screen.chapter.edit .card.stages-and-lessons-for-a-chapter {
+    clear: both;
+    height: 330px;
+    margin: 5px;
+    overflow: auto;
+}
