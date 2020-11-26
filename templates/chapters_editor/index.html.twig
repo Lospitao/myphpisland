@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<head>
+    <title>Chapter Editor</title>
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
+    <script type="text/javascript" src="{{ asset('js/chapter-title-update.js') }}"></script>
+</head>
+    <body>
+    <div class="screen chapter edit">
+        <!-- title -->
+        <section class="title card">
+            <div class="card-content">
+                <textarea class="title-text" id="chapter-title"  name="chapter-title" placeholder="Título del capítulo" data-uuid={{ chapterUuid }}></textarea>
+            </div>
+        </section>
+        <!-- Stages section -->
+        <section class="stages card">
+            <div class="card-content">
+                <span class="card-title">Escenarios</span>
+                {% include 'chapters_editor/editor_components/availableStages.html.twig' %}
+            </div>
+        </section>
+        <!-- Lessons section -->
+        <section class="lessons card">
+            <div class="card-content">
+                <span class="card-title">Lecciones</span>
+                {% include 'chapters_editor/editor_components/availableLessons.html.twig' %}
+            </div>
+        </section>
+        <!-- Chapter section -->
+        <section class="stages-and-lessons-for-a-chapter card">
+            <div class="card-content">
+                <span class="card-title">Escenarios y lecciones del capítulo</span>
+                {% include 'chapters_editor/editor_components/stagesLessonsCollection.html.twig' %}
+            </div>
+        </section>
+    </div>
+    </body>
+{% endblock %}

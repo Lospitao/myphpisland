@@ -17,7 +17,7 @@ class LessonsEditorController extends AbstractController
 
         //Create array where each kata title and uuid will be stored
         $lessonKatasArray = [];
-        $availableKatas = [];
+
         //get lesson through uuid
         $lesson = $this->getDoctrine()
             ->getRepository(Lesson::class)
