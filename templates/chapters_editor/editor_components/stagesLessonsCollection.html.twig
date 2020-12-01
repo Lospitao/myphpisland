@@ -1,3 +1,12 @@
-<ul class="chapter_lessons_stages_collection">
+<div class="chapter_lessons_stages_collection_list">
+    <ul class="chapter_lessons_stages_collection">
+        {% for chapterElement in chapterElementsArray %}
+            <li>
+                {{ chapterElement['title'] }}
 
-</ul>
+                <a href="#"><i class="{{ elementClass }}" data-title="{{ chapterElement['title'] }}" data-uuid="{{ chapterElement['uuid'] }}">clear</i></a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
