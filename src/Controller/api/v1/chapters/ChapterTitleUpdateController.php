@@ -16,7 +16,7 @@ Class ChapterTitleUpdateController extends AbstractController
      * @param $chapterUuid
      * @return JsonResponse
      */
-    function LessonUpdateController(Request $request, $chapterUuid)
+    function ChapterTitleUpdateController(Request $request, $chapterUuid)
     {
         //select chapter to be updated with uuid granted
         $chapter = $this->getDoctrine()
