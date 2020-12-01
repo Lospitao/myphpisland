@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Chapter;
+use App\Entity\ChapterElement;
 use App\Entity\Lesson;
 use App\Entity\Stage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,12 +17,64 @@ class ChaptersEditorController extends AbstractController
      */
     public function index($chapterUuid)
     {
-        //Create array to store chapter stages
-        $chapterStagesArray=[];
-        //Create array to store chapter lessons
-        $chapterLessonsArray=[];
 
+        /*Load Chapter Stages and Lessons*/
+        //Define class variable
+        $elementClass="";
+        //Get Chapter
+        $chapter = $this->getDoctrine()
+            ->getRepository(Chapter::class)
+            ->findOneBy(['uuid' => $chapterUuid]);
+        //Get chapter Id
+        $chapterId = $chapter->getId();
+        //Create array to save chapterElements
+        $chapterElementsArray = [];
+        //Get all entries with chapterId
+        $elementsInChapter = $this->getDoctrine()
+            ->getRepository(ChapterElement::class)
+            ->findBy(['chapterId' => $chapterId]);
+        //Iterate Through array ElementsInChapter to get the title and uuid of each element
+        foreach ($elementsInChapter as $element) {
+            //Get element type
+            $elementType= $element->getChapterElementType();
+            //Get element id
+            $elementId = $element->getStageOrLessonId();
+            //If element is a lesson
+            if ($elementType==1) {
+                $elementClass="tiny material-icons chapterLesson";
+                //get Lesson through ElementId
+                $lesson = $this->getDoctrine()
+                ->getRepository(Lesson::class)
+                ->findOneBy(['id'=>$elementId]);
+                //Get lesson Title
+                $ChapterLessonTitle = $lesson->getTitle();
+                //Get lesson Uuid
+                $ChapterLessonUuid = $lesson->getUuid();
+                //Push element into array
+                $chapterElementsArray[$ChapterLessonUuid] = [
+                    'title' => $ChapterLessonTitle,
+                    'uuid' => $ChapterLessonUuid,
+                ];
+            }
+            //If element is a Stage
+            else if ($elementType==2) {
+                $elementClass="tiny material-icons chapterStage";
+                //Get Stage through elementId
+                $stage = $this->getDoctrine()
+                    ->getRepository(Stage::class)
+                    ->findOneBy(['id'=>$elementId]);
+                //Get Stage Title
+                $ChapterStageTitle = $stage->getTitle();
+                //Get Stage Uuid
+                $ChapterStageUuid = $stage->getUuid();
+                //Push element into array
+                $chapterElementsArray[$ChapterStageUuid] = [
+                    'title' => $ChapterStageTitle,
+                    'uuid' => $ChapterStageUuid,
+                ];
 
+            }
+        }
         /*Load Available Stages*/
         //Create array to store available Stages
         $availableStages = [];
@@ -35,7 +89,7 @@ class ChaptersEditorController extends AbstractController
             //Get stage uuid
             $stageUuid = $stage->getUuid();
             //If stage is inside of lesson katas, remove it from availableKatas
-            if (!array_key_exists($stageUuid, $chapterStagesArray)) {
+            if (!array_key_exists($stageUuid, $chapterElementsArray)) {
                 //Push title and uuid of stage into availableStages
                 $availableStages[$stageUuid] = [
                     'stageTitle' => $stageTitle,
@@ -58,7 +112,7 @@ class ChaptersEditorController extends AbstractController
             //Get lesson uuid
             $lessonUuid = $lesson->getUuid();
             //If stage is inside of lesson katas, remove it from availableKatas
-            if (!array_key_exists($lessonUuid, $chapterLessonsArray)) {
+            if (!array_key_exists($lessonUuid, $chapterElementsArray)) {
                 //Push title and uuid of stage into availableStages
                 $availableLessons[$lessonUuid] = [
                     'lessonTitle' => $lessonTitle,
@@ -71,6 +125,8 @@ class ChaptersEditorController extends AbstractController
             'chapterUuid' => $chapterUuid,
             'availableStages' => $availableStages,
             'availableLessons' => $availableLessons,
+            'chapterElementsArray' => $chapterElementsArray,
+            'elementClass' => $elementClass
         ]);
     }
 }
