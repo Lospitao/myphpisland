@@ -15,9 +15,7 @@ Stage save page
     clear: both;
 }
 
-/**
- Chapter
- */
+/**Chapter-Edit**/
 
 .screen.chapter.edit .card.stages {
     position: unset;
@@ -38,6 +36,35 @@ Stage save page
 }
 
 .screen.chapter.edit .card.stages-and-lessons-for-a-chapter {
+    clear: both;
+    height: 330px;
+    margin: 5px;
+    overflow: auto;
+}
+/**Chapter-View**/
+.screen.chapter .card.title {
+    font-size: x-large;
+
+}
+.screen.chapter .card.stages {
+    position: unset;
+    width: 672px;
+    height: 250px;
+    float: left;
+    margin: 5px;
+    overflow: auto;
+}
+
+.screen.chapter .card.lessons {
+    position: unset;
+    width: 672px;
+    height: 250px;
+    float: left;
+    margin: 5px;
+    overflow: auto;
+}
+
+.screen.chapter .card.stages-and-lessons-for-a-chapter {
     clear: both;
     height: 330px;
     margin: 5px;
