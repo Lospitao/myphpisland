@@ -3,7 +3,7 @@
     <ul class="lessonKatas">
         {% for lessonKatas in lessonKatasArray %}
             <li>
-                <a href="#" class="lessonKatas" data-title="{{ lessonKatas['title'] }}" data-uuid="{{ lessonKatas['uuid'] }}">
+                <a href="{{ path('kata', {'uuid': ( lessonKatas['uuid'] ) }) }}" class="lessonKatas" data-title="{{ lessonKatas['title'] }}" data-uuid="{{ lessonKatas['uuid'] }}">
                 {{ lessonKatas['title'] }}
                 </a>
             </li>
