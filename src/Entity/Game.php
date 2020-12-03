@@ -2,15 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\ChapterRepository;
+use App\Repository\GameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * @ORM\Entity(repositoryClass=ChapterRepository::class)
+ * @ORM\Entity(repositoryClass=GameRepository::class)
  */
-class Chapter
+class Game
 {
     /**
      * @ORM\Id()
@@ -25,18 +26,17 @@ class Chapter
     private $title;
 
     /**
-     * @ORM\Column(type="guid")
+     * @ORM\Column(type="guid", nullable=true)
      */
     private $uuid;
-
     /**
-     * @ORM\ManyToMany(targetEntity="game", mappedBy="chapter")
+     * @ORM\ManyToMany(targetEntity="chapter", inversedBy="game")
      */
-    private $game;
+    private $chapter;
 
     public function __construct()
     {
-        $this->game = new ArrayCollection();
+        $this->chapter = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,7 +61,7 @@ class Chapter
         return $this->uuid;
     }
 
-    public function setUuid(string $uuid): self
+    public function setUuid(?string $uuid): self
     {
         $this->uuid = $uuid;
 
@@ -69,30 +69,29 @@ class Chapter
     }
 
     /**
-     * @return Collection|game[]
+     * @return Collection|chapter[]
      */
-    public function getGame(): Collection
+    public function getChapter(): Collection
     {
-        return $this->game;
+        return $this->chapter;
     }
 
-    public function addGame(game $game): self
+    public function addChapter(chapter $chapter): self
     {
-        if (!$this->game->contains($game)) {
-            $this->game[] = $game;
-            $game->addChapter($this);
+        if (!$this->chapter->contains($chapter)) {
+            $this->chapter[] = $chapter;
         }
 
         return $this;
     }
 
-    public function removeGame(game $game): self
+    public function removeChapter(chapter $chapter): self
     {
-        if ($this->game->contains($game)) {
-            $this->game->removeElement($game);
-            $game->removeChapter($this);
+        if ($this->chapter->contains($chapter)) {
+            $this->chapter->removeElement($chapter);
         }
 
         return $this;
     }
+
 }
