@@ -1,42 +1,42 @@
 <?php
 
-namespace App\Controller\api\v1\lessons;
+namespace App\Controller\api\v1\games;
 
 
 
-use App\Entity\Lesson;
+use App\Entity\Game;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-Class LessonTitleUpdateController extends AbstractController
+Class GameTitleUpdateController extends AbstractController
 {
     /**
-     * @Route("api/v1/lessons/{uuid}", name="LessonTitleUpdateController")
-     * @param $uuid
+     * @Route("api/v1/games/{gameUuid}", name="GameTitleUpdateController")
+     * @param $gameUuid
      * @return JsonResponse
      */
-    function LessonUpdateController(Request $request, $uuid)
+    function GameUpdateController(Request $request, $gameUuid)
     {
-        //select lesson to be updated with uuid granted
-        $lesson = $this->getDoctrine()
-            ->getRepository(Lesson::class)
-            ->findOneBy(['uuid' => $uuid]);
+        //select game to be updated with uuid granted
+        $game = $this->getDoctrine()
+            ->getRepository(Game::class)
+            ->findOneBy(['uuid' => $gameUuid]);
         //get value of title textarea
         $title = $request->request->get('title');
         //if there is a lesson created with an uuid
-        if ($uuid) {
+        if ($gameUuid) {
             //if title is not null
             if ($title) {
                 //set title into Database
-                $lesson->setTitle($title);
+                $game->setTitle($title);
             }
             else  throw $this->createNotFoundException('Debe introducir un título');
         }
 
         $entity_manager = $this->getDoctrine()->getManager();
 
-        $entity_manager->persist($lesson);
+        $entity_manager->persist($game);
         $entity_manager->flush();
 
         $response = new JsonResponse();
