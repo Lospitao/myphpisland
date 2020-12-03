@@ -29,8 +29,9 @@ class Game
      * @ORM\Column(type="guid", nullable=true)
      */
     private $uuid;
+
     /**
-     * @ORM\ManyToMany(targetEntity="chapter", inversedBy="game")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Chapter", inversedBy="game")
      */
     private $chapter;
 
