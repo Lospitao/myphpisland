@@ -1,3 +1,12 @@
-<ol class="collection">
-    <li class="collection-item">Capítulo 1: Quiero ser un pirata<a href="#!" class="secondary-content"><i class="material-icons">remove_circle_outline</i></a></li>
-</ol>
+
+<div class="gameChaptersList">
+    <ul class="gameChapters">
+        {% for gameChapter in gameChapters %}
+            <li>
+                {{ gameChapter['title'] }}
+                <a href="#"><i class="tiny material-icons gameChapter" data-title="{{ gameChapter['title'] }}" data-uuid="{{ gameChapter['uuid'] }}">clear</i></a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+

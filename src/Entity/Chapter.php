@@ -30,7 +30,7 @@ class Chapter
     private $uuid;
 
     /**
-     * @ORM\ManyToMany(targetEntity="game", mappedBy="chapter")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Game", mappedBy="chapter")
      */
     private $game;
 
