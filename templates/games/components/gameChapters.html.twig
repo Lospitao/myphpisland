@@ -1,0 +1,15 @@
+
+<div class="gameChaptersList">
+    <ul class="gameChapters">
+        {% for gameChapter in gameChapters %}
+            <li>
+                <a href="{{ path('chapters', {'chapterUuid': ( gameChapter['uuid'] ) }) }}" class="gameChapters" data-title="{{ gameChapter['title'] }}" data-uuid="{{ gameChapter['uuid'] }}">
+                {{ gameChapter['title'] }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+

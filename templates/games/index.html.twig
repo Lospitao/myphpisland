@@ -1,20 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GamesController!{% endblock %}
+
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!DOCTYPE html>
+    <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego View</title>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/lauralospitao/myphpislan/src/Controller/GamesController.php'|file_link(0) }}">src/Controller/GamesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/lauralospitao/myphpislan/templates/games/index.html.twig'|file_link(0) }}">templates/games/index.html.twig</a></code></li>
-    </ul>
-</div>
+</head>
+<body>
+<div class="screen">
+    <!-- Title section -->
+    <section class="title card">
+        <div class="card-content">
+            <textarea id="title" name="game-title" placeholder="Título del juego" data-uuid={{ gameUuid }}>{{ gameTitle }}</textarea>
+        </div>
+    </section>
+    <!-- List of Chapters section -->
+    <section class="available-chapters card">
+        <div class="card-content">
+            <span class="card-title">Capítulos</span>
+            <p>Listado de capítulos disponibles para incluir en la lección</p>
+            {% include 'games/components/availableChapters.html.twig' %}
+        </div>
+    </section>
+    <!-- Ordered List of Game Chapters section -->
+    <section class="game-chapters card">
+        <div class="card-content">
+            <span class="card-title">Capítulos del Juego</span>
+            <p>Listado de capítulos de la lección</p>
+            {% include 'games/components/gameChapters.html.twig' %}
+        </div>
+    </section>
+</body>
 {% endblock %}
