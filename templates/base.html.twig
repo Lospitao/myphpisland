@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- Social Media materialize bundle-->
         <link rel="stylesheet" href={{ asset('css/materialize-social.css') }}>
         <!--Font Awesome -->
         <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
@@ -29,6 +30,8 @@
         <!-- Materialize icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--CSS stylesheet-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/games.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/chapters.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/stages.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/katas.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/lessons.css') }}">
@@ -46,7 +49,7 @@
         <nav class="menu logged-user">
             <div class="nav-wrapper">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="#!" class="avatar"><img src="{{ '/uploads/' ~ app.user.profilePic }}" alt=""></a>
+                    <a href="#!" class="avatar"><img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt=""></a>
                 {% endif %}
                 <ul class="right hide-on-med-and-down">
                     <li><a class="waves-effect waves-light btn"><i class="material-icons">person</i></a></li>

@@ -1,0 +1,11 @@
+<div class="availableChaptersList">
+    <ul class="availableChapters">
+        {% for availableChapter  in availableChapters  %}
+            <li>
+                {{ availableChapter['title'] }}
+                <a href="#"><i class="tiny material-icons availableChapter"  data-title="{{ availableChapter['title'] }}" data-uuid="{{ availableChapter['uuid'] }}" >add_circle</i></a>
+            </li>
+
+        {% endfor %}
+    </ul>
+</div>

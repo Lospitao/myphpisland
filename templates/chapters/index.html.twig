@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <head>
+        <title>Chapter View</title>
+        <script>
+            $(document).ready(function(){
+                $('.modal').modal();
+            });
+        </script>
+    </head>
+    <body>
+    <div class="screen chapter view">
+        <!-- title -->
+        <section class="title card">
+            <div class="card-content">
+                <span class="title-text" id="chapter-title"  data-uuid={{ chapterUuid }}>{{ chapterTitle }}</span>
+            </div>
+        </section>
+        <!-- Stages section -->
+        <section class="stages card">
+            <div class="card-content">
+                <span class="card-title">Escenarios</span>
+                {% include 'chapters/components/availableStages.html.twig' %}
+            </div>
+        </section>
+        <!-- Lessons section -->
+        <section class="lessons card">
+            <div class="card-content">
+                <span class="card-title">Lecciones</span>
+                {% include 'chapters/components/availableLessons.html.twig' %}
+            </div>
+        </section>
+        <!-- Chapter section -->
+        <section class="stages-and-lessons-for-a-chapter card">
+            <div class="card-content">
+                <span class="card-title">Escenarios y lecciones del capítulo</span>
+                {% include 'chapters/components/stagesLessonsCollection.html.twig' %}
+            </div>
+        </section>
+    </div>
+    </body>
+{% endblock %}

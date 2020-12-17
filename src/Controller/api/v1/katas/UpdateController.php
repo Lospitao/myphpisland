@@ -25,6 +25,7 @@ Class UpdateController extends AbstractController {
 
         $title=$request->request->get('title');
         $description=$request->request->get('description');
+        $kataTestCode=$request->request->get('kataTestCode');
         $editorCode=$request->request->get('editorCode');
         $sampleTest=$request->request->get('sampleTest');
         if($uuid) {
@@ -34,6 +35,10 @@ Class UpdateController extends AbstractController {
             }
             if ($description) {
                 $kata->setDescription($description);
+                $kata->setUpdatedAt(new \DateTime());
+            }
+            if ($kataTestCode) {
+                $kata->setKataTestCode($kataTestCode);
                 $kata->setUpdatedAt(new \DateTime());
             }
             if ($editorCode) {
@@ -54,7 +59,8 @@ Class UpdateController extends AbstractController {
                 'data' => $kata,
                 'title' => $title,
                 'description' => $description,
-                'editorCode' => $editorCode
+                'editorCode' => $editorCode,
+                'kataTestCode' => $kataTestCode
             ]);
 
             return $response;

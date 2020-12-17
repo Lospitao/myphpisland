@@ -45,7 +45,7 @@ class Kata
     private $updated_at;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $kata_title;
 
@@ -57,6 +57,11 @@ class Kata
      * @ORM\ManyToMany(targetEntity="App\Entity\Lesson", mappedBy="kata")
      */
     private $lesson;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $kata_test_code;
 
     public function __construct()
     {
@@ -177,6 +182,18 @@ class Kata
             $this->lesson->removeElement($lesson);
             $lesson->removeKatum($this);
         }
+
+        return $this;
+    }
+
+    public function getKataTestCode(): ?string
+    {
+        return $this->kata_test_code;
+    }
+
+    public function setKataTestCode(?string $kata_test_code): self
+    {
+        $this->kata_test_code = $kata_test_code;
 
         return $this;
     }

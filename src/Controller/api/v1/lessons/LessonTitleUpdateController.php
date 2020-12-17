@@ -26,7 +26,7 @@ Class LessonTitleUpdateController extends AbstractController
         $title = $request->request->get('title');
         //if there is a lesson created with an uuid
         if ($uuid) {
-            //if title is not nul
+            //if title is not null
             if ($title) {
                 //set title into Database
                 $lesson->setTitle($title);

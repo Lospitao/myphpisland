@@ -39,6 +39,12 @@ Ambient Sound Component
     width: 680px;
     float: left;
 }
+#ambient_sound_file_upload_ambient_sound {
+    margin: 6px;
+}
+#ambient_sound_file_upload_submit {
+    margin: 6px;
+}
 /**
 Dialog Component
 */
@@ -46,10 +52,38 @@ Dialog Component
     width: 680px;
     float: right;
 }
+#dialog_file_upload_dialog {
+    margin: 6px;
+}
+#dialog_file_upload_submit {
+    margin: 6px;
+}
+#ambient-sound {
+
+}
 /**
 Background Image Component
 */
 .card.background-image {
     margin-top: 195px;
     height: 400px;
+
 }
+.card.background-image.view {
+    margin-top: 50px;
+    height: 600px;
+    text-align: center;
+}
+#background_image_file_upload_background_image {
+    margin: 6px;
+}
+#background_image_file_upload_submit {
+    margin: 6px;
+}
+ #background_image {
+    height: 500px;
+}
+ area {
+
+     visibility: hidden;
+ }

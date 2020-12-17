@@ -42,7 +42,6 @@ Class TestExecutionsController extends AbstractController {
             $testExecutor = new TestExecutor($temporaryFilesPath .  DIRECTORY_SEPARATOR, $phpunitShellPath, $phpunitBootstrapShellPath);
 
             // Create kata test file from string
-
             $kataTestCode = <<<'EOD'
 <?php 
 namespace KataTestExecutions;

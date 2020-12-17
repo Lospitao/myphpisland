@@ -1,0 +1,48 @@
+function removeChapterEvent(chapterToBeRemovedUuid, chapterTitleToBeRemovedFromGame, chapterToRemoveFromGame) {
+    //Select element with id title (lesson title textarea)
+    let title= document.getElementById("title");
+    //get lesson uuid
+    let uuid = title.getAttribute("data-uuid");
+    let updateLessonWebService = 'https://localhost:8000/api/v1/games/' + uuid + '/chapters/' + chapterToBeRemovedUuid ;
+
+
+    $.ajax({
+
+        url : updateLessonWebService,
+        data : {
+            'chapterToBeRemovedUuid' : chapterToBeRemovedUuid,
+            'chapterTitleToBeRemovedFromGame' : chapterTitleToBeRemovedFromGame,
+        },
+        type : 'DELETE',
+        dataType : 'json',
+        success: function (data) {
+            console.log('Submission was successful.');
+            let chapterToReturnToAvailable =`<li>${chapterTitleToBeRemovedFromGame}<a href="#"><i class="tiny material-icons availableChapter" data-title="${chapterTitleToBeRemovedFromGame}" data-uuid="${chapterToBeRemovedUuid}">add_circle</i></a></li>`;
+            $( ".availableChapters" ).append(chapterToReturnToAvailable);
+            $('.availableChapter[data-uuid="'+chapterToBeRemovedUuid+'"]').click(function() {
+                let chapterToBeAddedTitle = $(this).attr("data-title");
+                let chapterToBeAddedUuid = $(this).attr("data-uuid");
+                let chapterToRemoveFromAvailable = $('.availableChapter[data-uuid="'+chapterToBeRemovedUuid+'"]').parent().parent();
+                addChapterEvent(chapterToBeAddedUuid, chapterToBeAddedTitle, chapterToRemoveFromAvailable)
+            });
+            $(chapterToRemoveFromGame).remove();
+        },
+        error: function (data) {
+            console.log('An error occurred.');
+        },
+    })
+}
+
+function removeChapterFromGameEvent() {
+
+    $('.gameChapter').click(function() {
+        let chapterToBeRemovedUuid = $(this).attr("data-uuid");
+        let chapterTitleToBeRemovedFromGame = $(this).attr("data-title");
+        let chapterToRemoveFromGame = $(this).parent().parent();
+        removeChapterEvent(chapterToBeRemovedUuid, chapterTitleToBeRemovedFromGame, chapterToRemoveFromGame);
+    });
+}
+
+$(document).ready(function() {
+    removeChapterFromGameEvent();
+});

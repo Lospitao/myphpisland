@@ -1,0 +1,10 @@
+
+    <ul class="availableLessons">
+        {% for availableLesson in availableLessons %}
+            <li>
+                <a href="{{ path('lessons', {'uuid': ( availableLesson['lessonUuid'] ) }) }}" class="availableLesson" data-title="{{ availableLesson['lessonTitle'] }}" data-uuid="{{ availableLesson['lessonUuid'] }}">{{ availableLesson['lessonTitle'] }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
