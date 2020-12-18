@@ -22,7 +22,7 @@ Class TestExecutionsController extends AbstractController {
     function TestExecutions (Request $request, $uuid) {
         try {
 
-            //Select kata from uuid
+            // Select kata from uuid
             $kata = $this->getDoctrine()
                 ->getRepository(Kata::class)
                 ->findOneBy(['uuid' => $uuid]);
@@ -42,29 +42,7 @@ Class TestExecutionsController extends AbstractController {
             $testExecutor = new TestExecutor($temporaryFilesPath .  DIRECTORY_SEPARATOR, $phpunitShellPath, $phpunitBootstrapShellPath);
 
             // Create kata test file from string
-            $kataTestCode = <<<'EOD'
-<?php 
-namespace KataTestExecutions;
-
-use PHPUnit\Framework\TestCase;
-
-
-class AlwaysPassedTest extends TestCase
-{
-    public function testAlwaysPassed()
-    {
-        $alwaysPassedSourceCode = new AlwaysPassedSourceCode();
-        $semanticNames = $alwaysPassedSourceCode->getSemanticNames();
-        $areNamesValid = ($semanticNames['Nombre de usuario'] === 'username')
-            && ($semanticNames['Correo electrónico'] === 'email')
-            && ($semanticNames['contraseña'] === 'password');
-
-        $this->assertTrue($areNamesValid);
-    }
-}
-
-EOD;
-
+            $kataTestCode = $kata->getKataTestCode();
             $kataTestExecutionsPath = $projectRoot . DIRECTORY_SEPARATOR . 'tmp' .  DIRECTORY_SEPARATOR ;
             $kataTestPath = $kataTestExecutionsPath . 'AlwaysPassedTest.php';
             $isSaved = file_put_contents($kataTestPath, $kataTestCode);
