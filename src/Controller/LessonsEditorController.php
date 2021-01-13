@@ -24,14 +24,19 @@ class LessonsEditorController extends AbstractController
             ->findOneBy(['uuid' => $uuid]);
 
         //get kata collection related to lesson
-        $lessonKatas = $lesson->getKata();
+        $lessonKatas = $lesson->getKatas();
 
         //iteration inside lessonKatas
         foreach($lessonKatas as $lessonKata) {
+            //Get kata id
+            $kata_id= $lessonKata->getKata();
+            $relevantKata = $this->getDoctrine()
+                ->getRepository(Kata::class)
+                ->findOneBy(['id' => $kata_id]);
             //get kata title
-            $lessonKatasTitle = $lessonKata->getKataTitle();
+            $lessonKatasTitle = $relevantKata->getKataTitle();
             //get kata uuid
-            $lessonKatasUuid = $lessonKata->getUuid();
+            $lessonKatasUuid = $relevantKata->getUuid();
             //Push both into the array previously created
             $lessonKatasArray[$lessonKatasUuid]= [
                 'title' => $lessonKatasTitle,

@@ -17,7 +17,7 @@ function removeKataEvent(kataToBeRemovedUuid, kataTitleToBeRemovedFromLesson, ka
         dataType : 'json',
         success: function (data) {
             console.log('Submission was successful.');
-            let kataToReturnToAvailable =`<li>${kataTitleToBeRemovedFromLesson}<a href="#"><i class="tiny material-icons availableKata" data-title="${kataTitleToBeRemovedFromLesson}" data-uuid="${kataToBeRemovedUuid}">add_circle</i></a></li>`;
+            let kataToReturnToAvailable =`<li class="ui-state-default availableKataElement" data-title="${kataTitleToBeRemovedFromLesson}" data-uuid="${kataToBeRemovedUuid}">${kataTitleToBeRemovedFromLesson}<a href="#"><i class="tiny material-icons availableKata" data-title="${kataTitleToBeRemovedFromLesson}" data-uuid="${kataToBeRemovedUuid}">add_circle</i></a></li>`;
             $( ".availableKatas" ).append(kataToReturnToAvailable);
             $('.availableKata[data-uuid="'+kataToBeRemovedUuid+'"]').click(function() {
                 let kataToBeAddedTitle = $(this).attr("data-title");

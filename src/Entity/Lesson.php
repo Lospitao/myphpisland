@@ -30,7 +30,7 @@ class Lesson
     private $uuid;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Kata", inversedBy="lesson")
+     * @ORM\OneToMany(targetEntity="App\Entity\LessonKatas", mappedBy="lesson", fetch="EXTRA_LAZY")
      */
     private $kata;
 
@@ -69,9 +69,9 @@ class Lesson
     }
 
     /**
-     * @return Collection|Kata[]
+     * @return Collection|LessonKatas[]
      */
-    public function getKata(): Collection
+    public function getKatas(): Collection
     {
         return $this->kata;
     }

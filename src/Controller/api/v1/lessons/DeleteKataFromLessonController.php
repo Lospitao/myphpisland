@@ -4,6 +4,7 @@ namespace App\Controller\api\v1\lessons;
 
 use App\Entity\Kata;
 use App\Entity\Lesson;
+use App\Entity\LessonKatas;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -34,13 +35,24 @@ Class DeleteKataFromLessonController extends AbstractController
         if ($lesson) {
             //check if kata exists
             if ($kata) {
-
+                //Get kata id
+                $kataId=$kata->getId();
+                //Get kata in chapter-element table
+                $kataInLesson = $this->getDoctrine()
+                    ->getRepository(LessonKatas::class)
+                    ->findOneBy(['kata' =>$kataId]);
+                //persist lesson to chapter_element table
+                $entity_manager = $this->getDoctrine()->getManager();
+                $entity_manager->remove($kataInLesson);
+                $entity_manager->flush();
+                /*
                 $lesson->removeKatum($kata);
 
                 //remove kata from lesson in DB
                 $entity_manager = $this->getDoctrine()->getManager();
                 $entity_manager->persist($lesson);
                 $entity_manager->flush();
+                */
                 //set response
                 $response = new JsonResponse();
                 $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);

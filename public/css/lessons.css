@@ -50,8 +50,6 @@ Available Katas Component
 }
 .card.available-katas li i {
     float: right;
-
-
 }
 /**
 Ordered Lesson Katas List
@@ -61,4 +59,22 @@ Ordered Lesson Katas List
     height: 680px;
     margin: 5px;
     float: right;
+}
+.card.lesson-katas li i {
+    float: right;
+}
+#availableKatasList, #lessonKatasList {
+
+    list-style-type: none;
+}
+#availableKatasList li, #lessonKatasList {
+    font-size: 1.2em;
+    border: 1px solid #eee;
+}
+#availableKatasList li {
+    background-color: #9ddfe9;
+}
+#lessonKatasList li {
+    background-color: #4fc3f7;
+    color: black;
 }

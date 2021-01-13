@@ -54,7 +54,7 @@ class Kata
      */
     private $uuid;
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Lesson", mappedBy="kata")
+     * @ORM\OneToMany(targetEntity="App\Entity\LessonKatas", mappedBy="kata")
      */
     private $lesson;
 
@@ -159,7 +159,7 @@ class Kata
     }
 
     /**
-     * @return Collection|Lesson[]
+     * @return Collection|LessonKatas[]
      */
     public function getLesson(): Collection
     {
