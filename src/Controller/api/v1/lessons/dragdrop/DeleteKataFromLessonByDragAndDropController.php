@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\api\v1\lessons;
+namespace App\Controller\api\v1\lessons\dragdrop;
 
 use App\Entity\Kata;
 use App\Entity\Lesson;
@@ -10,21 +10,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-Class DeleteKataFromLessonController extends AbstractController
+class DeleteKataFromLessonByDragAndDropController extends AbstractController
 {
     /**
-     * @Route("api/v1/lessons/{uuid}/katas/{kataToBeRemovedUuid}", name="DeleteKataFromLessonController")
-     * @param $uuid,
+     * @Route("api/v1/lessons/dragdrop/{uuid}/katas/{kataToBeRemovedUuid}", name="DeleteKataFromLessonController")
+     * @param $uuid ,
      * @param $kataToBeRemovedUuid
      * @return JsonResponse
      */
-    function DeleteKataFromLessonController (Request $request, $uuid, $kataToBeRemovedUuid)
+    function DeleteKataFromLessonByDragAndDropController(Request $request, $uuid, $kataToBeRemovedUuid)
     {
-
         //get kata uuid
         $kataUuid = $request->request->get('kataToBeRemovedUuid');
         //get kata to be added
-        $kata= $this->getDoctrine()
+        $kata = $this->getDoctrine()
             ->getRepository(Kata::class)
             ->findOneBy(['uuid' => $kataUuid]);
         //get lesson to be updated
@@ -36,11 +35,11 @@ Class DeleteKataFromLessonController extends AbstractController
             //check if kata exists
             if ($kata) {
                 //Get kata id
-                $kataId=$kata->getId();
+                $kataId = $kata->getId();
                 //Get kata in chapter-element table
                 $kataInLesson = $this->getDoctrine()
                     ->getRepository(LessonKatas::class)
-                    ->findOneBy(['kata' =>$kataId]);
+                    ->findOneBy(['kata' => $kataId]);
                 //persist lesson to chapter_element table
                 $entity_manager = $this->getDoctrine()->getManager();
                 $entity_manager->remove($kataInLesson);
@@ -49,13 +48,11 @@ Class DeleteKataFromLessonController extends AbstractController
                 $response = new JsonResponse();
                 $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
                 return $response;
-            }
-            else {
+            } else {
                 $response = new JsonResponse();
                 $response->setStatusCode(JsonResponse::HTTP_BAD_REQUEST);
                 return $response;
             }
         }
     }
-
 }
