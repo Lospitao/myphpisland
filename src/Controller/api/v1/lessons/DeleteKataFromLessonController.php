@@ -15,18 +15,19 @@ Class DeleteKataFromLessonController extends AbstractController
     /**
      * @Route("api/v1/lessons/{uuid}/katas/{kataToBeRemovedUuid}", name="DeleteKataFromLessonController")
      * @param $uuid,
-     * @param $kataToBeRemovedUuid
+     * @param $kataToBeRemovedUuid,
      * @return JsonResponse
      */
     function DeleteKataFromLessonController (Request $request, $uuid, $kataToBeRemovedUuid)
     {
+echo "Lo estoy cogiendo";
 
         //get kata uuid
-        $kataUuid = $request->request->get('kataToBeRemovedUuid');
+        $kata_uuid = $request->request->get('kataToBeRemovedUuid');
         //get kata to be added
         $kata= $this->getDoctrine()
             ->getRepository(Kata::class)
-            ->findOneBy(['uuid' => $kataUuid]);
+            ->findOneBy(['uuid' => $kata_uuid]);
         //get lesson to be updated
         $lesson = $this->getDoctrine()
             ->getRepository(Lesson::class)
@@ -45,6 +46,7 @@ Class DeleteKataFromLessonController extends AbstractController
                 $entity_manager = $this->getDoctrine()->getManager();
                 $entity_manager->remove($kataInLesson);
                 $entity_manager->flush();
+
                 //set response
                 $response = new JsonResponse();
                 $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);

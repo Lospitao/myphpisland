@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DeleteKataFromLessonByDragAndDropController extends AbstractController
 {
     /**
-     * @Route("api/v1/lessons/dragdrop/{uuid}/katas/{kataToBeRemovedUuid}", name="DeleteKataFromLessonController")
+     * @Route("api/v1/lessons/dragdrop/{uuid}/katas/{kataToBeRemovedUuid}", name="DeleteKataFromLessonByDragAndDropController")
      * @param $uuid ,
      * @param $kataToBeRemovedUuid
      * @return JsonResponse

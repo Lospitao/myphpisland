@@ -21,6 +21,8 @@ class AddKataToLessonByDragAndDropController extends AbstractController
     {
         //get kata uuid
         $kataUuid = $request->request->get('kataToBeAddedUuid');
+        //get kata position
+        $kataPositionInLesson = $request->request->get('position');
         //get kata to be added
         $kata = $this->getDoctrine()
             ->getRepository(Kata::class)
@@ -37,8 +39,7 @@ class AddKataToLessonByDragAndDropController extends AbstractController
                 $newLessonKata = new LessonKatas();
                 $newLessonKata->setKata($kata);
                 $newLessonKata->setLesson($lesson);
-                $position = 222;
-                $newLessonKata->setPosition($position);
+                $newLessonKata->setPosition($kataPositionInLesson);
                 //persist kata to lesson (lesson-kata table in DB)
                 $entity_manager = $this->getDoctrine()->getManager();
                 $entity_manager->persist($newLessonKata);

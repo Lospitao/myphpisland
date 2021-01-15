@@ -10,7 +10,7 @@ function addKataToLessonByDragAndDrop (kataToBeAddedTitle, kataToBeAddedUuid, av
     let title = document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'http://localhost:8000/api/v1/lessons/dragdrop/' + uuid + '/katas' ;
+    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/dragdrop/' + uuid + '/katas' ;
 
     $.ajax({
         url : updateLessonWebService,
