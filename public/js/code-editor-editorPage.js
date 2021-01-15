@@ -16,7 +16,7 @@ $(document).ready(function() {
            let title = document.getElementById("title");
            let uuid = title.getAttribute("data-uuid")
 
-           let updateKataWebService = 'https://localhost:8000/api/v1/katas/' + uuid;
+           let updateKataWebService = 'http://localhost:8000/api/v1/katas/' + uuid;
            let editorCode = editor.getValue(index);
            $.ajax({
                url : updateKataWebService,

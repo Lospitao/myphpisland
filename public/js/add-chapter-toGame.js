@@ -3,7 +3,7 @@ function addChapterEvent(chapterToBeAddedUuid, chapterToBeAddedTitle, chapterToR
     let title = document.getElementById("title");
     //get game uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'https://localhost:8000/api/v1/games/' + uuid + '/chapters' ;
+    let updateLessonWebService = 'http://localhost:8000/api/v1/games/' + uuid + '/chapters' ;
 
 
     $.ajax({
