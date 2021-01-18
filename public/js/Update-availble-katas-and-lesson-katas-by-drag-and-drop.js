@@ -1,23 +1,52 @@
 //Define function to update position
 function updatePositionKatasList() {
-    $( ".lessonKataElement" ).each(function( index ) {
-        console.log( index + ": " + $( this ).text() );
+    $( ".lessonKataElement" ).each(function( index, element ) {
+        //Select element with id title (lesson title textarea)
+        let title = document.getElementById("title");
+        //get lesson uuid
+        let lesson_uuid = title.getAttribute("data-uuid");
+        let kata_uuid = element.getAttribute("data-uuid");
+        let position = index;
+        let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + lesson_uuid + '/katas/' + kata_uuid;
+
+        $.ajax({
+
+            url : updateLessonWebService,
+            data : {
+                'kataUuid' : kata_uuid,
+                'position': position,
+            },
+            type : 'PATCH',
+            dataType : 'json',
+            success: function (data) {
+                console.log('Submission was successful.');
+
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+            },
+        })
+
     });
 }
 
 function addKataToLessonByDragAndDrop (kataToBeAddedTitle, kataToBeAddedUuid, availableKataSortable, sortablesender) {
+    function calculatePositionOfNewLessonKata() {
+        var katasInLesson = $('.lessonKataElement');
+        return katasInLesson.length;
+    }
     //Select element with id title (lesson title textarea)
     let title = document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/dragdrop/' + uuid + '/katas' ;
+    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas';
 
     $.ajax({
         url : updateLessonWebService,
         data : {
             'kataToBeAddedUuid' : kataToBeAddedUuid,
             'kataToBeAddedTitle' : kataToBeAddedTitle,
-            'position' : 222,
+            'positionOfNewLessonKata' : calculatePositionOfNewLessonKata(),
         },
         type : 'POST',
         dataType : 'json',
@@ -41,7 +70,7 @@ function removeKataFromLessonByDragAndDrop (kataToBeReturnedToAvailableTitle, ka
     let title= document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/dragdrop/' + uuid + '/katas/' + kataToBeReturnedToAvailableUuid ;
+    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas/' + kataToBeReturnedToAvailableUuid ;
 
 
     $.ajax({

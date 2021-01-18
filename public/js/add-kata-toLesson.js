@@ -4,8 +4,7 @@
 function addKataEvent(kataToBeAddedUuid, kataToBeAddedTitle, kataToRemoveFromAvailable) {
     function calculatePositionOfNewLessonKata() {
         var katasInLesson = $('.lessonKataElement');
-        var totalKatasInLesson = katasInLesson.length;
-        return totalKatasInLesson;
+        return katasInLesson.length;
     }
     //Select element with id title (lesson title textarea)
     let title = document.getElementById("title");

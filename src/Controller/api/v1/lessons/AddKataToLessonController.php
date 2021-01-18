@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 Class AddKataToLessonController extends AbstractController
 {
     /**
-     * @Route("api/v1/lessons/{uuid}/katas", name="AddKataToLessonController")
+     * @Route("api/v1/lessons/{uuid}/katas", name="AddKataToLessonController" )
      * @param $uuid,
      * @return JsonResponse
      */
@@ -37,7 +37,7 @@ Class AddKataToLessonController extends AbstractController
         if ($uuid) {
             //check if kata exists
             if ($kata) {
-                //Add kata to lesson in relational tabqle lessonKatas
+                //Add kata to lesson in relational table lessonKatas
                 $newLessonKata =  new LessonKatas();
                 $newLessonKata->setKata($kata);
                 $newLessonKata->setLesson($lesson);

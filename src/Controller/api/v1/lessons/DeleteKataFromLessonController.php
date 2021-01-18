@@ -13,14 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 Class DeleteKataFromLessonController extends AbstractController
 {
     /**
-     * @Route("api/v1/lessons/{uuid}/katas/{kataToBeRemovedUuid}", name="DeleteKataFromLessonController")
+     * @Route("api/v1/lessons/{uuid}/katas/{kataToBeRemovedUuid}", methods={"DELETE"}, name="DeleteKataFromLessonController")
      * @param $uuid,
      * @param $kataToBeRemovedUuid,
      * @return JsonResponse
      */
     function DeleteKataFromLessonController (Request $request, $uuid, $kataToBeRemovedUuid)
     {
-echo "Lo estoy cogiendo";
 
         //get kata uuid
         $kata_uuid = $request->request->get('kataToBeRemovedUuid');
