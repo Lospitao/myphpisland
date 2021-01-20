@@ -3,7 +3,7 @@
     <ul id="lessonKatasList" class="connectedSortable lessonKatas">
         {% for lessonKatas in lessonKatasArray %}
             <li class="ui-state-highlight lessonKataElement" data-title="{{ lessonKatas['title'] }}" data-uuid="{{ lessonKatas['uuid'] }}">
-                {{ lessonKatas['title'] }}
+                {{ lessonKatas['title'] }}. La posición de la kata es {{ lessonKatas['position'] }}
                 <a href="#"><i class="tiny material-icons lessonKata" data-title="{{ lessonKatas['title'] }}" data-uuid="{{ lessonKatas['uuid'] }}">clear</i></a>
             </li>
         {% endfor %}

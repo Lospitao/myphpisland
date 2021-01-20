@@ -70,10 +70,9 @@ Class LessonKatas {
     }
 
     /**
-     * @param int $int
      * @return mixed
      */
-    public function getPosition(int $int)
+    public function getPosition()
     {
         return $this->position;
     }

@@ -1,5 +1,5 @@
 //Define function to update position
-function updatePositionKatasList() {
+function updatePositionOfLessonKatasAfterSorting() {
     $( ".lessonKataElement" ).each(function( index, element ) {
         //Select element with id title (lesson title textarea)
         let title = document.getElementById("title");
@@ -21,20 +21,28 @@ function updatePositionKatasList() {
             success: function (data) {
                 console.log('Submission was successful.');
 
+
             },
             error: function (data) {
                 console.log('An error occurred.');
+                console.log("position");
+                console.log(index);
             },
         })
 
     });
 }
 
-function addKataToLessonByDragAndDrop (kataToBeAddedTitle, kataToBeAddedUuid, availableKataSortable, sortablesender) {
+function addKataToLessonByDragAndDrop (ui) {
+
     function calculatePositionOfNewLessonKata() {
         var katasInLesson = $('.lessonKataElement');
         return katasInLesson.length;
     }
+    let kataToBeAddedTitle = (ui.item.context).getAttribute("data-title");
+    let kataToBeAddedUuid = (ui.item.context).getAttribute("data-uuid");
+    let availableKataSortable = ui.item;
+    let sortableSender = ui.sender;
     //Select element with id title (lesson title textarea)
     let title = document.getElementById("title");
     //get lesson uuid
@@ -53,20 +61,24 @@ function addKataToLessonByDragAndDrop (kataToBeAddedTitle, kataToBeAddedUuid, av
         success: function (data) {
             console.log('Submission was successful.');
 
-            if (sortablesender) {
+            if (sortableSender) {
                 //define newLessonKata
                 let newLessonKata = `<li class="ui-state-highlight lessonKataElement ui-sortable-handle" data-title="${kataToBeAddedTitle}" data-uuid="${kataToBeAddedUuid}">${kataToBeAddedTitle}<a href="#"><i class="tiny material-icons lessonKata" data-title="${kataToBeAddedTitle}" data-uuid="${kataToBeAddedUuid}">clear</i></a></li>`;
                 availableKataSortable.replaceWith(newLessonKata);
             }
-            updatePositionKatasList();
+            updatePositionOfLessonKatasAfterSorting();
         },
         error: function (data) {
             console.log('An error occurred.');
         },
     })
 }
-function removeKataFromLessonByDragAndDrop (kataToBeReturnedToAvailableTitle, kataToBeReturnedToAvailableUuid, lessonKataSortable, sortablesender) {
-    //Select element with id title (lesson title textarea)
+function removeKataFromLessonByDragAndDrop (ui) {
+
+    let kataToBeReturnedToAvailableTitle = (ui.item.context).getAttribute("data-title");
+    let kataToBeReturnedToAvailableUuid = (ui.item.context).getAttribute("data-uuid");
+    let lessonKataSortable = ui.item;//Select element with id title (lesson title textarea)
+    let sortableSender = ui.sender;
     let title= document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
@@ -84,48 +96,43 @@ function removeKataFromLessonByDragAndDrop (kataToBeReturnedToAvailableTitle, ka
         dataType : 'json',
         success: function (data) {
             console.log('Submission was successful.');
-            if (sortablesender) {
+            if (sortableSender) {
                 //define kataToBeReturned
                 let kataToBeReturned = `<li class="ui-state-highlight availableKataElement ui-sortable-handle" data-title="${kataToBeReturnedToAvailableTitle}" data-uuid="${kataToBeReturnedToAvailableUuid}">${kataToBeReturnedToAvailableTitle}<a href="#"><i class="tiny material-icons lessonKata" data-title="${kataToBeReturnedToAvailableTitle}" data-uuid="${kataToBeReturnedToAvailableUuid}">add_circle</i></a></li>`;
                 lessonKataSortable.replaceWith(kataToBeReturned);
             }
-            updatePositionKatasList();
+            updatePositionOfLessonKatasAfterSorting();
         },
         error: function (data) {
             console.log('An error occurred.');
         },
     })
 }
-function makeKataListSortable() {
+
+function makeKataListSortableFromAndToAvailableAndLessonSections() {
 
     $( "#availableKatasList, #lessonKatasList").sortable({
         connectWith: ".connectedSortable",
         receive: function (event, ui) {
-            //define element to be moved class
             let elementClass = (ui.item.context).getAttribute("class");
-            //If the moved element is an lesson Kata
-            if (elementClass.includes("lessonKataElement")) {
-                //define kataToBeReturnedToAvailableTitle and kataToBeReturnedToAvailableUuid
-                let kataToBeReturnedToAvailableTitle = (ui.item.context).getAttribute("data-title");
-                let kataToBeReturnedToAvailableUuid = (ui.item.context).getAttribute("data-uuid");
-                let lessonKataSortable = ui.item;
-                let sortablesender = ui.sender;
-                removeKataFromLessonByDragAndDrop (kataToBeReturnedToAvailableTitle, kataToBeReturnedToAvailableUuid, lessonKataSortable, sortablesender);
+            function kataIsALessonKata (elementClass) {
+                return elementClass.includes("lessonKataElement");
             }
-            //else (if the moved element is an available kata)
-            else {
-                //define kataToBeAddedTitle and kataToBeAddedTitle
-                let kataToBeAddedTitle = (ui.item.context).getAttribute("data-title");
-                let kataToBeAddedUuid = (ui.item.context).getAttribute("data-uuid");
-                let availableKataSortable = ui.item;
-                let sortablesender = ui.sender;
-                addKataToLessonByDragAndDrop (kataToBeAddedTitle, kataToBeAddedUuid, availableKataSortable, sortablesender);
+            if (kataIsALessonKata(elementClass)) {
+                removeKataFromLessonByDragAndDrop(ui);
             }
+            else addKataToLessonByDragAndDrop(ui);
+
+        },
+        update: function (event,ui) {
+          updatePositionOfLessonKatasAfterSorting();
         },
         revert:true,
     }).disableSelection();
+
 }
 $(document).ready(function() {
-    makeKataListSortable();
+    makeKataListSortableFromAndToAvailableAndLessonSections();
+
 });
 
