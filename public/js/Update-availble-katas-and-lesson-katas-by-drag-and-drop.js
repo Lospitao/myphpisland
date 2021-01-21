@@ -1,3 +1,7 @@
+function kataIsALessonKata (ui) {
+    let elementClass = (ui.item.context).getAttribute("class");
+    return elementClass.includes("lessonKataElement");
+}
 //Define function to update position
 function updatePositionOfLessonKatasAfterSorting() {
     $( ".lessonKataElement" ).each(function( index, element ) {
@@ -20,13 +24,9 @@ function updatePositionOfLessonKatasAfterSorting() {
             dataType : 'json',
             success: function (data) {
                 console.log('Submission was successful.');
-
-
             },
             error: function (data) {
                 console.log('An error occurred.');
-                console.log("position");
-                console.log(index);
             },
         })
 
@@ -114,11 +114,8 @@ function makeKataListSortableFromAndToAvailableAndLessonSections() {
     $( "#availableKatasList, #lessonKatasList").sortable({
         connectWith: ".connectedSortable",
         receive: function (event, ui) {
-            let elementClass = (ui.item.context).getAttribute("class");
-            function kataIsALessonKata (elementClass) {
-                return elementClass.includes("lessonKataElement");
-            }
-            if (kataIsALessonKata(elementClass)) {
+
+            if (kataIsALessonKata(ui)) {
                 removeKataFromLessonByDragAndDrop(ui);
             }
             else addKataToLessonByDragAndDrop(ui);
