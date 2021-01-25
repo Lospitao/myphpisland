@@ -16,7 +16,7 @@ $(document).ready(function() {
         let title = document.getElementById("title");
         let uuid = title.getAttribute("data-uuid")
         //Define Controller
-        let updateKataWebService = 'http://localhost:8000/api/v1/test_executions/' + uuid;
+        let updateKataWebService = 'https://localhost:8000/api/v1/test_executions/' + uuid;
         //Get value of Textarea
         let editorCode = editor.getValue(index);
 

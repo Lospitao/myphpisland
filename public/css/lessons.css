@@ -67,7 +67,7 @@ Ordered Lesson Katas List
 
     list-style-type: none;
 }
-#availableKatasList li, #lessonKatasList {
+#availableKatasList li, #lessonKatasList li{
     font-size: 1.2em;
     border: 1px solid #eee;
 }
