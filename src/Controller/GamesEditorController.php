@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Chapter;
 use App\Entity\Game;
+use App\Entity\GameChapters;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,20 +23,31 @@ class GamesEditorController extends AbstractController
         $game = $this->getDoctrine()
             ->getRepository(Game::class)
             ->findOneBy(['uuid' => $gameUuid]);
-
-        //get kata collection related to lesson
-        $gameChaptersInDB = $game->getChapter();
+        $gameId = $game->getId();
+        //get chapter collection related to game
+        $gameChaptersInDB = $this->getDoctrine()
+            ->getRepository(GameChapters::class)
+            ->findBy(['game' => $gameId], ['position' => 'ASC']);
 
         //iteration inside game Chapters
         foreach($gameChaptersInDB as $gameChapterInDB) {
+            //Get kata id
+            $chapterId= $gameChapterInDB->getChapter();
+            $chapterPosition = $gameChapterInDB->getPosition();
+            //Get kata in
+            $relevantChapter = $this->getDoctrine()
+                ->getRepository(Chapter::class)
+                ->findOneBy(['id' => $chapterId]);
+
             //get chapter title
-            $gameChapterTitle = $gameChapterInDB->getTitle();
+            $gameChapterTitle = $relevantChapter->getTitle();
             //get chapter uuid
-            $gameChapterUuid = $gameChapterInDB->getUuid();
+            $gameChapterUuid = $relevantChapter->getUuid();
             //Push both into the array previously created
             $gameChapters[$gameChapterUuid]= [
                 'title' => $gameChapterTitle,
                 'uuid' => $gameChapterUuid,
+                'position' => $chapterPosition
             ];
         }
         /*Load available chapters as index is loaded*/

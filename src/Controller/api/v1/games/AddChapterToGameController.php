@@ -3,6 +3,7 @@ namespace App\Controller\api\v1\games;
 
 use App\Entity\Chapter;
 use App\Entity\Game;
+use App\Entity\GameChapters;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,13 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class AddChapterToGameController extends abstractController
 {
     /**
-     * @Route("api/v1/games/{gameUuid}/chapters", name="AddChapterToGameController")
+     * @Route("api/v1/games/{gameUuid}/chapters", methods={"POST"}, name="AddChapterToGameController")
      * @param $gameUuid
      * @return JsonResponse
      */
     function AddChapterToGameController (Request $request, $gameUuid) {
         //get Chapter Uuid
-        $chapterUuid = $request->request->get('ChapterToBeAddedUuid');
+        $chapterUuid = $request->request->get('chapterToBeAddedUuid');
+        //get position of new chapter to be added
+        $newChapterPosition = $request->request->get('positionOfNewGameChapter');
         //get chapter to be added
         $chapter = $this->getDoctrine()
             ->getRepository(Chapter::class)
@@ -31,13 +34,15 @@ class AddChapterToGameController extends abstractController
         //check if game exists
         if ($gameUuid) {
             //check if chapter exists
-            if ($chapter) {
+            if ($chapterUuid) {
                 //Add Chapter to Game in relational table
-                $game->addChapter($chapter);
-
+                $newGameChapter = new GameChapters();
+                $newGameChapter->setGame($game);
+                $newGameChapter->setChapter($chapter);
+                $newGameChapter->setPosition($newChapterPosition);
                 //persist chapter to game (game-chapter table in DB)
                 $entity_manager = $this->getDoctrine()->getManager();
-                $entity_manager->persist($game);
+                $entity_manager->persist($newGameChapter);
                 $entity_manager->flush();
 
                 //set response
