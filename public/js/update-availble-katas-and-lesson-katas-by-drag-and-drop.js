@@ -126,7 +126,6 @@ function makeKataListSortableFromAndToAvailableAndLessonSections() {
         },
         revert:true,
     }).disableSelection();
-
 }
 $(document).ready(function() {
     makeKataListSortableFromAndToAvailableAndLessonSections();

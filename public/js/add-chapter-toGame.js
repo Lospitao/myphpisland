@@ -1,24 +1,28 @@
 function addChapterEvent(chapterToBeAddedUuid, chapterToBeAddedTitle, chapterToRemoveFromAvailable) {
+    function calculatePositionOfNewGameChapter() {
+        var chaptersInGame = $('.gameChapterElement');
+        return chaptersInGame.length;
+    }
     //Select element with id title (lesson title textarea)
     let title = document.getElementById("title");
     //get game uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'http://localhost:8000/api/v1/games/' + uuid + '/chapters' ;
+    let updateGameWebService = 'https://localhost:8000/api/v1/games/' + uuid + '/chapters' ;
 
 
     $.ajax({
 
-        url : updateLessonWebService,
+        url : updateGameWebService,
         data : {
-            'ChapterToBeAddedUuid' : chapterToBeAddedUuid,
-            'ChapterToBeAddedTitle' : chapterToBeAddedTitle,
+            'chapterToBeAddedUuid' : chapterToBeAddedUuid,
+            'positionOfNewGameChapter' : calculatePositionOfNewGameChapter(),
         },
         type : 'POST',
         dataType : 'json',
         success: function (data) {
             console.log('Submission was successful.');
-            let newGameChapter = `<li >${chapterToBeAddedTitle}<a href="#"><i class="tiny material-icons gameChapter" data-title="${chapterToBeAddedTitle}" data-uuid="${chapterToBeAddedUuid}">clear</i></a></li>`;
-            $( ".gameChapters" ).append(newGameChapter);
+            let newGameChapter = `<li class="ui-state-highlight gameChapterElement" data-title="${chapterToBeAddedTitle}" data-uuid="${chapterToBeAddedUuid}">${chapterToBeAddedTitle}<a href="#"><i class="tiny material-icons gameChapter" data-title="${chapterToBeAddedTitle}" data-uuid="${chapterToBeAddedUuid}">clear</i></a></li>`;
+            $( "#gameChaptersList" ).append(newGameChapter);
             $('.gameChapter[data-uuid="'+chapterToBeAddedUuid+'"]').click(function() {
                 let chapterTitleToBeRemovedFromGame = $(this).attr("data-title");
                 let chapterToBeRemovedUuid = $(this).attr("data-uuid");
@@ -29,6 +33,7 @@ function addChapterEvent(chapterToBeAddedUuid, chapterToBeAddedTitle, chapterToR
         },
         error: function (data) {
             console.log('An error occurred.');
+            console.log(data);
         },
     })
 }

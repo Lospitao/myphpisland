@@ -6,8 +6,6 @@ function removeKataEvent(kataToBeRemovedUuid, kataTitleToBeRemovedFromLesson, ka
 
     let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas/' + kataToBeRemovedUuid;
 
-
-
     $.ajax({
 
         url : updateLessonWebService,

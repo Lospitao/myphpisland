@@ -3,7 +3,7 @@ $(document).ready(function() {
     let element = document.getElementById("username");
     let username = element.getAttribute("class")
 
-    let updateLessonWebService = 'http://localhost:8000/api/v1/users/' + username;
+    let updateLessonWebService = 'https://localhost:8000/api/v1/users/' + username;
 
 
 
