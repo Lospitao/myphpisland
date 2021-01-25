@@ -1,19 +1,4 @@
-/*
-Stage save page
- */
-.screen.stage.save .card.ambient-sound {
-    position: unset;
-    float: left;
-}
 
-.screen.stage.save .card.dialogue-sound {
-    position: unset;
-    float: left;
-}
-
-.screen.stage.save .card.background-stage {
-    clear: both;
-}
 
 /**Chapter-Edit**/
 

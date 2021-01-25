@@ -1,10 +1,10 @@
 
 <div class="gameChaptersList">
-    <ul class="gameChapters">
+    <ul id="gameChaptersList" class="connectedSortable gameChapter">
         {% for gameChapter in gameChapters %}
-            <li>
+            <li class="ui-state-highlight gameChapterElement" data-title="{{ gameChapter['title']  }}" data-uuid="{{ gameChapter['uuid'] }}">
                 {{ gameChapter['title'] }}
-                <a href="#"><i class="tiny material-icons gameChapter" data-title="{{ gameChapter['title'] }}" data-uuid="{{ gameChapter['uuid'] }}">clear</i></a>
+                <a href="#"><i class="tiny material-icons gameChapterRemoveIcon" data-title="{{ gameChapter['title'] }}" data-uuid="{{ gameChapter['uuid'] }}">clear</i></a>
             </li>
         {% endfor %}
     </ul>

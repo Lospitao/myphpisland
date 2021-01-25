@@ -1,7 +1,7 @@
 <div class="availableChaptersList">
-    <ul class="availableChapters">
+    <ul id="availableChaptersList" class="connectedSortable availableChapters">
         {% for availableChapter  in availableChapters  %}
-            <li>
+            <li class="ui-state-highlight availableChapterElement" data-title="{{ availableChapter['title']  }}" data-uuid="{{ availableChapter['uuid'] }}">
                 {{ availableChapter['title'] }}
                 <a href="#"><i class="tiny material-icons availableChapter"  data-title="{{ availableChapter['title'] }}" data-uuid="{{ availableChapter['uuid'] }}" >add_circle</i></a>
             </li>
