@@ -91,7 +91,7 @@ class ChaptersEditorController extends AbstractController
             $stageTitle = $stage->getTitle();
             //Get stage uuid
             $stageUuid = $stage->getUuid();
-            //If stage is inside of lesson katas, remove it from availableKatas
+            //If stage is inside of chapter element table, remove it from availableKatas
             if (!array_key_exists($stageUuid, $chapterElementsArray)) {
                 //Push title and uuid of stage into availableStages
                 $availableStages[$stageUuid] = [

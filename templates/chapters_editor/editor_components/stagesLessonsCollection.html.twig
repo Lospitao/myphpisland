@@ -3,7 +3,7 @@
         {% for chapterElement in chapterElementsArray %}
             <li class="ui-state-highlight ChapterLessonAndStageElement" data-id="{{ chapterElement['id'] }}" data-title="{{ chapterElement['title'] }}" data-uuid="{{ chapterElement['uuid'] }}">
                 {{ chapterElement['title'] }}
-                <a href="#"><i class="tiny material-icons {{ elementClass }}" data-title="{{ chapterElement['title'] }}" data-uuid="{{ chapterElement['uuid'] }}">clear</i></a>
+                <a href="#"><i class="{{ elementClass }}" data-title="{{ chapterElement['title'] }}" data-uuid="{{ chapterElement['uuid'] }}">clear</i></a>
             </li>
         {% endfor %}
     </ul>

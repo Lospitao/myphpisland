@@ -11,15 +11,15 @@ Class DeleteChapterElementFromChapterController extends AbstractController
 {
 
     /**
-     * @Route("/api/v1/chapters/{chapterUuid}/chapterelements/{idElementChapter}", name="DeleteChapterElementFromChapterController")
+     * @Route("/api/v1/chapters/{chapterUuid}/chapterelements/{idChapterElement}", name="DeleteChapterElementFromChapterController")
      * @param $chapterUuid
-     * @param $idElementChapter
+     * @param $idChapterElement
      * @return JsonResponse
      */
-    function DeleteChapterElementFromChapterController($chapterUuid, $idElementChapter)
+    function DeleteChapterElementFromChapterController($chapterUuid, $idChapterElement)
     {
         try {
-            $this->DeleteChapterElementFromChapterService($idElementChapter);
+            $this->DeleteChapterElementFromChapterService($idChapterElement);
             $jSonResponseWithoutContent = $this->returnJsonResponseWithoutContent();
             return $jSonResponseWithoutContent;
         } catch (\Doctrine\ORM\EntityNotFoundException $ex) {
@@ -33,9 +33,9 @@ Class DeleteChapterElementFromChapterController extends AbstractController
         $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
         return $response;
     }
-    private function checkIfAnElementIdHasBeenProvided($idElementChapter)
+    private function checkIfAnElementIdHasBeenProvided($idChapterElement)
     {
-        if (empty($idElementChapter)) {
+        if (empty($idChapterElement)) {
             throw new Exception("Id del capítulo no encontrado");
         }
     }
@@ -58,10 +58,10 @@ Class DeleteChapterElementFromChapterController extends AbstractController
         return $errorResponse;
     }
 
-    private function DeleteChapterElementFromChapterService($idElementChapter)
+    private function DeleteChapterElementFromChapterService($idChapterElement)
     {
-        $chapterElementToBeRemoved = $this->findChapterElementById($idElementChapter);
-        $this->checkIfAnElementIdHasBeenProvided($idElementChapter);
+        $chapterElementToBeRemoved = $this->findChapterElementById($idChapterElement);
+        $this->checkIfAnElementIdHasBeenProvided($idChapterElement);
         $this->deleteElementFromChapter($chapterElementToBeRemoved);
     }
 }

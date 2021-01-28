@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 Class AddChapterElementToChapterController extends AbstractController
 {
     /**
-     * @Route("/api/v1/chapters/{chapterUuid}/ChapterElements", name="AddChapterElementToChapterController")
+     * @Route("/api/v1/chapters/{chapterUuid}/chapterelements", name="AddChapterElementToChapterController")
      * @param $chapterUuid
      * @return JsonResponse
      */
@@ -50,10 +50,12 @@ Class AddChapterElementToChapterController extends AbstractController
                     $newChapterLesson->setChapterElementType(1);
                     $newChapterLesson->setStageOrLessonId((int)$lessonId);
                     $newChapterLesson->setPosition($positionOfNewLessonAdded);
+
                     //persist lesson to chapter_element table
                     $entity_manager = $this->getDoctrine()->getManager();
                     $entity_manager->persist($newChapterLesson);
                     $entity_manager->flush();
+                    $idChapterElement= $newChapterLesson->getId();
                 }
             }
             else if ($stageToBeAddedUuid) {
@@ -78,12 +80,15 @@ Class AddChapterElementToChapterController extends AbstractController
                     $entity_manager = $this->getDoctrine()->getManager();
                     $entity_manager->persist($newChapterStage);
                     $entity_manager->flush();
+                    $idChapterElement = $newChapterStage->getId();
+
                 }
             }
+            $response = new JsonResponse([
+                'idChapterElement' => $idChapterElement,
+            ]);
+            return $response;
         }
 
-        $response = new JsonResponse();
-        $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
-        return $response;
     }
 }

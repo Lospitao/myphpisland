@@ -1,8 +1,8 @@
-function removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChapter, idElementChapter, lessonToRemoveFromChapter) {
+function removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChapter, idChapterElement, lessonToRemoveFromChapter) {
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid")
 
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idElementChapter;
+    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idChapterElement;
 
     $.ajax({
 
@@ -10,8 +10,7 @@ function removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChap
         data : {
             'lessonToBeRemovedUuid' : lessonToBeRemovedUuid,
             'lessonTitleToBeRemovedFromChapter' : lessonTitleToBeRemovedFromChapter,
-            'idElementChapter' : idElementChapter,
-
+            'idChapterElement' : idChapterElement,
         },
         type : 'DELETE',
         dataType : 'json',
@@ -33,11 +32,11 @@ function removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChap
         },
     })
 }
-function removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter, idElementChapter, stageToRemoveFromChapter) {
+function removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter, idChapterElement, stageToRemoveFromChapter) {
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid")
 
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idElementChapter;
+    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idChapterElement;
 
 
     $.ajax({
@@ -46,7 +45,7 @@ function removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter
         data : {
             'stageToBeRemovedUuid' : stageToBeRemovedUuid,
             'stageTitleToBeRemovedFromChapter' : stageTitleToBeRemovedFromChapter,
-            'idElementChapter' : idElementChapter,
+            'idChapterElement' : idChapterElement,
         },
         type : 'DELETE',
         dataType : 'json',
@@ -73,9 +72,9 @@ function removeStageFromChapterEvent() {
     $('.chapterStage').click(function() {
         let stageToBeRemovedUuid = $(this).attr("data-uuid");
         let stageTitleToBeRemovedFromChapter = $(this).attr("data-title");
-        let idElementChapter = $(this).parent().parent().attr("data-id");
+        let idChapterElement = $(this).parent().parent().attr("data-id");
         let stageToRemoveFromChapter = $(this).parent().parent();
-        removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter, idElementChapter, stageToRemoveFromChapter);
+        removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter, idChapterElement, stageToRemoveFromChapter);
     });
 }
 function removeLessonFromChapterEvent() {
@@ -83,9 +82,9 @@ function removeLessonFromChapterEvent() {
     $('.chapterLesson').click(function() {
         let lessonToBeRemovedUuid = $(this).attr("data-uuid");
         let lessonTitleToBeRemovedFromChapter = $(this).attr("data-title");
-        let idElementChapter = $(this).parent().parent().attr("data-id");
+        let idChapterElement = $(this).parent().parent().attr("data-id");
         let lessonToRemoveFromChapter = $(this).parent().parent();
-        removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChapter, idElementChapter, lessonToRemoveFromChapter);
+        removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChapter, idChapterElement, lessonToRemoveFromChapter);
     });
 }
 $(document).ready(function() {
