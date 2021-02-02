@@ -210,7 +210,9 @@ function makeListsSortable () {
             }
 
         },
-
+        update: function (event,ui) {
+            updatePositionOfChapterElementsAfterSorting();
+        },
 
         revert:true,
     }).disableSelection();
