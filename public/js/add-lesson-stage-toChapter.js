@@ -15,7 +15,7 @@ function addStageEvent(stageToBeAddedUuid, stageToBeAddedTitle, stageToRemoveFro
         data : {
             'stageToBeAddedUuid' : stageToBeAddedUuid,
             'stageToBeAddedTitle' : stageToBeAddedTitle,
-            'positionOfNewStageAdded' : calculatePositionOfNewElementAdded(),
+            'positionOfNewChapterStage' : calculatePositionOfNewElementAdded(),
 
 
         },
@@ -54,7 +54,7 @@ function addLessonEvent(lessonToBeAddedUuid, lessonToBeAddedTitle,lessonToRemove
         data : {
             'lessonToBeAddedUuid' : lessonToBeAddedUuid,
             'lessonToBeAddedTitle' : lessonToBeAddedTitle,
-            'positionOfNewLessonAdded' : calculatePositionOfNewElementAdded(),
+            'positionOfNewChapterLesson' : calculatePositionOfNewElementAdded(),
 
         },
         type : 'POST',

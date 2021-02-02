@@ -4,8 +4,6 @@ function chapterIsAGameChapter(ui) {
 }
 function updatePositionOfGameChaptersAfterSorting() {
     $( ".gameChapterElement" ).each(function( index, element ) {
-
-
         let title = document.getElementById("title");
 
         let uuid = title.getAttribute("data-uuid");

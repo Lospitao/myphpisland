@@ -65,17 +65,18 @@ Ordered Game Chapters List
 .card.game-chapters li i {
     float: right;
 }
+/*Drag and Drop Style*/
 #availableChaptersList, #gameChaptersList {
 
     list-style-type: none;
 }
 #availableChaptersList li , #gameChaptersList li{
-
     font-size: 1.2em;
     border: 1px solid #eee;
 }
 #availableChaptersList li {
     background-color: #9ddfe9;
+    color: black;
 }
 #gameChaptersList li {
     background-color: #4fc3f7;

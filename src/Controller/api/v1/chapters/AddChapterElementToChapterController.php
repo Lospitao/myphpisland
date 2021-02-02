@@ -30,8 +30,8 @@ Class AddChapterElementToChapterController extends AbstractController
             //Get Stage or Lesson Id
             $stageToBeAddedUuid = $request->request->get('stageToBeAddedUuid');
             $lessonToBeAddedUuid = $request->request->get('lessonToBeAddedUuid');
-            $positionOfNewLessonAdded = $request->request->get('positionOfNewLessonAdded');
-            $positionOfNewStageAdded = $request->request->get('positionOfNewStageAdded');
+            $positionOfNewLessonAdded = $request->request->get('positionOfNewChapterLesson');
+            $positionOfNewStageAdded = $request->request->get('positionOfNewChapterStage');
             if ($lessonToBeAddedUuid) {
                 //Get Lesson
                 $lesson = $this->getDoctrine()

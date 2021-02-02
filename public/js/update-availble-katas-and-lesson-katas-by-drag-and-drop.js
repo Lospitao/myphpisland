@@ -129,6 +129,5 @@ function makeKataListSortableFromAndToAvailableAndLessonSections() {
 }
 $(document).ready(function() {
     makeKataListSortableFromAndToAvailableAndLessonSections();
-
 });
 
