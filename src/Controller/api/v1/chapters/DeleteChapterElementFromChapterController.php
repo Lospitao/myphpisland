@@ -9,9 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 Class DeleteChapterElementFromChapterController extends AbstractController
 {
-
     /**
-     * @Route("/api/v1/chapters/{chapterUuid}/chapterelements/{idChapterElement}", name="DeleteChapterElementFromChapterController")
+     * @Route("/api/v1/chapters/{chapterUuid}/chapterelements/{idChapterElement}", methods={"DELETE"}, name="DeleteChapterElementFromChapterController")
      * @param $chapterUuid
      * @param $idChapterElement
      * @return JsonResponse
@@ -63,6 +62,7 @@ Class DeleteChapterElementFromChapterController extends AbstractController
         $chapterElementToBeRemoved = $this->findChapterElementById($idChapterElement);
         $this->checkIfAnElementIdHasBeenProvided($idChapterElement);
         $this->deleteElementFromChapter($chapterElementToBeRemoved);
+
     }
 }
 

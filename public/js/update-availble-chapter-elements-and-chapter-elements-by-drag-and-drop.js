@@ -30,6 +30,41 @@ function updatePositionOfChapterElementsAfterSorting (ui) {
 }
 /*STAGE SORTABLE FUNCTIONALITY*/
 
+function removeStageFromChapterByDragAndDrop(ui) {
+
+    let chapterStageToBeRemovedTitle = (ui.item.context).getAttribute("data-title");
+    let chapterStageToBeRemovedUuid = (ui.item.context).getAttribute("data-uuid");
+    let chapterStageToBeRemovedId = (ui.item.context).getAttribute("data-id");
+    let chapterStageSortable = ui.item;
+    let sortableSender = ui.sender;
+
+    let chapterTitle = document.getElementById("chapter-title");
+    let chapterUuid = chapterTitle.getAttribute("data-uuid");
+    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid + '/chapterelements/' + chapterStageToBeRemovedId;
+
+    $.ajax({
+
+        url : updateChapterWebService,
+        data : {
+            'chapterStageToBeRemovedTitle' : chapterStageToBeRemovedTitle,
+            'chapterStageToBeRemovedUuid' : chapterStageToBeRemovedUuid,
+            'idChapterElement' : chapterStageToBeRemovedId,
+        },
+        type : 'DELETE',
+        dataType : 'json',
+        success: function (data) {
+            console.log('Submission was successful.');
+            if (sortableSender) {
+                let chapterStageToBeReturnedToAvailable = `<li class="ui-state-default availableStageElement ui-sortable-handle" data-title="${chapterStageToBeRemovedTitle}" data-uuid="${chapterStageToBeRemovedUuid}">${chapterStageToBeRemovedTitle}<a href="#"><i class="tiny material-icons availableStage" data-title="${chapterStageToBeRemovedTitle}" data-uuid="${chapterStageToBeRemovedUuid}">add_circle</i></a></li>`;
+                chapterStageSortable.replaceWith(chapterStageToBeReturnedToAvailable);
+            }
+            updatePositionOfChapterElementsAfterSorting();
+        },
+        error: function (data) {
+            console.log('An error occurred.');
+        },
+    })
+}
 function addStageToChapterByDragAndDrop(ui) {
     function calculatePositionOfNewChapterElement(ui) {
         let elementsInChapter = $('.ChapterLessonAndStageElement');
@@ -113,7 +148,41 @@ function addLessonToChapterByDragAndDrop (ui) {
         },
     })
 }
+function removeLessonFromChapterByDragAndDrop (ui) {
 
+    let chapterLessonToBeRemovedTitle = (ui.item.context).getAttribute("data-title");
+    let chapterLessonToBeRemovedUuid = (ui.item.context).getAttribute("data-uuid");
+    let chapterLessonToBeRemovedId = (ui.item.context).getAttribute("data-id");
+    let chapterLessonSortable = ui.item;
+    let sortableSender = ui.sender;
+
+    let chapterTitle = document.getElementById("chapter-title");
+    let chapterUuid = chapterTitle.getAttribute("data-uuid");
+    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid + '/chapterelements/' + chapterLessonToBeRemovedId;
+
+    $.ajax({
+
+        url : updateChapterWebService,
+        data : {
+            'chapterLessonToBeRemovedTitle' : chapterLessonToBeRemovedTitle,
+            'chapterLessonToBeRemovedUuid' : chapterLessonToBeRemovedUuid,
+            'idChapterElement': chapterLessonToBeRemovedId,
+        },
+        type : 'DELETE',
+        dataType : 'json',
+        success: function (data) {
+            console.log('Submission was successful.');
+            if (sortableSender) {
+                let chapterLessonToBeReturnedToAvailable = `<li class="ui-state-default availableLessonElement ui-sortable-handle" data-title="${chapterLessonToBeRemovedTitle}" data-uuid="${chapterLessonToBeRemovedUuid}">${chapterLessonToBeRemovedTitle}<a href="#"><i class="tiny material-icons availableLesson" data-title="${chapterLessonToBeRemovedTitle}" data-uuid="${chapterLessonToBeRemovedUuid}">add_circle</i></a></li>`;
+                chapterLessonSortable.replaceWith(chapterLessonToBeReturnedToAvailable);
+            }
+            updatePositionOfGameChaptersAfterSorting();
+        },
+        error: function (data) {
+            console.log('An error occurred.');
+        },
+    })
+}
 function draggedElementIsALesson(ui) {
     let elementClass = (ui.item.context).getAttribute("class");
     return elementClass.includes("availableLessonElement");
