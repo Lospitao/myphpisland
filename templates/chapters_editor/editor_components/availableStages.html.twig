@@ -1,7 +1,7 @@
 <div class="availableStagesList">
-<ul class="availableStages">
+<ul id="availableStagesList" class="connectedSortable availableStages">
     {% for availableStage in availableStages %}
-        <li>
+        <li class="ui-state-default availableStageElement" data-title="{{ availableStage['stageTitle'] }}" data-uuid="{{ availableStage['stageUuid'] }}">
             {{ availableStage['stageTitle'] }}
             <a href="#"><i class="tiny material-icons availableStage"  data-title="{{ availableStage['stageTitle'] }}" data-uuid="{{ availableStage['stageUuid'] }}" >add_circle</i></a>
         </li>

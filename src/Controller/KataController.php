@@ -32,7 +32,8 @@ class KataController extends AbstractController
     }
 
     /**
-     * @Route("/katas/{uuid}", name="kata" )
+     * @Route("/katas/{uuid}", name="kata")
+     * @param $uuid
      */
     public function index($uuid)
     {

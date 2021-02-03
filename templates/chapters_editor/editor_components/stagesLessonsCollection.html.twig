@@ -1,9 +1,8 @@
-<div class="chapter_lessons_stages_collection_list">
-    <ul class="chapter_lessons_stages_collection">
+<div class="ChapterLessonsAndStagesCollectionList">
+    <ul id="ChapterLessonsAndStagesCollectionList" class="connectedSortable ChapterLessonsAndStages">
         {% for chapterElement in chapterElementsArray %}
-            <li>
+            <li class="ui-state-highlight ChapterLessonAndStageElement" data-id="{{ chapterElement['id'] }}" data-title="{{ chapterElement['title'] }}" data-uuid="{{ chapterElement['uuid'] }}">
                 {{ chapterElement['title'] }}
-
                 <a href="#"><i class="{{ elementClass }}" data-title="{{ chapterElement['title'] }}" data-uuid="{{ chapterElement['uuid'] }}">clear</i></a>
             </li>
         {% endfor %}

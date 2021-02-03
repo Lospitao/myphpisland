@@ -2,8 +2,6 @@
 
 namespace App\Controller\api\v1\chapters;
 
-
-
 use App\Entity\Chapter;
 use App\Entity\Lesson;
 use App\Entity\Stage;
@@ -12,10 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-Class AddStagesAndLessonsToChapterController extends AbstractController
+Class AddChapterElementToChapterController extends AbstractController
 {
     /**
-     * @Route("/api/v1/chapters/{chapterUuid}/element", name="AddStagesAndLessonsToChapterController")
+     * @Route("/api/v1/chapters/{chapterUuid}/chapterelements", name="AddChapterElementToChapterController")
      * @param $chapterUuid
      * @return JsonResponse
      */
@@ -32,31 +30,8 @@ Class AddStagesAndLessonsToChapterController extends AbstractController
             //Get Stage or Lesson Id
             $stageToBeAddedUuid = $request->request->get('stageToBeAddedUuid');
             $lessonToBeAddedUuid = $request->request->get('lessonToBeAddedUuid');
-
-            if ($stageToBeAddedUuid) {
-                //Get Stage
-                $stage= $this->getDoctrine()
-                    ->getRepository(Stage::class)
-                    ->findOneBy(['uuid' => $stageToBeAddedUuid]);
-                //Get Stage Id
-                $stageId = $stage->getId();
-                //Check if entry already exists in DB
-                $stageInChapterElementEntity=$this->getDoctrine()
-                    ->getRepository(ChapterElement::class)
-                    ->findOneBy(['stageOrLessonId' => $stageId]);
-                if(!$stageInChapterElementEntity) {
-
-                    $newChapterStage = new ChapterElement();
-                    $newChapterStage->setChapterId((int)$chapterId);
-                    $newChapterStage->setChapterElementType(2);
-                    $newChapterStage->setStageOrLessonId((int)$stageId);
-
-                    //persist stage to chapter_element table
-                    $entity_manager = $this->getDoctrine()->getManager();
-                    $entity_manager->persist($newChapterStage);
-                    $entity_manager->flush();
-                }
-            }
+            $positionOfNewLessonAdded = $request->request->get('positionOfNewChapterLesson');
+            $positionOfNewStageAdded = $request->request->get('positionOfNewChapterStage');
             if ($lessonToBeAddedUuid) {
                 //Get Lesson
                 $lesson = $this->getDoctrine()
@@ -67,28 +42,53 @@ Class AddStagesAndLessonsToChapterController extends AbstractController
                 //Check if entry already exists en DB
                 $lessonInChapterElementEntity=$this->getDoctrine()
                     ->getRepository(ChapterElement::class)
-                    ->findOneBy(['stageOrLessonId'=>$lessonId]);
+                    ->findOneBy(['stageOrLessonId'=>$lessonId, 'chapterElementType' => 1]);
                 if(!$lessonInChapterElementEntity) {
 
                     $newChapterLesson = new ChapterElement();
                     $newChapterLesson->setChapterId((int)$chapterId);
                     $newChapterLesson->setChapterElementType(1);
                     $newChapterLesson->setStageOrLessonId((int)$lessonId);
+                    $newChapterLesson->setPosition($positionOfNewLessonAdded);
 
                     //persist lesson to chapter_element table
                     $entity_manager = $this->getDoctrine()->getManager();
                     $entity_manager->persist($newChapterLesson);
                     $entity_manager->flush();
+                    $idChapterElement= $newChapterLesson->getId();
                 }
             }
+            else if ($stageToBeAddedUuid) {
+                //Get Stage
+                $stage= $this->getDoctrine()
+                    ->getRepository(Stage::class)
+                    ->findOneBy(['uuid' => $stageToBeAddedUuid]);
+                //Get Stage Id
+                $stageId = $stage->getId();
+                //Check if entry already exists in DB
+                $stageInChapterElementEntity=$this->getDoctrine()
+                    ->getRepository(ChapterElement::class)
+                    ->findOneBy(['stageOrLessonId' => $stageId, 'chapterElementType' => 2]);
+                if(!$stageInChapterElementEntity) {
 
+                    $newChapterStage = new ChapterElement();
+                    $newChapterStage->setChapterId((int)$chapterId);
+                    $newChapterStage->setChapterElementType(2);
+                    $newChapterStage->setStageOrLessonId((int)$stageId);
+                    $newChapterStage->setPosition($positionOfNewStageAdded);
+                    //persist stage to chapter_element table
+                    $entity_manager = $this->getDoctrine()->getManager();
+                    $entity_manager->persist($newChapterStage);
+                    $entity_manager->flush();
+                    $idChapterElement = $newChapterStage->getId();
 
+                }
+            }
+            $response = new JsonResponse([
+                'idChapterElement' => $idChapterElement,
+            ]);
+            return $response;
         }
-            else  throw $this->createNotFoundException('Se ha producido un problema al añadir elementos al capítulo');
 
-
-        $response = new JsonResponse();
-        $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
-        return $response;
     }
 }

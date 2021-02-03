@@ -1,24 +1,22 @@
-function removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChapter, lessonToRemoveFromChapter) {
+function removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChapter, idChapterElement, lessonToRemoveFromChapter) {
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid")
 
-    let updateLessonWebService = 'http://localhost:8000/api/v1/chapters/' + chapterUuid+ '/elementsToBeRemoved';
-
-
-
+    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idChapterElement;
 
     $.ajax({
 
-        url : updateLessonWebService,
+        url : updateChapterWebService,
         data : {
             'lessonToBeRemovedUuid' : lessonToBeRemovedUuid,
             'lessonTitleToBeRemovedFromChapter' : lessonTitleToBeRemovedFromChapter,
+            'idChapterElement' : idChapterElement,
         },
         type : 'DELETE',
         dataType : 'json',
         success: function (data) {
             console.log('Submission was successful.');
-            let lessonToReturnToAvailable =`<li>${lessonTitleToBeRemovedFromChapter}<a href="#"><i class="tiny material-icons availableLesson" data-title="${lessonTitleToBeRemovedFromChapter}" data-uuid="${lessonToBeRemovedUuid}">add_circle</i></a></li>`;
+            let lessonToReturnToAvailable =`<li class="ui-state-default availableLessonElement" data-title="${lessonTitleToBeRemovedFromChapter}" data-uuid="${lessonToBeRemovedUuid}">${lessonTitleToBeRemovedFromChapter}<a href="#"><i class="tiny material-icons availableLesson" data-title="${lessonTitleToBeRemovedFromChapter}" data-uuid="${lessonToBeRemovedUuid}">add_circle</i></a></li>`;
             $( ".availableLessons" ).append(lessonToReturnToAvailable);
             $('.availableLesson[data-uuid="'+lessonToBeRemovedUuid+'"]').click(function() {
                 let lessonToBeAddedTitle = $(this).attr("data-title");
@@ -34,25 +32,26 @@ function removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChap
         },
     })
 }
-function removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter, stageToRemoveFromChapter) {
+function removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter, idChapterElement, stageToRemoveFromChapter) {
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid")
 
-    let updateLessonWebService = 'http://localhost:8000/api/v1/chapters/' + chapterUuid+ '/elementsToBeRemoved';
+    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idChapterElement;
 
 
     $.ajax({
 
-        url : updateLessonWebService,
+        url : updateChapterWebService,
         data : {
             'stageToBeRemovedUuid' : stageToBeRemovedUuid,
             'stageTitleToBeRemovedFromChapter' : stageTitleToBeRemovedFromChapter,
+            'idChapterElement' : idChapterElement,
         },
         type : 'DELETE',
         dataType : 'json',
         success: function (data) {
             console.log('Submission was successful.');
-            let stageToReturnToAvailable =`<li>${stageTitleToBeRemovedFromChapter}<a href="#"><i class="tiny material-icons availableStage" data-title="${stageTitleToBeRemovedFromChapter}" data-uuid="${stageToBeRemovedUuid}">add_circle</i></a></li>`;
+            let stageToReturnToAvailable =`<li class="ui-state-default availableStageElement" data-title="${stageTitleToBeRemovedFromChapter}" data-uuid="${stageToBeRemovedUuid}">${stageTitleToBeRemovedFromChapter}<a href="#"><i class="tiny material-icons availableStage" data-title="${stageTitleToBeRemovedFromChapter}" data-uuid="${stageToBeRemovedUuid}">add_circle</i></a></li>`;
             $( ".availableStages" ).append(stageToReturnToAvailable);
             $('.availableStage[data-uuid="'+stageToBeRemovedUuid+'"]').click(function() {
                 let stageToBeAddedTitle = $(this).attr("data-title");
@@ -73,8 +72,9 @@ function removeStageFromChapterEvent() {
     $('.chapterStage').click(function() {
         let stageToBeRemovedUuid = $(this).attr("data-uuid");
         let stageTitleToBeRemovedFromChapter = $(this).attr("data-title");
+        let idChapterElement = $(this).parent().parent().attr("data-id");
         let stageToRemoveFromChapter = $(this).parent().parent();
-        removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter, stageToRemoveFromChapter);
+        removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter, idChapterElement, stageToRemoveFromChapter);
     });
 }
 function removeLessonFromChapterEvent() {
@@ -82,8 +82,9 @@ function removeLessonFromChapterEvent() {
     $('.chapterLesson').click(function() {
         let lessonToBeRemovedUuid = $(this).attr("data-uuid");
         let lessonTitleToBeRemovedFromChapter = $(this).attr("data-title");
+        let idChapterElement = $(this).parent().parent().attr("data-id");
         let lessonToRemoveFromChapter = $(this).parent().parent();
-        removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChapter, lessonToRemoveFromChapter);
+        removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChapter, idChapterElement, lessonToRemoveFromChapter);
     });
 }
 $(document).ready(function() {

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Kata;
 use App\Entity\Lesson;
+use App\Entity\LessonKatas;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,21 +23,31 @@ class LessonsEditorController extends AbstractController
         $lesson = $this->getDoctrine()
             ->getRepository(Lesson::class)
             ->findOneBy(['uuid' => $uuid]);
-
+        $lessonId = $lesson->getId();
         //get kata collection related to lesson
-        $lessonKatas = $lesson->getKata();
-
+        $lessonKatas = $this->getDoctrine()
+            ->getRepository(LessonKatas::class)
+            ->findBy(['lesson' => $lessonId], ['position' => 'ASC']);
         //iteration inside lessonKatas
         foreach($lessonKatas as $lessonKata) {
+            //Get kata id
+            $kataId= $lessonKata->getKata();
+            $kataPosition = $lessonKata->getPosition();
+            //Get kata in
+            $relevantKata = $this->getDoctrine()
+                ->getRepository(Kata::class)
+                ->findOneBy(['id' => $kataId]);
             //get kata title
-            $lessonKatasTitle = $lessonKata->getKataTitle();
+            $lessonKatasTitle = $relevantKata->getKataTitle();
             //get kata uuid
-            $lessonKatasUuid = $lessonKata->getUuid();
+            $lessonKatasUuid = $relevantKata->getUuid();
             //Push both into the array previously created
             $lessonKatasArray[$lessonKatasUuid]= [
                 'title' => $lessonKatasTitle,
                 'uuid' => $lessonKatasUuid,
+                'position' => $kataPosition,
             ];
+
         }
 
     //Load Available katas as index is loaded
@@ -68,7 +79,7 @@ class LessonsEditorController extends AbstractController
             'availableKatas'=> $availableKatas,
             'kata_uuid' => $kata_uuid,
             'lessonKatasArray'=> $lessonKatasArray,
-            'lessonKatas' => $lessonKatas
+            'lessonKatas' => $lessonKatas,
         ]);
     }
 }

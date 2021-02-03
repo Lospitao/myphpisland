@@ -31,7 +31,7 @@ class Game
     private $uuid;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Chapter", inversedBy="game")
+     * @ORM\OneToMany(targetEntity="App\Entity\GameChapters", mappedBy="game", fetch="EXTRA_LAZY")
      */
     private $chapter;
 
@@ -70,7 +70,7 @@ class Game
     }
 
     /**
-     * @return Collection|chapter[]
+     * @return Collection|LessonKatas[]
      */
     public function getChapter(): Collection
     {

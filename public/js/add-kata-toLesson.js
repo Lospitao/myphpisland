@@ -1,10 +1,16 @@
+
+
+
 function addKataEvent(kataToBeAddedUuid, kataToBeAddedTitle, kataToRemoveFromAvailable) {
+    function calculatePositionOfNewLessonKata() {
+        var katasInLesson = $('.lessonKataElement');
+        return katasInLesson.length;
+    }
     //Select element with id title (lesson title textarea)
     let title = document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'http://localhost:8000/api/v1/lessons/' + uuid + '/katas' ;
-
+    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas';
 
     $.ajax({
 
@@ -12,12 +18,13 @@ function addKataEvent(kataToBeAddedUuid, kataToBeAddedTitle, kataToRemoveFromAva
         data : {
             'kataToBeAddedUuid' : kataToBeAddedUuid,
             'kataToBeAddedTitle' : kataToBeAddedTitle,
-        },
+            'positionOfNewLessonKata' : calculatePositionOfNewLessonKata(),
+            },
         type : 'POST',
         dataType : 'json',
         success: function (data) {
             console.log('Submission was successful.');
-            let newLessonKata = `<li >${kataToBeAddedTitle}<a href="#"><i class="tiny material-icons lessonKata" data-title="${kataToBeAddedTitle}" data-uuid="${kataToBeAddedUuid}">clear</i></a></li>`;
+            let newLessonKata = `<li class="ui-state-highlight lessonKataElement" data-title="${kataToBeAddedTitle}" data-uuid="${kataToBeAddedUuid}">${kataToBeAddedTitle}<a href="#"><i class="tiny material-icons lessonKata" data-title="${kataToBeAddedTitle}" data-uuid="${kataToBeAddedUuid}">clear</i></a></li>`;
             $( ".lessonKatas" ).append(newLessonKata);
             $('.lessonKata[data-uuid="'+kataToBeAddedUuid+'"]').click(function() {
                let kataTitleToBeRemovedFromLesson = $(this).attr("data-title");
@@ -40,7 +47,6 @@ function addAvailableKataToLessonEvent() {
         let kataToBeAddedTitle = $(this).attr("data-title");
         let kataToRemoveFromAvailable = $(this).parent().parent();
         addKataEvent(kataToBeAddedUuid, kataToBeAddedTitle, kataToRemoveFromAvailable);
-
     });
 }
 
