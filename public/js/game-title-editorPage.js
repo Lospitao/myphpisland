@@ -4,7 +4,7 @@ $(document).ready(function() {
     let title = document.getElementById("title");
     let gameUuid = title.getAttribute("data-uuid")
 
-    let updateLessonWebService = 'http://localhost:8000/api/v1/games/' + gameUuid;
+    let updateLessonWebService = '/api/v1/games/' + gameUuid;
 
 
 
