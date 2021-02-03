@@ -1383,16 +1383,16 @@
         },
         {
             "name": "jorge.sanchez/phpunit-execution-from-php",
-            "version": "0.1.0",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eltortuganegra/phpunit-execution-from-php.git",
-                "reference": "07c56501782467869b52f5ff69c914fd22d2cf62"
+                "reference": "d8e761453d225063682e2a8737bf6355827f47b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eltortuganegra/phpunit-execution-from-php/zipball/07c56501782467869b52f5ff69c914fd22d2cf62",
-                "reference": "07c56501782467869b52f5ff69c914fd22d2cf62",
+                "url": "https://api.github.com/repos/eltortuganegra/phpunit-execution-from-php/zipball/d8e761453d225063682e2a8737bf6355827f47b4",
+                "reference": "d8e761453d225063682e2a8737bf6355827f47b4",
                 "shasum": ""
             },
             "require": {
@@ -1417,10 +1417,10 @@
                 }
             ],
             "support": {
-                "source": "https://github.com/eltortuganegra/phpunit-execution-from-php/tree/0.1.0",
+                "source": "https://github.com/eltortuganegra/phpunit-execution-from-php/tree/v0.1.2",
                 "issues": "https://github.com/eltortuganegra/phpunit-execution-from-php/issues"
             },
-            "time": "2020-11-05T08:15:29+00:00"
+            "time": "2021-02-01T19:00:34+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -7771,12 +7771,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },
@@ -8373,5 +8373,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

@@ -44,7 +44,7 @@ Class TestExecutionsController extends AbstractController {
             // Create kata test file from string
             $kataTestCode = $kata->getKataTestCode();
             $kataTestExecutionsPath = $projectRoot . DIRECTORY_SEPARATOR . 'tmp' .  DIRECTORY_SEPARATOR ;
-            $kataTestPath = $kataTestExecutionsPath . 'AlwaysPassedTest.php';
+            $kataTestPath = $kataTestExecutionsPath . 'KataTest.php';
             $isSaved = file_put_contents($kataTestPath, $kataTestCode);
             if ($isSaved === false) {
                 throw new Exception('Kata test file has not could to be created.');
@@ -52,6 +52,9 @@ Class TestExecutionsController extends AbstractController {
 
             // Execute the test
             $testResult = $testExecutor->execute($kataTestPath, $editorCode);
+
+            // Remove kata test path
+            unlink($kataTestPath);
 
             if ($this->hasAnErrorHadDuringTheTestExecution($testResult)) {
                 throw new Exception('Se ha producido un error al ejecutar el test.');
