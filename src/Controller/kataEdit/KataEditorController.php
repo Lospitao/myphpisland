@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\kataEdit;
 
 use App\Entity\Kata;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

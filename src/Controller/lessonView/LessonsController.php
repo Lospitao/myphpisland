@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\lessonView;
 
 use App\Entity\Kata;
 use App\Entity\Lesson;

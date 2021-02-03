@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\stageEdit;
 
 use App\Entity\Stage;
 use App\Form\AmbientSoundFileUploadType;
