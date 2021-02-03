@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\gameView;
 
 use App\Entity\Chapter;
 use App\Entity\Game;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\chapterEdit;
 
 use App\Entity\Chapter;
 use App\Entity\ChapterElement;
