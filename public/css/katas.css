@@ -51,6 +51,12 @@ Description component
     float: left;
     border: none;
 }
+.card.description.show {
+    width: 500px;
+    height: 650px;
+    margin: 5px;
+    float: left;
+}
 /**
 Kata-test component
  */
