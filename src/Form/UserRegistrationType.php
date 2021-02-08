@@ -18,25 +18,22 @@ class UserRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('username', TextType::class)
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
-                'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
-            ])
-            ->add('email', EmailType::class)
+            ->add('username', TextType::class, ['label' => 'Nombre de usuario'])
 
+            ->add('email', EmailType::class, ['label' => 'Correo electrónico'])
+            ->add('password', PasswordType::class, [
+                'invalid_message' => 'The password fields must match.',
+                'required' => true,
+                'label' => 'Contraseña',
+            ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success float-right'
-                ]
+                ],
+                'label' => 'Enviar'
             ])
-            ->add('profilePic', FileType::class)
+            ->add('profilePic', FileType::class, ['label' => 'Foto de perfil  ',
+                'empty_data' => 'Seleccione un archivo.'])
         ;
     }
 

@@ -1,10 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="screen">
+    {{ form_start(form) }}
     <div class="main_body registration_form" style="padding:150px;">
-        {{ form(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        <br><br>
+        {{ form_row(form.profilePic) }}
         <p>Las fotos de perfil no deberán superar los 2MB</p>
-    <br>
-    <a class="waves-effect waves-dark btn float-right" href="{{ path('app_login') }}">Log in</a>
+        <br>
+        {{ form_row(form.submit) }}
+        <br>
     </div>
+    {{ form_end(form) }}
+</div>
+
 {% endblock %}

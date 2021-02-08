@@ -31,7 +31,6 @@ class RegistationController extends AbstractController
 
             $username = $user->getUsername();
             $password = $user->getPassword();
-
             $user->setSignupDate(new \DateTime());
             $user->setUsername($username);
             $user->setPassword(
@@ -66,7 +65,8 @@ class RegistationController extends AbstractController
         }
 
         return $this->render('registation/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+
         ]);
 
 

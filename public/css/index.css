@@ -1,0 +1,27 @@
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+    align-items: center;
+}
+
+.card .card-content {
+    padding: 5px;
+}
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}
+.screen {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
