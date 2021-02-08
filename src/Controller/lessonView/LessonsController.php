@@ -4,6 +4,7 @@ namespace App\Controller\lessonView;
 
 use App\Entity\Kata;
 use App\Entity\Lesson;
+use App\Entity\LessonKatas;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
@@ -33,7 +34,7 @@ class LessonsController extends AbstractController
      */
     public function index($uuid)
     {
-        /*Load Katas that are already in the lesson as index is loaded*/
+
         //Create array where each kata title and uuid will be stored
         $lessonKatasArray = [];
 
@@ -41,22 +42,32 @@ class LessonsController extends AbstractController
         $lesson = $this->getDoctrine()
             ->getRepository(Lesson::class)
             ->findOneBy(['uuid' => $uuid]);
-        //get lesson title
+        $lessonId = $lesson->getId();
         $lessonTitle = $lesson->getTitle();
         //get kata collection related to lesson
-        $lessonKatas = $lesson->getKata();
-
+        $lessonKatas = $this->getDoctrine()
+            ->getRepository(LessonKatas::class)
+            ->findBy(['lesson' => $lessonId], ['position' => 'ASC']);
         //iteration inside lessonKatas
         foreach($lessonKatas as $lessonKata) {
+            //Get kata id
+            $kataId= $lessonKata->getKata();
+            $kataPosition = $lessonKata->getPosition();
+            //Get kata in
+            $relevantKata = $this->getDoctrine()
+                ->getRepository(Kata::class)
+                ->findOneBy(['id' => $kataId]);
             //get kata title
-            $lessonKatasTitle = $lessonKata->getKataTitle();
+            $lessonKatasTitle = $relevantKata->getKataTitle();
             //get kata uuid
-            $lessonKatasUuid = $lessonKata->getUuid();
+            $lessonKatasUuid = $relevantKata->getUuid();
             //Push both into the array previously created
             $lessonKatasArray[$lessonKatasUuid]= [
                 'title' => $lessonKatasTitle,
                 'uuid' => $lessonKatasUuid,
+                'position' => $kataPosition,
             ];
+
         }
 
         //Load Available katas as index is loaded
@@ -83,7 +94,7 @@ class LessonsController extends AbstractController
 
 
         return $this->render('lessons/index.html.twig', [
-            'controller_name' => 'LessonsEditorController',
+            'controller_name' => 'LessonsController',
             'lesson_uuid' => $uuid,
             'availableKatas'=> $availableKatas,
             'kata_uuid' => $kata_uuid,

@@ -43,10 +43,6 @@ class ChaptersController extends AbstractController
         /*Load Chapter Stages and Lessons*/
         //Define class variable
         $elementClass="";
-        //Get Chapter
-        $chapter = $this->getDoctrine()
-            ->getRepository(Chapter::class)
-            ->findOneBy(['uuid' => $chapterUuid]);
         //Get chapter Id
         $chapterId = $chapter->getId();
         //Create array to save chapterElements
