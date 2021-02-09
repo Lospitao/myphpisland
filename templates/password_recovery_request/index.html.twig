@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block title %}Log in!{% endblock %}
+{% block stylesheets %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Social Media materialize bundle-->
+    <link rel="stylesheet" href={{ asset('css/materialize-social.css') }}>
+    <!--Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Materialize icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- login stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/password-recovery.css') }}">
+{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Password Recovery Request</title>
+
+</head>
+<body>
+<div class="screen">
+
+    <!-- Password Recovery -->
+
+    <form method="post">
+        <p>Por favor, introduce tu correo electrónico</p>
+        <label for="email_for_password_recovery">Correo electrónico</label>
+        <input type="text" name="email" id="email_for_password_recovery" class="form-control" required autofocus><br><br><br>
+        <button class="btn btn-lg btn-primary" type="submit">
+            Enviar
+        </button>
+
+    </form>
+
+
+</div>
+</body>
+{% endblock %}
