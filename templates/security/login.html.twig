@@ -19,7 +19,7 @@
 
 {% block body %}
     <div class="screen">
-        <form class="passowrd-recovery" method="post">
+        <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
@@ -56,7 +56,7 @@
 
             <a class="waves-effect waves-dark btn float-right" href="{{ path('register') }}">Registrarme</a>
             <br><br>
-            <a class="password-recovery" href="{{ path('password_recovery_request') }}">Have you forgotten your password?</a>
+            <a class="password-recovery" href="{{ path('PasswordRecoveryRequest') }}">¿Has olvidado tu contraseña?</a>
         </form>
     </div>
 
