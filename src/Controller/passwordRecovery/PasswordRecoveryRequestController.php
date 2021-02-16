@@ -36,6 +36,7 @@ class PasswordRecoveryRequestController extends AbstractController
                 $this->generatePasswordGenerationCode();
                 $this->setEmailParameters();
                 $this->emailCodeForPasswordRecovery($mailer);
+                return $this->redirectToRoute('password-recovery');
             }
             return $this->render('password_recovery_request/index.html.twig', [
                 'controller_name' => 'PasswordRecoveryRequestController',
@@ -63,8 +64,8 @@ class PasswordRecoveryRequestController extends AbstractController
         $passwordRecoveryRequest = new PasswordRecoveryRequest;
         $passwordRecoveryRequest->setCreatedAt(new \DateTime());
         $passwordRecoveryRequest->setIdUser($userId);
-        $passwordRecoveryCode=Uuid::v4();
-        $passwordRecoveryRequest->setResetPasswordCode($passwordRecoveryCode);
+        $this->passwordRecoveryCode=Uuid::v4();
+        $passwordRecoveryRequest->setResetPasswordCode($this->passwordRecoveryCode);
         $entity_manager = $this->getDoctrine()->getManager();
         $entity_manager->persist($passwordRecoveryRequest);
         $entity_manager->flush();
@@ -82,7 +83,8 @@ class PasswordRecoveryRequestController extends AbstractController
         <body>
         <p>Estimado usuario,</p><br>
         <p>se ha recibido una solicitud para restablecer su contraseña. Para poder llevarlo a cabo debe pulsar en el siguiente enlace:</p><br>
-        <a href=\"password-recovery/\" {$this->passwordRecoveryCode}>Restablecer contraseña </a><br>
+        <a href=\"password-recovery/\">Restablecer contraseña </a><br>
+        <p>e introducir el código {$this->passwordRecoveryCode}</p>
         <p>Un saludo.</p>
         </body>
         </html>
