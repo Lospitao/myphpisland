@@ -22,6 +22,7 @@ class PasswordRecoveryRequestController extends AbstractController
     var $subject;
     var $message;
     var $headers;
+    var $email;
     /**
      * @Route("/forgot_my_password", name="PasswordRecoveryRequest")
      * @param Request $request
@@ -36,6 +37,9 @@ class PasswordRecoveryRequestController extends AbstractController
                 $this->generatePasswordGenerationCode();
                 $this->setEmailParameters();
                 $this->emailCodeForPasswordRecovery($mailer);
+
+                $this->addFlash('success', 'Se ha enviado un correo electrónico con el código para restablecer su contraseña. Si no está en la bandeja de entrada revise la carpeta de SPAM');
+
                 return $this->redirectToRoute('password-recovery');
             }
             return $this->render('password_recovery_request/index.html.twig', [
@@ -94,14 +98,19 @@ class PasswordRecoveryRequestController extends AbstractController
     }
     private function emailCodeForPasswordRecovery($mailer)
     {
-        $email = (new Email())
+        $this->email = (new Email())
             ->from($this->emailSender)
             ->to($this->enteredEmail)
             ->bcc($this->emailSender)
             ->subject($this->subject)
             ->html($this->message);
 
-        $mailer->send($email);
+        $mailer->send($this->email);
+    }
+
+    private function returnFlashResultMessage($mailer)
+    {
+
     }
 
 }
