@@ -46,6 +46,7 @@
     {% endblock %}
 </head>
 <body>
+
     <div class="base">
         <nav class="menu logged-user">
             <div class="nav-wrapper">
@@ -65,11 +66,17 @@
             </div>
         </nav>
     </div>
+    {% for message in app.flashes('success') %}
+        <div class="flash alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
 {% block body %}
 
 {% endblock %}
 
 
 {% block javascripts %}{% endblock %}
+
 </body>
 

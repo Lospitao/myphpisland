@@ -50,6 +50,14 @@ class User implements UserInterface
     private $profilePic;
 
     /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
