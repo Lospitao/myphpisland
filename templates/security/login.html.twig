@@ -19,6 +19,7 @@
 
 {% block body %}
     <div class="screen">
+
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -29,6 +30,7 @@
                     You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
             {% endif %}
+
 
             <h2 class="h3 mb-3 font-weight-normal">Por favor, inicie sesión</h2>
             <label for="inputUsername">Nombre de usuario</label>

@@ -31,6 +31,9 @@ class PasswordResetPageController extends AbstractController
                 $this->findUserEntityToUpdate();
                 //$this->checkIfPasswordIsValid(); **Conditions not specified yet (implement them in RegistrationController too)**
                 $this->updateNewPassword($passwordEncoder);
+
+                $this->addFlash('success', 'Su contraseña se ha reestablecido correctamente');
+
                 return $this->redirect($this->generateUrl('app_login'));
             }
 
