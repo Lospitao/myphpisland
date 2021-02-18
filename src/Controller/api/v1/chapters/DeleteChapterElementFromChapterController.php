@@ -21,8 +21,8 @@ Class DeleteChapterElementFromChapterController extends AbstractController
             $this->DeleteChapterElementFromChapterService($idChapterElement);
             $jSonResponseWithoutContent = $this->returnJsonResponseWithoutContent();
             return $jSonResponseWithoutContent;
-        } catch (\Exception $ex) {
-            $jsonResponseWithError = $this->createJsonResponseWithError($ex);
+        } catch (\Exception $exception) {
+            $jsonResponseWithError = $this->createJsonResponseWithError($exception);
             return $jsonResponseWithError;
         }
     }
