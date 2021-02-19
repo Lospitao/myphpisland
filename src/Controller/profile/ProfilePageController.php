@@ -19,16 +19,18 @@ class ProfilePageController extends AbstractController
     var $enteredCurrentPassword;
     var $enteredNewPassword;
     var $enteredRepeatPassword;
-    var $encodedEnteredCurrentPassword;
+    var $email;
+
     /**
-     * @Route("/profile_page/{username}", name="profile_page")
+     * @Route("/profile", name="profile")
+     * @param $email
      */
-    public function Index(Request $request, UserPasswordEncoderInterface $passwordEncoder, $username)
+    public function Index(Request $request, UserPasswordEncoderInterface $passwordEncoder )
     {
         try {
 
-            $this->getUserToUpdate($username);
-            $this->getValueOfEnteredCurrentPassword($request, $passwordEncoder);
+            $this->getUserToUpdate();
+            $this->getValueOfEnteredCurrentPassword($request);
             $this->getValueOfEnteredNewPassword($request);
             $this->getValueOfEnteredRepeatedPassword($request);
             if($this->enteredCurrentPassword && $this->enteredNewPassword && $this->enteredRepeatPassword) {
@@ -48,14 +50,14 @@ class ProfilePageController extends AbstractController
         }
     }
 
-    private function getUserToUpdate($username)
+    private function getUserToUpdate()
     {
         $this->user= $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(['username' => $username]);
+            ->findOneBy(['email' => $this->email]);
     }
 
-    private function getValueOfEnteredCurrentPassword(Request $request, $passwordEncoder)
+    private function getValueOfEnteredCurrentPassword(Request $request)
     {
         $this->enteredCurrentPassword = $request->request->get('current_password');
     }

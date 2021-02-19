@@ -27,7 +27,7 @@
     <!-- Password section -->
     <section class="password card">
 
-    <form action="{{ path('profile_page', {'username': app.user.username}) }}" method="post">
+    <form action="{{ path('profile') }}" method="post">
         <label for="current_password">Contraseña actual</label>
         <input type="password" name="current_password" id="current_password" class="form-control" required autofocus><br>
         <label for="new_password">Nueva contraseña</label>
