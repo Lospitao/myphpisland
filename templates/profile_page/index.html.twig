@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-
+{% block title %}Página de perfil{% endblock %}
 {% block body %}
 <head>
     <meta charset="UTF-8">
@@ -17,8 +17,8 @@
         <div class="card-content">
             <img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
             <div class="info">
-                <h5 id="username" class={{ app.user.username }}>Username: {{ app.user.username }}</h5>
-                <h5>Email: {{ app.user.email }}</h5>
+                <h5 id="username" class={{ app.user.username }}>Nombre de usuario: {{ app.user.username }}</h5>
+                <h5>Correo electrónico: {{ app.user.email }}</h5>
             </div>
 
         </div>
