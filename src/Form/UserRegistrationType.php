@@ -46,8 +46,6 @@ class UserRegistrationType extends AbstractType
                 ],
                 'label' => 'Enviar'
             ])
-            ->add('profilePic', FileType::class, ['label' => 'Foto de perfil  ',
-                'empty_data' => 'Seleccione un archivo.'])
         ;
     }
 

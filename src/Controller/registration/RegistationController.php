@@ -33,14 +33,6 @@ class RegistationController extends AbstractController
             if ($this->form->isSubmitted() && $this->form->isValid()) {
                 $this->setSignupDate();
                 $this->setEncodedPassword($passwordEncoder);
-                $this->getProfilePicture();
-                if ($this->profilePicFile) {
-                    $this->nameProfilePicFile();
-                    $this->specifyProfilePicRoute();
-                    $this->includeVariableInRoute();
-                    $this->storeProfilePicFile();
-                    $this->recordPictureInDataBase();
-                }
                 $this->persistNewUserToDataBase();
                 $this->addFlash('success', 'Se ha registrado con éxito');
                 return $this->redirectToRoute('app_login');
@@ -79,33 +71,7 @@ class RegistationController extends AbstractController
             )
         );
     }
-     private function getProfilePicture() {
-         /**
-          * @var UploadedFile $file
-          */
-         $this->profilePicFile = $this->form['profilePic']->getData();
 
-     }
-    private function nameProfilePicFile()
-    {
-        $this->filename = md5(uniqid()) . '.' . $this->profilePicFile->guessClientExtension();
-    }
-    private function specifyProfilePicRoute ()
-    {
-        $this->routeName=$this->getParameter('user_profile_pics_dir');
-    }
-    private function includeVariableInRoute()
-    {
-        $this->destinationPath =  str_replace('username', $this->user->getUsername(), $this->routeName);
-    }
-    private function storeProfilePicFile()
-    {
-        $this->profilePicFile->move($this->destinationPath,
-            $this->filename);
-    }
-    private function recordPictureInDataBase () {
-        $this->user->setProfilePic($this->filename);
-    }
     private function persistNewUserToDataBase()
     {
         $entityManager = $this->getDoctrine()->getManager();

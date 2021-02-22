@@ -8,11 +8,9 @@
         {{ form_row(form.email) }}
         {{ form_row(form.plainPassword) }}
         <br><br>
-        {{ form_row(form.profilePic) }}
-        <p>Las fotos de perfil no deberán superar los 2MB</p>
-        <br>
         {{ form_row(form.submit) }}
         <br>
+        <p><a class="login-link" href="{{ path('app_login') }}">Inicia sesión</a> si ya tienes una cuenta</p>
     </div>
     {{ form_end(form) }}
 </div>
