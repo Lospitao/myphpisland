@@ -54,7 +54,7 @@
                     <a href="#!" class="avatar"><img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt=""></a>
                     <ul class="right hide-on-med-and-down">
                         <li><a class="waves-effect waves-light btn"><i class="material-icons">notifications</i></a></li>
-                        <li><a class="waves-effect waves-light btn"><i class="material-icons">settings</i></a></li>
+                        <li><a class="waves-effect waves-light btn" href="{{ path('profile') }}"><i class="material-icons">settings</i></a></li>
                         <li><a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Salir</a></li>
                     </ul>
                 {% else %}
