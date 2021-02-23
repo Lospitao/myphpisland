@@ -41,5 +41,12 @@ security:
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: /profile, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /games, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /chapters, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /lessons, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /stages, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /katas, roles: IS_AUTHENTICATED_FULLY }
+
+
     role_hierarchy:
 
