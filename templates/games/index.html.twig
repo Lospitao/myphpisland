@@ -14,21 +14,13 @@
 <body>
 <div class="screen">
     <!-- Title section -->
-    <section class="title card">
+    <section class="title view-card">
         <div class="card-content">
-            <textarea id="title" name="game-title" placeholder="Título del juego" data-uuid={{ gameUuid }}>{{ gameTitle }}</textarea>
-        </div>
-    </section>
-    <!-- List of Chapters section -->
-    <section class="available-chapters card">
-        <div class="card-content">
-            <span class="card-title">Capítulos</span>
-            <p>Listado de capítulos disponibles para incluir en la lección</p>
-            {% include 'games/components/availableChapters.html.twig' %}
+            <h1>{{ gameTitle }}</h1>
         </div>
     </section>
     <!-- Ordered List of Game Chapters section -->
-    <section class="game-chapters card">
+    <section class="game-chapters-view card">
         <div class="card-content">
             <span class="card-title">Capítulos del Juego</span>
             <p>Listado de capítulos de la lección</p>

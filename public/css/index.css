@@ -25,3 +25,12 @@ General editor_components
     align-items: center;
     align-content: center;
 }
+.game-card, .game-card-trigger {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
