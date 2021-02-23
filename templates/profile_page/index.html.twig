@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-
+{% block title %}Página de perfil{% endblock %}
 {% block body %}
 <head>
     <meta charset="UTF-8">
     <title>Profile Page</title>
-    <script type="text/javascript" src="{{ asset('js/profile/update-password.js') }}"></script>
+
 
 </head>
 
@@ -15,10 +15,10 @@
     <!-- Information section -->
     <section class="information card">
         <div class="card-content">
-            <img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
+            <img id="profile_picture_thumbnail" src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
             <div class="info">
-                <h5 id="username" class={{ app.user.username }}>Username: {{ app.user.username }}</h5>
-                <h5>Email: {{ app.user.email }}</h5>
+                <h5 id="username" class={{ app.user.username }}>Nombre de usuario: {{ app.user.username }}</h5>
+                <h5>Correo electrónico: {{ app.user.email }}</h5>
             </div>
 
         </div>
@@ -26,31 +26,40 @@
 
     <!-- Password section -->
     <section class="password card">
-        <div class="card-content">
-            <label for="current_password">Current password</label><br>
-               <input type="password" name="current_password" id="current_password" autofocus required><br>
-            <label for="new_password">New password</label><br>
-                <input type="password" name="new_password" id="new_password" required><br>
-            <label for="repeat_password">Repeat password</label><br>
-                <input type="password" name="repeat_password" id="repeat_password" required><br>
-            <a id="update_password" class="waves-effect waves-dark btn float-right" href="#">Update password</a>
-        </div>
+        <form action="{{ path('profile') }}" method="post">
+            <label for="current_password">Contraseña actual</label>
+            <input type="password" name="current_password" id="current_password" class="form-control" required autofocus><br>
+            <label for="new_password">Nueva contraseña</label>
+            <input type="password" name="new_password" id="new_password" class="form-control" required><br>
+            <label for="repeat_password">Repetir contraseña</label>
+            <input type="password" name="repeat_password" id="repeat_password" class="form-control" required ><br><br>
+            <button class="btn btn-lg btn-primary" id="update_password" type="submit">
+            Establecer nueva contraseña
+        </button>
+        </form>
     </section>
-
+    <!-- Profile picture section -->
+    <section class="profile-pic card">
+        {{ form_start(profilePictureForm) }}
+        {{ form_row(profilePictureForm.profilePic) }}
+        <br>
+        {{ form_row(profilePictureForm.submit) }}
+        {{ form_end(profilePictureForm) }}
+    </section>
     <!-- Social section -->
     <section class="social card">
         <div class="card-content">
             <a
                     id="github-link"
                     class="waves-effect waves-light btn-large social github"
-                    href="https://github.com/login/oauth/authorize?redirect_uri=https://localhost:8000/profile_page/{{ app.user.username }}"
+                    href="https://github.com/login/oauth/authorize?redirect_uri=https://localhost:8000/profile"
                     SameSite=None
                     Secure
             >
                 <i class="fa fa-github"></i> Sign in with github</a>
             <br><br><br>
-            <a id="twitter.link" class="waves-effect waves-light btn-large social twitter" >
-                <i class="fa fa-twitter"></i> Sign in with twitter</a>
+            <a id="twitter-link" class="waves-effect waves-light btn-large social twitter">
+                <i class="fa fa-twitter"></i>Sign in with twitter</a>
         </div>
     </section>
 

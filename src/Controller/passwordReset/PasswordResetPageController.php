@@ -9,6 +9,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class PasswordResetPageController extends AbstractController
 {
@@ -36,14 +37,23 @@ class PasswordResetPageController extends AbstractController
 
                 return $this->redirect($this->generateUrl('app_login'));
             }
-
-
-        } catch (\Doctrine\ORM\EntityNotFoundException $ex) {
-            error_log($ex->getMessage());
+            return $this->render('password_reset_page/index.html.twig', [
+                'controller_name' => 'PasswordResetPageController',
+            ]);
+        }catch (UsernameNotFoundException $exception) {
+            $errorMessage=$exception->getMessage();
+            $this->addFlash('error', $errorMessage);
+            return $this->render('password_reset_page/index.html.twig', [
+                'controller_name' => 'PasswordResetPageController',
+            ]);
+        } catch (\Exception $exception) {
+            $errorMessage=$exception->getMessage();
+            $this->addFlash('error', $errorMessage);
+            return $this->render('password_reset_page/index.html.twig', [
+                'controller_name' => 'PasswordResetPageController',
+            ]);
         }
-        return $this->render('password_reset_page/index.html.twig', [
-            'controller_name' => 'PasswordResetPageController',
-        ]);
+
     }
     private function getValueOfEnteredCode(Request $request)
     {

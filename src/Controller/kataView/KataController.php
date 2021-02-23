@@ -6,29 +6,38 @@ namespace App\Controller\kataView;
 use App\Entity\Kata;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 
 class KataController extends AbstractController
 
 {
+    var $uuid;
+    var $createdKata;
+    var $kataToLoad;
+    var $title;
+    var $description;
+    var $codeEditor;
+    var $sampleTest;
+
     /**
      * @Route("/katas/create", name="katas_create" )
      */
-    public function katascreate()
+    public function katasCreate()
     {
-        $kata = new Kata;
-        $uuid = Uuid::v4();
-        $kata->setUuid($uuid);
-        $kata->setCreatedAt(new \DateTime());
-        $kata->setUpdatedAt(new \DateTime());
+        try {
+                $this->createNewKataService();
+                $this->persistToDataBase();
+                $this->addFlash('success', 'Edite la nueva kata');
 
-        $entity_manager = $this->getDoctrine()->getManager();
-        $entity_manager->persist($kata);
-        $entity_manager->flush();
-
-        return $this->redirectToRoute('katas_editor', [
-            'uuid' => $uuid]);
+            return $this->redirectToRoute('katas_editor', [
+                'uuid' => $this->uuid]);
+        } catch (\Exception $exception) {
+            $jsonResponseWithError = $this->createJsonResponseWithError($exception);
+            return $jsonResponseWithError;
+        }
     }
 
     /**
@@ -37,27 +46,80 @@ class KataController extends AbstractController
      */
     public function index($uuid)
     {
-        $kata = $this->getDoctrine()
+        try {
+
+            $this->setKataFromDataBase($uuid);
+            $this->checkIfKataToLoadExists();
+            $kataViewResponse = $this->createKataViewResponse($uuid);
+            return $kataViewResponse;
+        } catch (\Exception $exception) {
+            $errorMessage=$exception->getMessage();
+            $this->addFlash('error', $errorMessage);
+            return $this->redirectToRoute('katas_create');
+        }
+    }
+
+    private function createNewKataService()
+    {
+        $this->createNewEntity();
+        $this->setUuid();
+        $this->setCreatedAt();
+        $this->setUpdatedAt();
+    }
+
+    private function createNewEntity()
+    {
+        $this->createdKata = new Kata;
+    }
+
+    private function setUuid()
+    {
+        $this->uuid = Uuid::v4();
+        $this->createdKata->setUuid($this->uuid);
+    }
+
+    private function setCreatedAt()
+    {
+        $this->createdKata->setCreatedAt(new \DateTime());
+    }
+
+    private function setUpdatedAt()
+    {
+        $this->createdKata->setUpdatedAt(new \DateTime());
+    }
+
+    private function persistToDataBase()
+    {    $entity_manager = $this->getDoctrine()->getManager();
+        $entity_manager->persist($this->createdKata);
+        $entity_manager->flush();
+    }
+
+    private function createJsonResponseWithError(\Exception $exception)
+    {
+        $response = new JsonResponse();
+        $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
+        return $response;
+    }
+    private function setKataFromDataBase($uuid)
+    {
+        $this->kataToLoad = $this->getDoctrine()
             ->getRepository(Kata::class)
-            ->findOneBy(['uuid' => $uuid]);
-
-        $title= $kata->getKataTitle();
-        $description = $kata->getDescription();
-        $codeEditor = $kata->getEditorCode();
-        $sampleTest = $kata->getTestCode();
-
-
+            ->findOneBy(['uuid'=>$uuid]);
+    }
+    private function checkIfKataToLoadExists() {
+        if (!$this->kataToLoad) {
+            throw new Exception("La kata especificada no existe. Cree una nueva kata");
+        }
+    }
+    private function createKataViewResponse($uuid)
+    {
         return $this->render('kata/index.html.twig', [
             'controller_name' => 'KataController',
-            'title' => $title,
-            'description' => $description,
-            'codeEditor' => $codeEditor,
-            'sampleTest' => $sampleTest,
+            'title' => $this->kataToLoad->getKataTitle(),
+            'description' => $this->kataToLoad->getDescription(),
+            'codeEditor' => $this->kataToLoad->getEditorCode(),
+            'sampleTest' => $this->kataToLoad->getTestCode(),
             'uuid' => $uuid,
         ]);
     }
-
-
-
-
 }

@@ -67,7 +67,6 @@ Ordered Game Chapters List
 }
 /*Drag and Drop Style*/
 #availableChaptersList, #gameChaptersList {
-
     list-style-type: none;
 }
 #availableChaptersList li , #gameChaptersList li{
@@ -81,4 +80,14 @@ Ordered Game Chapters List
 #gameChaptersList li {
     background-color: #4fc3f7;
     color: black;
+}
+/**
+Ordered Game Chapters List View Template
+*/
+.card.game-chapters-view {
+    width: 1360px;
+    height: 600px;
+}
+.title.view-card {
+    border:none;
 }

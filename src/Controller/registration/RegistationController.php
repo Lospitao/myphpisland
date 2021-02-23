@@ -12,8 +12,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistationController extends AbstractController
 {
-    private $appKernel;
 
+    var $user;
+    var $form;
+    var $profilePicFile;
+    var $filename;
+    var $routeName;
+    var $destinationPath;
     /**
      * @Route("/register", name="register")
      * @param Request $request
@@ -22,53 +27,55 @@ class RegistationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder )
     {
-        $user = new User();
-
-        $form = $this->createForm(UserRegistrationType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-
-            $username = $user->getUsername();
-            $password = $user->getPassword();
-            $user->setSignupDate(new \DateTime());
-            $user->setUsername($username);
-            $user->setPassword(
-            $passwordEncoder->encodePassword($user, $password)
-            );
-
-
-
-            $entity_manager = $this->getDoctrine()->getManager();
-            /**
-             * @var UploadedFile $file
-             */
-            $file = $form['profilePic']->getData();
-
-
-            if ($file) {
-                /*give file a name*/
-                $filename = md5(uniqid()) . '.' . $file->guessClientExtension();
-                /*specify directory route*/
-                $routeName=$this->getParameter('user_profile_pics_dir');
-                /*include variable in route*/
-                $destinationPath =  str_replace('username', $username, $routeName);
-                /*Store it somewhere*/
-                $file->move($destinationPath,
-                $filename);
-                $user->setProfilePic($filename);
+        try {
+            $this->createNewUser();
+            $this->generateForm($request);
+            if ($this->form->isSubmitted() && $this->form->isValid()) {
+                $this->setSignupDate();
+                $this->setEncodedPassword($passwordEncoder);
+                $this->persistNewUserToDataBase();
+                $this->addFlash('success', 'Se ha registrado con éxito');
+                return $this->redirectToRoute('app_login');
             }
-            $entity_manager->persist($user);
-            $entity_manager->flush();
-
-            return $this->redirect($this->generateUrl('app_login'));
+            return $this->render('registation/index.html.twig', [
+                'form' => $this->form->createView(),
+            ]);
+        } catch (\Exception $exception) {
+            $errorMessage=$exception->getMessage();
+            $this->addFlash('error', $errorMessage);
+            return $this->render('registation/index.html.twig', [
+                'form' => $this->form->createView(),
+            ]);
         }
 
-        return $this->render('registation/index.html.twig', [
-            'form' => $form->createView(),
+    }
+    private function createNewUser()
+    {
+        $this->user = new User();
+    }
+    private function generateForm($request)
+    {
+        $this->form = $this->createForm(UserRegistrationType::class, $this->user);
+        $this->form->handleRequest($request);
+    }
+    private function setSignupDate()
+    {
+        $this->user->setSignupDate(new \DateTime());
+    }
+    private function setEncodedPassword($passwordEncoder)
+    {
+        $this->user->setPassword(
+            $passwordEncoder->encodePassword(
+                $this->user,
+                $this->form->get('plainPassword')->getData()
+            )
+        );
+    }
 
-        ]);
-
-
+    private function persistNewUserToDataBase()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($this->user);
+        $entityManager->flush();
     }
 }

@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}¡Bienvenido pirata!{% endblock %}</title>
     {% block stylesheets %}
 
 
@@ -54,13 +54,13 @@
                     <a href="#!" class="avatar"><img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt=""></a>
                     <ul class="right hide-on-med-and-down">
                         <li><a class="waves-effect waves-light btn"><i class="material-icons">notifications</i></a></li>
-                        <li><a class="waves-effect waves-light btn"><i class="material-icons">settings</i></a></li>
-                        <li><a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Logout</a></li>
+                        <li><a class="waves-effect waves-light btn" href="{{ path('profile') }}"><i class="material-icons">settings</i></a></li>
+                        <li><a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Salir</a></li>
                     </ul>
                 {% else %}
                     <ul class="right hide-on-med-and-down">
-                        <li><a class="waves-effect waves-light btn" href="{{ path('app_login') }}">Login</a></li>
-                        <li><a class="waves-effect waves-light btn" href="{{ path('register') }}">Register</a></li>
+                        <li><a class="waves-effect waves-light btn" href="{{ path('app_login') }}">Iniciar Sesión</a></li>
+                        <li><a class="waves-effect waves-light btn" href="{{ path('register') }}">Registrarse</a></li>
                     </ul>
                 {% endif %}
             </div>
@@ -68,6 +68,11 @@
     </div>
     {% for message in app.flashes('success') %}
         <div class="flash alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="flash alert-error">
             {{ message }}
         </div>
     {% endfor %}

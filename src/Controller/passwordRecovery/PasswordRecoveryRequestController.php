@@ -45,8 +45,12 @@ class PasswordRecoveryRequestController extends AbstractController
             return $this->render('password_recovery_request/index.html.twig', [
                 'controller_name' => 'PasswordRecoveryRequestController',
             ]);
-        }catch (\Doctrine\ORM\EntityNotFoundException $ex) {
-                error_log($ex->getMessage());
+        } catch (\Exception $exception) {
+            $errorMessage=$exception->getMessage();
+            $this->addFlash('error', $errorMessage);
+            return $this->render('password_recovery_request/index.html.twig', [
+                'controller_name' => 'PasswordRecoveryRequestController',
+            ]);
             }
     }
     private function getUserRequestingPasswordRecovery()
@@ -87,7 +91,7 @@ class PasswordRecoveryRequestController extends AbstractController
         <body>
         <p>Estimado usuario,</p><br>
         <p>se ha recibido una solicitud para restablecer su contraseña. Para poder llevarlo a cabo debe pulsar en el siguiente enlace:</p><br>
-        <a href=\"password-recovery/\">Restablecer contraseña </a><br>
+        <a href=\"https://localhost:8000/password-recovery/\">Restablecer contraseña </a><br>
         <p>e introducir el código {$this->passwordRecoveryCode}</p>
         <p>Un saludo.</p>
         </body>
