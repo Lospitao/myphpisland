@@ -1,38 +1,43 @@
 <?php
 
-namespace App\Controller\lessonView;
+namespace App\Controller\chapterCreate;
 
-use App\Entity\Kata;
+use App\Entity\Chapter;
+use App\Entity\ChapterElement;
 use App\Entity\Lesson;
-use App\Entity\LessonKatas;
+use App\Entity\Stage;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 
-class LessonsController extends AbstractController
+class ChaptersController extends AbstractController
 {
-    var $createdLesson;
-    var $newLessonUuid;
+    var $createdChapter;
+    var $newChapterUuid;
+
+
     /**
-     * @Route("/lessons/create", name="lessons_create" )
+     * @Route("/chapters/create", name="chapters_create" )
      */
-    public function lessonscreate()
+    public function chaptersCreate()
     {
         try {
-            $this->createNewLessonService();
+            $this->createNewChapterService();
             $this->persistToDataBase();
-            $this->createLessonCreationSuccessMessage();
+            $this->createChapterCreationSuccessMessage();
 
-            return $this->redirectToRoute('lessons_editor', [
-                'uuid' => $this->newLessonUuid]);
+            return $this->redirectToRoute('chapters_editor', [
+                'chapterUuid' => $this->newChapterUuid]);
         } catch (\Exception $exception) {
             $jsonResponseWithError = $this->createJsonResponseWithError($exception);
             return $jsonResponseWithError;
         }
+
     }
 
-    private function createNewLessonService()
+    private function createNewChapterService()
     {
         $this->createNewEntity();
         $this->setUuid();
@@ -40,27 +45,25 @@ class LessonsController extends AbstractController
 
     private function createNewEntity()
     {
-        $this->createdLesson = new Lesson();
+        $this->createdChapter = new Chapter();
     }
 
     private function setUuid()
     {
-        $this->newLessonUuid = Uuid::v4();
-        $this->createdLesson->setUuid($this->newLessonUuid);
+        $this->newChapterUuid = Uuid::v4();
+        $this->createdChapter->setUuid($this->newChapterUuid);
     }
 
     private function persistToDataBase()
     {
         $entity_manager = $this->getDoctrine()->getManager();
-        $entity_manager->persist($this->createdLesson);
+        $entity_manager->persist($this->createdChapter);
         $entity_manager->flush();
     }
-
-    private function createLessonCreationSuccessMessage()
+    private function createChapterCreationSuccessMessage()
     {
-        $this->addFlash('success', 'Edite la nueva lección');
+        $this->addFlash('success', 'Edite el nuevo capítulo');
     }
-
     private function createJsonResponseWithError(\Exception $exception)
     {
         $response = new JsonResponse();

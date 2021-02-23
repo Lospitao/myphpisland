@@ -1,64 +1,61 @@
 <?php
 
-namespace App\Controller\lessonView;
+namespace App\Controller\gameCreate;
 
-use App\Entity\Kata;
-use App\Entity\Lesson;
-use App\Entity\LessonKatas;
+use App\Entity\Chapter;
+use App\Entity\Game;
+use App\Entity\GameChapters;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 
-class LessonsController extends AbstractController
+class GamesController extends AbstractController
 {
-    var $createdLesson;
-    var $newLessonUuid;
+    var $newGameUuid;
+    var $createdGame;
     /**
-     * @Route("/lessons/create", name="lessons_create" )
+     * @Route("/games/create", name="games_create" )
      */
-    public function lessonscreate()
+    public function gamescreate()
     {
         try {
-            $this->createNewLessonService();
+            $this->createNewGameService();
             $this->persistToDataBase();
-            $this->createLessonCreationSuccessMessage();
+            $this->createGameCreationSuccessMessage();
 
-            return $this->redirectToRoute('lessons_editor', [
-                'uuid' => $this->newLessonUuid]);
+            return $this->redirectToRoute('games_editor', [
+                'gameUuid' => $this->newGameUuid]);
         } catch (\Exception $exception) {
             $jsonResponseWithError = $this->createJsonResponseWithError($exception);
             return $jsonResponseWithError;
         }
     }
 
-    private function createNewLessonService()
+    private function createNewGameService()
     {
         $this->createNewEntity();
         $this->setUuid();
     }
-
     private function createNewEntity()
     {
-        $this->createdLesson = new Lesson();
+        $this->createdGame = new Game();
     }
-
     private function setUuid()
     {
-        $this->newLessonUuid = Uuid::v4();
-        $this->createdLesson->setUuid($this->newLessonUuid);
+        $this->newGameUuid = Uuid::v4();
+        $this->createdGame->setUuid($this->newGameUuid);
     }
-
     private function persistToDataBase()
     {
         $entity_manager = $this->getDoctrine()->getManager();
-        $entity_manager->persist($this->createdLesson);
+        $entity_manager->persist($this->createdGame);
         $entity_manager->flush();
     }
 
-    private function createLessonCreationSuccessMessage()
+    private function createGameCreationSuccessMessage()
     {
-        $this->addFlash('success', 'Edite la nueva lección');
+        $this->addFlash('success', 'Edite el nuevo juego');
     }
 
     private function createJsonResponseWithError(\Exception $exception)
@@ -67,4 +64,6 @@ class LessonsController extends AbstractController
         $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
         return $response;
     }
+
 }
+
