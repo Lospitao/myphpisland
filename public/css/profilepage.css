@@ -29,7 +29,7 @@ Informtion Component
 */
 .card.information {
     width:1360px;
-    height: 150px;
+    height: 220px;
 }
 .card.information img{
     min-width:35px;
@@ -41,12 +41,16 @@ Informtion Component
     position: absolute;
     top: 20px; left: 180px;
 }
+#profile_picture_thumbnail {
+    max-width: 100%;
+    height: auto;
+}
 /**
 Password component
  */
 .card.password {
     width: 1360px;
-    height: 340px;
+    height: 250px;
     text-align: center;
     padding-bottom: 20px;
     padding-top: 20px;
@@ -55,10 +59,29 @@ Password component
     width: 500px;
 }
 /**
+Profile picture component
+ */
+.card.profile-pic {
+    width: 1360px;
+    height: 115px;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#profile_picture_update, #profile_picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/**
 Social component
  */
 .card.social {
     width: 1360px;
+    height: 190px;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -74,14 +97,14 @@ Social component
  */
 
 .icon-block {
-    padding: 0 15px;
+    padding: 0 10px;
 }
 .icon-block .material-icons {
     font-size: inherit;
 }
 
 pre{
-    padding: 16px 20px 0px;
+    padding: 12px 15px 0px;
     background: #eee;
     border: 1px solid #ddd;
     border-radius: 4px;

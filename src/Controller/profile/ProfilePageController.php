@@ -4,13 +4,16 @@ namespace App\Controller\profile;
 
 use App\Entity\User;
 
+use App\Form\ProfilePictureUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 class ProfilePageController extends AbstractController
@@ -19,42 +22,64 @@ class ProfilePageController extends AbstractController
     var $enteredCurrentPassword;
     var $enteredNewPassword;
     var $enteredRepeatPassword;
-    var $email;
+    var $profilePictureForm;
+    var $profilePicFile;
+    var $profilePictureFileName;
+    var $destinationPath;
+
 
     /**
-     * @Route("/profile", name="profile")
-     * @param $email
+     * @Route("/profile/", name="profile")
+     *
      */
-    public function Index(Request $request, UserPasswordEncoderInterface $passwordEncoder )
+    public function Index(Request $request, UserPasswordEncoderInterface $passwordEncoder, AuthenticationUtils $authenticationUtils )
     {
         try {
-
-            $this->getUserToUpdate();
+            /*passsword update*/
+            $this->createProfilePictureForm();
+            $this->getUserToUpdate( $authenticationUtils);
             $this->getValueOfEnteredCurrentPassword($request);
             $this->getValueOfEnteredNewPassword($request);
             $this->getValueOfEnteredRepeatedPassword($request);
-            if($this->enteredCurrentPassword && $this->enteredNewPassword && $this->enteredRepeatPassword) {
+
+            if ($this->enteredCurrentPassword && $this->enteredNewPassword && $this->enteredRepeatPassword) {
                 $this->checkIfCurrentPasswordExists($passwordEncoder);
                 $this->checkIfNewPasswordMatchesRepeatedPassword();
                 $this->updateNewPassword($passwordEncoder);
-                $this->addFlash('success', 'Su contraseña se ha actualizado correctamente');
+                $this->persistNewDataToUserInDataBase();
+                $this->createSuccessfulPasswordUpdateMessage();
             }
+            /*profile picture update*/
+
+            $this->handleProfilePictureForm($request);
+            if ($this->profilePictureForm->isSubmitted()) {
+                $this->getProfilePictureFile();
+                $this->nameProfilePictureFile();
+                $this->specifyDirectoryRouteForProfilePicture();
+                $this->storeProfilePicture();
+                $this->setProfilePictureInDataBase();
+                $this->persistNewDataToUserInDataBase();
+            }
+
             return $this->render('profile_page/index.html.twig', [
                 'controller_name' => 'ProfilePageController',
+                'profilePictureForm' => $this->profilePictureForm->createView(),
             ]);
         } catch (\Exception $exception) {
             error_log($exception->getMessage());
             return $this->render('profile_page/index.html.twig', [
                 'controller_name' => 'ProfilePageController',
+                'profilePictureForm' => $this->profilePictureForm->createView(),
             ]);
         }
     }
 
-    private function getUserToUpdate()
+    private function getUserToUpdate(AuthenticationUtils $authenticationUtils)
     {
-        $this->user= $this->getDoctrine()
+        $email = $authenticationUtils->getLastUsername();
+        $this->user = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(['email' => $this->email]);
+            ->findOneBy(['email' => $email]);
     }
 
     private function getValueOfEnteredCurrentPassword(Request $request)
@@ -74,7 +99,7 @@ class ProfilePageController extends AbstractController
 
     private function checkIfCurrentPasswordExists($passwordEncoder)
     {
-        $isPasswordValid =$passwordEncoder->isPasswordValid($this->user, $this->enteredCurrentPassword);
+        $isPasswordValid = $passwordEncoder->isPasswordValid($this->user, $this->enteredCurrentPassword);
         if (!$isPasswordValid) {
             throw new Exception("La contraseña actual introducida no es correcta.");
         }
@@ -92,8 +117,58 @@ class ProfilePageController extends AbstractController
         $this->user->setPassword(
             $passwordEncoder->encodePassword($this->user, $this->enteredNewPassword)
         );
+    }
+    private function persistNewDataToUserInDataBase()
+    {
         $entity_manager = $this->getDoctrine()->getManager();
         $entity_manager->persist($this->user);
         $entity_manager->flush();
     }
+    private function createSuccessfulPasswordUpdateMessage()
+    {
+        $this->addFlash('success', 'Su contraseña se ha actualizado correctamente');
+    }
+
+    private function createProfilePictureForm()
+    {
+        $this->profilePictureForm = $this->createForm(ProfilePictureUpdateType::class, $this->user);
+    }
+
+    private function handleProfilePictureForm(Request $request)
+    {
+        $this->profilePictureForm->handleRequest($request);
+    }
+
+    private function getProfilePictureFile()
+    {
+        /**
+         * @var UploadedFile $file
+         */
+        $this->profilePicFile = $this->profilePictureForm['profilePic']->getData();
+
+    }
+
+    private function nameProfilePictureFile()
+    {
+        $this->profilePictureFileName = md5(uniqid()) . '.' . $this->profilePicFile->guessClientExtension();
+    }
+
+    private function specifyDirectoryRouteForProfilePicture()
+    {
+        $this->routeName=$this->getParameter('user_profile_pics_dir');
+        $this->destinationPath =  str_replace('username', $this->user->getUsername(), $this->routeName);
+    }
+
+    private function storeProfilePicture()
+    {
+        $this->profilePicFile->move($this->destinationPath,
+            $this->profilePictureFileName);
+    }
+
+    private function setProfilePictureInDataBase()
+    {
+        $this->user->setProfilePic($this->profilePictureFileName);
+    }
+
+
 }

@@ -98,7 +98,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         }
         $credentials = [
             'email' => $request->request->get('email')];
-        return new RedirectResponse($this->urlGenerator->generate('profile', ['email' => $credentials['email'] ]));
+        return new RedirectResponse($this->urlGenerator->generate('profile'));
 
     }
 

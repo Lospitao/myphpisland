@@ -15,7 +15,7 @@
     <!-- Information section -->
     <section class="information card">
         <div class="card-content">
-            <img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
+            <img id="profile_picture_thumbnail" src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
             <div class="info">
                 <h5 id="username" class={{ app.user.username }}>Nombre de usuario: {{ app.user.username }}</h5>
                 <h5>Correo electrónico: {{ app.user.email }}</h5>
@@ -26,27 +26,33 @@
 
     <!-- Password section -->
     <section class="password card">
-
-    <form action="{{ path('profile') }}" method="post">
-        <label for="current_password">Contraseña actual</label>
-        <input type="password" name="current_password" id="current_password" class="form-control" required autofocus><br>
-        <label for="new_password">Nueva contraseña</label>
-        <input type="password" name="new_password" id="new_password" class="form-control" required><br>
-        <label for="repeat_password">Repetir contraseña</label>
-        <input type="password" name="repeat_password" id="repeat_password" class="form-control" required ><br>
-        <button class="btn btn-lg btn-primary" id="update_password" type="submit">
+        <form action="{{ path('profile') }}" method="post">
+            <label for="current_password">Contraseña actual</label>
+            <input type="password" name="current_password" id="current_password" class="form-control" required autofocus><br>
+            <label for="new_password">Nueva contraseña</label>
+            <input type="password" name="new_password" id="new_password" class="form-control" required><br>
+            <label for="repeat_password">Repetir contraseña</label>
+            <input type="password" name="repeat_password" id="repeat_password" class="form-control" required ><br><br>
+            <button class="btn btn-lg btn-primary" id="update_password" type="submit">
             Establecer nueva contraseña
         </button>
-    </form>
+        </form>
     </section>
-
+    <!-- Profile picture section -->
+    <section class="profile-pic card">
+        {{ form_start(profilePictureForm) }}
+        {{ form_row(profilePictureForm.profilePic) }}
+        <br>
+        {{ form_row(profilePictureForm.submit) }}
+        {{ form_end(profilePictureForm) }}
+    </section>
     <!-- Social section -->
     <section class="social card">
         <div class="card-content">
             <a
                     id="github-link"
                     class="waves-effect waves-light btn-large social github"
-                    href="https://github.com/login/oauth/authorize?redirect_uri=https://localhost:8000/profile_page/{{ app.user.username }}"
+                    href="https://github.com/login/oauth/authorize?redirect_uri=https://localhost:8000/profile"
                     SameSite=None
                     Secure
             >
