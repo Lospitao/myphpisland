@@ -21,6 +21,7 @@ class KataController extends AbstractController
     var $description;
     var $codeEditor;
     var $sampleTest;
+
     /**
      * @Route("/katas/create", name="katas_create" )
      */
@@ -47,38 +48,26 @@ class KataController extends AbstractController
     {
         try {
 
-            $this->getKataToLoad($uuid);
+            $this->setKataFromDataBase($uuid);
             $this->checkIfKataToLoadExists();
-            $this->getKataToLoadTitle();
-            $this->getKataToLoadDescription();
-            $this->getKataToLoadEditorCode();
-            $this->getKataToLoadSampleTest();
-
-            return $this->render('kata/index.html.twig', [
-                'controller_name' => 'KataController',
-                'title' => $this->title,
-                'description' => $this->description,
-                'codeEditor' => $this->codeEditor,
-                'sampleTest' => $this->sampleTest,
-                'uuid' => $uuid,
-            ]);
+            $kataViewResponse = $this->createKataViewResponse($uuid);
+            return $kataViewResponse;
         } catch (\Exception $exception) {
             $errorMessage=$exception->getMessage();
             $this->addFlash('error', $errorMessage);
             return $this->redirectToRoute('katas_create');
         }
-
     }
 
     private function createNewKataService()
     {
-        $this->createNewUuid();
+        $this->createNewEntity();
         $this->setUuid();
         $this->setCreatedAt();
         $this->setUpdatedAt();
     }
 
-    private function createNewUuid()
+    private function createNewEntity()
     {
         $this->createdKata = new Kata;
     }
@@ -111,7 +100,7 @@ class KataController extends AbstractController
         $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
         return $response;
     }
-    private function getKataToLoad($uuid)
+    private function setKataFromDataBase($uuid)
     {
         $this->kataToLoad = $this->getDoctrine()
             ->getRepository(Kata::class)
@@ -122,23 +111,15 @@ class KataController extends AbstractController
             throw new Exception("La kata especificada no existe. Cree una nueva kata");
         }
     }
-    private function getKataToLoadTitle()
+    private function createKataViewResponse($uuid)
     {
-        $this->title= $this->kataToLoad->getKataTitle();
-    }
-
-    private function getKataToLoadDescription()
-    {
-        $this->description = $this->kataToLoad->getDescription();
-    }
-
-    private function getKataToLoadEditorCode()
-    {
-        $this->codeEditor = $this->kataToLoad->getEditorCode();
-    }
-
-    private function getKataToLoadSampleTest()
-    {
-        $this->sampleTest = $this->kataToLoad->getTestCode();
+        return $this->render('kata/index.html.twig', [
+            'controller_name' => 'KataController',
+            'title' => $this->kataToLoad->getKataTitle(),
+            'description' => $this->kataToLoad->getDescription(),
+            'codeEditor' => $this->kataToLoad->getEditorCode(),
+            'sampleTest' => $this->kataToLoad->getTestCode(),
+            'uuid' => $uuid,
+        ]);
     }
 }
