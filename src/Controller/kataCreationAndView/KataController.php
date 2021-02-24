@@ -25,7 +25,7 @@ class KataController extends AbstractController
     {
         try {
                 $this->createNewKataService();
-                $this->persistToDataBase();
+                $this->persistToRepository();
                 $this->createKataCreationSuccessMessage();
 
             return $this->redirectToRoute('katas_editor', [
@@ -83,7 +83,7 @@ class KataController extends AbstractController
         $this->createdKata->setUpdatedAt(new \DateTime());
     }
 
-    private function persistToDataBase()
+    private function persistToRepository()
     {
         $entity_manager = $this->getDoctrine()->getManager();
         $entity_manager->persist($this->createdKata);

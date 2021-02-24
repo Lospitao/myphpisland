@@ -21,7 +21,7 @@ class LessonsController extends AbstractController
     {
         try {
             $this->createNewLessonService();
-            $this->persistToDataBase();
+            $this->persistToRepository();
             $this->createLessonCreationSuccessMessage();
 
             return $this->redirectToRoute('lessons_editor', [
@@ -49,7 +49,7 @@ class LessonsController extends AbstractController
         $this->createdLesson->setUuid($this->newLessonUuid);
     }
 
-    private function persistToDataBase()
+    private function persistToRepository()
     {
         $entity_manager = $this->getDoctrine()->getManager();
         $entity_manager->persist($this->createdLesson);

@@ -25,7 +25,7 @@ class ChaptersController extends AbstractController
     {
         try {
             $this->createNewChapterService();
-            $this->persistToDataBase();
+            $this->persistToRepository();
             $this->createChapterCreationSuccessMessage();
 
             return $this->redirectToRoute('chapters_editor', [
@@ -54,7 +54,7 @@ class ChaptersController extends AbstractController
         $this->createdChapter->setUuid($this->newChapterUuid);
     }
 
-    private function persistToDataBase()
+    private function persistToRepository()
     {
         $entity_manager = $this->getDoctrine()->getManager();
         $entity_manager->persist($this->createdChapter);

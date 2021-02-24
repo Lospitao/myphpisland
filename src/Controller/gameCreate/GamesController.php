@@ -21,7 +21,7 @@ class GamesController extends AbstractController
     {
         try {
             $this->createNewGameService();
-            $this->persistToDataBase();
+            $this->persistToRepository();
             $this->createGameCreationSuccessMessage();
 
             return $this->redirectToRoute('games_editor', [
@@ -46,7 +46,7 @@ class GamesController extends AbstractController
         $this->newGameUuid = Uuid::v4();
         $this->createdGame->setUuid($this->newGameUuid);
     }
-    private function persistToDataBase()
+    private function persistToRepository()
     {
         $entity_manager = $this->getDoctrine()->getManager();
         $entity_manager->persist($this->createdGame);

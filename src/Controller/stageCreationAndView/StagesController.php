@@ -19,8 +19,8 @@ class StagesController extends AbstractController
      */
     public function stagescreate() {
         try {
-            $this->createNewGameService();
-            $this->persistToDataBase();
+            $this->createNewStageService();
+            $this->persistToRepository();
             $this->createStageCreationSuccessMessage();
 
             return $this->redirectToRoute('stages_editor', [
@@ -48,7 +48,7 @@ class StagesController extends AbstractController
 
     }
 
-    private function createNewGameService()
+    private function createNewStageService()
     {
         $this->createNewEntity();
         $this->setUuid();
@@ -65,7 +65,7 @@ class StagesController extends AbstractController
         $this->createdStage->setUuid($this->newStageUuid);
     }
 
-    private function persistToDataBase()
+    private function persistToRepository()
     {
         $entity_manager = $this->getDoctrine()->getManager();
         $entity_manager->persist($this->createdStage);
