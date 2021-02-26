@@ -10,6 +10,27 @@ use Doctrine\ORM\Mapping as ORM;
  */
 Class GameChapters {
     /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="chapter")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $game;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Chapter", inversedBy="game")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $chapter;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $position;
+    /**
      * @return mixed
      */
     public function getId()
@@ -72,26 +93,6 @@ Class GameChapters {
     {
         $this->position = $position;
     }
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="chapter")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $game;
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Chapter", inversedBy="game")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $chapter;
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $position;
 
 }

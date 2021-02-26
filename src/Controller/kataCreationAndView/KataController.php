@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\kataView;
+namespace App\Controller\kataCreationAndView;
 
 
 use App\Entity\Kata;
@@ -17,10 +17,6 @@ class KataController extends AbstractController
     var $uuid;
     var $createdKata;
     var $kataToLoad;
-    var $title;
-    var $description;
-    var $codeEditor;
-    var $sampleTest;
 
     /**
      * @Route("/katas/create", name="katas_create" )
@@ -29,8 +25,8 @@ class KataController extends AbstractController
     {
         try {
                 $this->createNewKataService();
-                $this->persistToDataBase();
-                $this->addFlash('success', 'Edite la nueva kata');
+                $this->persistToRepository();
+                $this->createKataCreationSuccessMessage();
 
             return $this->redirectToRoute('katas_editor', [
                 'uuid' => $this->uuid]);
@@ -48,13 +44,12 @@ class KataController extends AbstractController
     {
         try {
 
-            $this->setKataFromDataBase($uuid);
+            $this->setKataToLoadFromDataBase($uuid);
             $this->checkIfKataToLoadExists();
             $kataViewResponse = $this->createKataViewResponse($uuid);
             return $kataViewResponse;
         } catch (\Exception $exception) {
-            $errorMessage=$exception->getMessage();
-            $this->addFlash('error', $errorMessage);
+            $this->createErrorMessage($exception);
             return $this->redirectToRoute('katas_create');
         }
     }
@@ -88,19 +83,23 @@ class KataController extends AbstractController
         $this->createdKata->setUpdatedAt(new \DateTime());
     }
 
-    private function persistToDataBase()
-    {    $entity_manager = $this->getDoctrine()->getManager();
+    private function persistToRepository()
+    {
+        $entity_manager = $this->getDoctrine()->getManager();
         $entity_manager->persist($this->createdKata);
         $entity_manager->flush();
     }
-
+    private function createKataCreationSuccessMessage()
+    {
+        $this->addFlash('success', 'Edite la nueva kata');
+    }
     private function createJsonResponseWithError(\Exception $exception)
     {
         $response = new JsonResponse();
         $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
         return $response;
     }
-    private function setKataFromDataBase($uuid)
+    private function setKataToLoadFromDataBase($uuid)
     {
         $this->kataToLoad = $this->getDoctrine()
             ->getRepository(Kata::class)
@@ -122,4 +121,12 @@ class KataController extends AbstractController
             'uuid' => $uuid,
         ]);
     }
+
+    private function createErrorMessage($exception)
+    {
+        $errorMessage=$exception->getMessage();
+        $this->addFlash('error', $errorMessage);
+    }
+
+
 }

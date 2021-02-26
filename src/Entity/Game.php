@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Game
 {
+    const ID_MYPHPISLAND = 1;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
