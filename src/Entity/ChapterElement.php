@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ChapterElement
 {
+    const ID_chapter_element_type_lesson = 1;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
