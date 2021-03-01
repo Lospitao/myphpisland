@@ -23,15 +23,18 @@ class RegistationController extends AbstractController
     var $user;
     var $form;
     var $gameSession;
+    var $gameSessionUuid;
     var $gameHistoryEntry;
     var $gameId;
     var $chaptersInGame;
+    var $firstChapter;
     var $firstChapterId;
     var $elementsInChapter;
     var $chapterElementId;
     var $katasInLesson;
     var $elementType;
     var $firstKataId;
+
 
 
     /**
@@ -48,7 +51,7 @@ class RegistationController extends AbstractController
             if ($this->form->isSubmitted() && $this->form->isValid()) {
                 $this->createNewUserEntityService($passwordEncoder);
                 $this->createNewGameSessionService();
-            /*    $this->createNewGameHistoryEntryService(); */
+                $this->createNewGameHistoryEntryService();
                 $this->createSuccessfullyRegisteredNewUser();
                 return $this->redirectToRoute('app_login');
             }
@@ -79,27 +82,39 @@ class RegistationController extends AbstractController
     private function createNewGameSessionService()
     {
         $this->createNewGameSession();
+        $this->setCreatedAt();
         $this->setGameSessionUuid();
         $this->setGameSessionIdUser();
         $this->setDefaultGameToGameSession();
         $this->getAscendingOrderChaptersInGame();
+        $this->getFirstChapterId();
         $this->setFirstChapterToGameSession();
         $this->getAscendingOrderElementsInChapter();
         $this->setFirstChapterElementToGameSession();
         $this->checkChapterElementType();
-        if ($this->elementType == 1)
+        if ($this->isChapterElementALesson())
         {
             $this->getAscendingOrderKatasInLesson();
             $this->setFirstKataToGameSession();
         }
         $this->persistNewGameSessionToRepository();
     }
-  /*
+
     private function createNewGameHistoryEntryService() {
-        $this->createNewGameHistoryEntry();
+        $this->createNewGameSessionHistoryEntry();
+        $this->setGameHistoryCreatedAt();
+        $this->setGameSessionHistoryUuid();
+        $this->setGameSessionHistoryIdUser();
+        $this->setDefaultGameToGameSessionHistory();
+        $this->setFirstChapterToGameSessionHistory();
+        $this->setFirstChapterElementToGameSessionHistory();
+        if ($this->isChapterElementALesson())
+        {
+            $this->setFirstKataToGameSessionHistory();
+        }
         $this->persistNewGameHistoryEntryToRepository();
     }
-  */
+
 /*createNewUserEntityService*/
     private function createNewUser()
     {
@@ -135,10 +150,13 @@ class RegistationController extends AbstractController
     {
         $this->gameSession = new GameSession();
     }
+    private function setCreatedAt() {
+        $this->gameSession->setCreatedAt(new \DateTime());
+    }
     private function setGameSessionUuid()
     {
-        $gameSessionUuid = Uuid::v4();
-        $this->gameSession->setUuid($gameSessionUuid);
+        $this->gameSessionUuid = Uuid::v4();
+        $this->gameSession->setUuid($this->gameSessionUuid);
 
     }
     private function setGameSessionIdUser()
@@ -146,8 +164,11 @@ class RegistationController extends AbstractController
         $this->gameSession->setIdUser($this->user->getId());
     }
     private function setDefaultGameToGameSession() {
-        $this->gameId = Game::ID_MYPHPISLAND;
+        $this->gameId = $this->getGameId();
         $this->gameSession->setIdGame($this->gameId);
+    }
+    private function getGameId() {
+        return Game::ID_MYPHPISLAND;
     }
     private function getAscendingOrderChaptersInGame()
     {
@@ -155,14 +176,20 @@ class RegistationController extends AbstractController
             ->getRepository(GameChapters::class)
             ->findBy(['game' => $this->gameId], ['position' => 'ASC']);
     }
+    private function getFirstChapterId() {
+        $this->chapterId = $this->getChapterId();
+        $this->firstChapter = $this->getDoctrine()
+            ->getRepository(Chapter::class)
+            ->findOneBy(['id' => $this->chapterId]);
+        $this->firstChapterId = $this->firstChapter->getId();
+    }
     private function setFirstChapterToGameSession()
     {
-        $chapterId = $this->chaptersInGame[0]->getChapter();
-        $firstChapter = $this->getDoctrine()
-            ->getRepository(Chapter::class)
-            ->findOneBy(['id' => $chapterId]);
-        $this->firstChapterId = $firstChapter->getId();
         $this->gameSession->setIdChapter($this->firstChapterId);
+    }
+    private function getChapterId()
+    {
+        return $this->chaptersInGame[0]->getChapter();
     }
     private function getAscendingOrderElementsInChapter()
     {
@@ -171,12 +198,19 @@ class RegistationController extends AbstractController
             ->findBy(['chapterId' => $this->firstChapterId], ['position' => 'ASC']);
     }
     private function setFirstChapterElementToGameSession () {
-        $this->chapterElementId= $this->elementsInChapter[0]->getStageOrLessonId();
+        $this->chapterElementId= $this->getChapterElementId();
         $this->gameSession->setIdChapterElement($this->chapterElementId);
+    }
+    private function getChapterElementId()
+    {
+        return $this->elementsInChapter[0]->getStageOrLessonId();
     }
     private function checkChapterElementType()
     {
         $this->elementType = $this->elementsInChapter[0]->getChapterElementType();
+    }
+    private function isChapterElementALesson() {
+        return ChapterElement::ID_chapter_element_type_lesson;
     }
     private function  getAscendingOrderKatasInLesson()
     {
@@ -186,40 +220,60 @@ class RegistationController extends AbstractController
     }
     private function setFirstKataToGameSession()
     {
-        $this->kataId=$this->katasInLesson[0]->getKata();
+        $this->kataId= $this->getKataId();
         $firstKata = $this->getDoctrine()
             ->getRepository(Kata::class)
             ->findOneBy(['id' => $this->kataId]);
         $this->firstKataId = $firstKata->getId();
         $this->gameSession->setIdKata($this->firstKataId);
 
-}
+    }
+    private function getKataId() {
+        return $this->katasInLesson[0]->getKata();
+    }
     private function persistNewGameSessionToRepository()
     {
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($this->gameSession);
         $entityManager->flush();
     }
-    /*
-    private function createNewGameHistoryEntry()
+/*CreateNewGameSessionHistoryEntry*/
+    private function createNewGameSessionHistoryEntry()
     {
         $this->gameHistoryEntry = new GameHistory();
     }
-
+    private function setGameHistoryCreatedAt()
+    {
+        $this->gameHistoryEntry->setCreatedAt(new \DateTime());
+    }
+    private function setGameSessionHistoryUuid()
+    {
+        $this->gameHistoryEntry->setUuidGameSession($this->gameSessionUuid);
+    }
+    private function setGameSessionHistoryIdUser()
+    {
+        $this->gameHistoryEntry->setIdUser($this->user->getId());
+    }
+    private function setDefaultGameToGameSessionHistory ()
+    {
+        $this->gameHistoryEntry->setIdGame($this->gameId);
+    }
+    private function setFirstChapterToGameSessionHistory()
+    {
+        $this->gameHistoryEntry->setIdChapter($this->firstChapterId);
+    }
+    private function setFirstChapterElementToGameSessionHistory() {
+        $this->gameHistoryEntry->setIdChapterElement($this->chapterElementId);
+    }
+    private function setFirstKataToGameSessionHistory() {
+        $this->gameHistoryEntry->setIdKata($this->firstKataId);
+    }
     private function persistNewGameHistoryEntryToRepository()
     {
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($this->gameHistoryEntry);
         $entityManager->flush();
     }
-
-*/
-
-
-
-
-
-
 
 
 
