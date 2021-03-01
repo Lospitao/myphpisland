@@ -18,11 +18,6 @@ class GameHistory
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
-
-    /**
      * @ORM\Column(type="guid")
      */
     private $uuidGameSession;
@@ -52,21 +47,14 @@ class GameHistory
      */
     private $idKata;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     public function getUuidGameSession(): ?string
@@ -140,4 +128,17 @@ class GameHistory
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+    
 }
