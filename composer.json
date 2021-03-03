@@ -49,7 +49,7 @@
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/markdown-extra": "^3.0",
         "twig/twig": "^2.12|^3.0",
-        "jorge.sanchez/phpunit-execution-from-php": "0.1.*"
+        "jorge.sanchez/phpunit-execution-from-php": "0.2.*"
     },
     "require-dev": {
         "symfony/browser-kit": "^5.1",
