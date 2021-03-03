@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class RegistationController extends AbstractController
 {
@@ -87,9 +88,11 @@ class RegistationController extends AbstractController
         $this->setGameSessionIdUser();
         $this->setDefaultGameToGameSession();
         $this->getAscendingOrderChaptersInGame();
+        if (!$this->chaptersInGame) {$this->throwIncompleteGameException();}
         $this->getFirstChapterId();
         $this->setFirstChapterToGameSession();
         $this->getAscendingOrderElementsInChapter();
+        if (!$this->elementsInChapter) {$this->throwIncompleteGameException();}
         $this->setFirstChapterElementToGameSession();
         $this->checkChapterElementType();
         if ($this->isChapterElementALesson())
@@ -115,7 +118,7 @@ class RegistationController extends AbstractController
         $this->persistNewGameHistoryEntryToRepository();
     }
 
-/*createNewUserEntityService*/
+    /*createNewUserEntityService*/
     private function createNewUser()
     {
         $this->user = new User();
@@ -145,7 +148,7 @@ class RegistationController extends AbstractController
         $entityManager->persist($this->user);
         $entityManager->flush();
     }
-/*createNewGameSessionService*/
+    /*createNewGameSessionService*/
     private function createNewGameSession()
     {
         $this->gameSession = new GameSession();
@@ -157,10 +160,9 @@ class RegistationController extends AbstractController
     {
         $this->gameSessionUuid = Uuid::v4();
         $this->gameSession->setUuid($this->gameSessionUuid);
-
     }
     private function setGameSessionIdUser()
-    {
+      {
         $this->gameSession->setIdUser($this->user->getId());
     }
     private function setDefaultGameToGameSession() {
@@ -203,20 +205,21 @@ class RegistationController extends AbstractController
     }
     private function getChapterElementId()
     {
-        return $this->elementsInChapter[0]->getStageOrLessonId();
+        return $this->elementsInChapter[0]->getId();
     }
     private function checkChapterElementType()
     {
         $this->elementType = $this->elementsInChapter[0]->getChapterElementType();
     }
     private function isChapterElementALesson() {
-        return ChapterElement::ID_chapter_element_type_lesson;
+        return $this->elementType == ChapterElement::ID_chapter_element_type_lesson;
     }
     private function  getAscendingOrderKatasInLesson()
     {
+        $lessonId=$this->elementsInChapter[0]->getStageOrLessonId();
         $this->katasInLesson = $this->getDoctrine()
             ->getRepository(LessonKatas::class)
-            ->findBy(['lesson' => $this->chapterElementId], ['position' => 'ASC']);
+            ->findBy(['lesson' => $lessonId], ['position' => 'ASC']);
     }
     private function setFirstKataToGameSession()
     {
@@ -237,7 +240,7 @@ class RegistationController extends AbstractController
         $entityManager->persist($this->gameSession);
         $entityManager->flush();
     }
-/*CreateNewGameSessionHistoryEntry*/
+    /*CreateNewGameSessionHistoryEntry*/
     private function createNewGameSessionHistoryEntry()
     {
         $this->gameHistoryEntry = new GameHistory();
@@ -274,10 +277,10 @@ class RegistationController extends AbstractController
         $entityManager->persist($this->gameHistoryEntry);
         $entityManager->flush();
     }
-
-
-
-
+    private function throwIncompleteGameException()
+    {
+        throw new Exception("La edición del juego especificado no se ha completado. Contacte con los administradores");
+    }
     private function createSuccessfullyRegisteredNewUser()
     {
         $this->addFlash('success', 'Se ha registrado con éxito');
