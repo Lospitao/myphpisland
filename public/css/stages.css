@@ -5,11 +5,12 @@
 General editor_components
  *****************/
 .card {
-
+border:none;
 }
 
 .card .card-content {
     padding: 5px;
+    border:none;
 }
 
 .screen {
@@ -38,6 +39,7 @@ Ambient Sound Component
 .card.ambient-sound {
     width: 680px;
     float: left;
+    border:none;
 }
 #ambient_sound_file_upload_ambient_sound {
     margin: 6px;
@@ -64,18 +66,21 @@ Dialog Component
 /**
 Background Image Component
 */
+
 .card.background-image {
     margin-top: 195px;
-    height: 400px;
+    height: 500px;
 
 }
 .card.background-image.view {
     margin-top: 50px;
     height: 600px;
     text-align: center;
+
 }
 #background_image_file_upload_background_image {
     margin: 6px;
+
 }
 #background_image_file_upload_submit {
     margin: 6px;
@@ -84,6 +89,6 @@ Background Image Component
     height: 500px;
 }
  area {
-
      visibility: hidden;
  }
+

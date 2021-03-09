@@ -88,11 +88,11 @@ class RegistationController extends AbstractController
         $this->setGameSessionIdUser();
         $this->setDefaultGameToGameSession();
         $this->getAscendingOrderChaptersInGame();
-        if (!$this->chaptersInGame) {$this->throwIncompleteGameException();}
+        $this->checkIfGameHasOneChapterAtLeast();
         $this->getFirstChapterId();
         $this->setFirstChapterToGameSession();
         $this->getAscendingOrderElementsInChapter();
-        if (!$this->elementsInChapter) {$this->throwIncompleteGameException();}
+        $this->checkIfChapterHasOneChapterElementAtLeast();
         $this->setFirstChapterElementToGameSession();
         $this->checkChapterElementType();
         if ($this->isChapterElementALesson())
@@ -149,6 +149,7 @@ class RegistationController extends AbstractController
         $entityManager->flush();
     }
     /*createNewGameSessionService*/
+
     private function createNewGameSession()
     {
         $this->gameSession = new GameSession();
@@ -169,6 +170,7 @@ class RegistationController extends AbstractController
         $this->gameId = $this->getGameId();
         $this->gameSession->setIdGame($this->gameId);
     }
+
     private function getGameId() {
         return Game::ID_MYPHPISLAND;
     }
@@ -177,6 +179,14 @@ class RegistationController extends AbstractController
         $this->chaptersInGame = $this->getDoctrine()
             ->getRepository(GameChapters::class)
             ->findBy(['game' => $this->gameId], ['position' => 'ASC']);
+    }
+    private function checkIfGameHasOneChapterAtLeast() {
+        if ($this->doesTheGameHaveOneChapterAtLeast()) {
+            throw new Exception("La edición del juego no se ha completado, por favor, contacte con los adminsitradores.");
+        }
+    }
+    private function doesTheGameHaveOneChapterAtLeast() {
+        return !$this->chaptersInGame;
     }
     private function getFirstChapterId() {
         $this->chapterId = $this->getChapterId();
@@ -198,6 +208,15 @@ class RegistationController extends AbstractController
         $this->elementsInChapter = $this->getDoctrine()
             ->getRepository( ChapterElement::class)
             ->findBy(['chapterId' => $this->firstChapterId], ['position' => 'ASC']);
+    }
+    private function checkIfChapterHasOneChapterElementAtLeast()
+    {
+        if ($this->doesTheChapterHaveOneChapterElementAtLeast()) {
+            throw new Exception("La edición del juego no se ha completado, por favor, contacte con los adminsitradores.");
+        }
+    }
+    private function doesTheChapterHaveOneChapterElementAtLeast() {
+        return !$this->elementsInChapter;
     }
     private function setFirstChapterElementToGameSession () {
         $this->chapterElementId= $this->getChapterElementId();
@@ -277,10 +296,7 @@ class RegistationController extends AbstractController
         $entityManager->persist($this->gameHistoryEntry);
         $entityManager->flush();
     }
-    private function throwIncompleteGameException()
-    {
-        throw new Exception("La edición del juego especificado no se ha completado. Contacte con los administradores");
-    }
+
     private function createSuccessfullyRegisteredNewUser()
     {
         $this->addFlash('success', 'Se ha registrado con éxito');
@@ -290,8 +306,4 @@ class RegistationController extends AbstractController
         $errorMessage=$exception->getMessage();
         $this->addFlash('error', $errorMessage);
     }
-
-
-
-
 }

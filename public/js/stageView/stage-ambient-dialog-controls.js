@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    let title = document.getElementById("stage-title");
+    let title = document.getElementById("stage-view");
     let stageUuid = title.getAttribute("data-uuid");
     //Ambient sound starts playing once the stage is loaded
     var sound = new Howl({
