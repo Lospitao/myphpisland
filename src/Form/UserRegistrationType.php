@@ -41,7 +41,7 @@ class UserRegistrationType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-success float-right'
                 ],
-                'label' => 'Enviar'
+                'label' => 'Registrar'
             ])
         ;
     }
