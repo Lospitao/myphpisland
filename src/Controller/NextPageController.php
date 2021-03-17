@@ -6,16 +6,16 @@
 namespace App\Controller;
 
 
+use App\Entity\Chapter;
 use App\Entity\ChapterElement;
 use App\Entity\Game;
+use App\Entity\GameChapters;
 use App\Entity\GameHistory;
 use App\Entity\GameSession;
 use App\Entity\Kata;
-use App\Entity\Lesson;
 use App\Entity\LessonKatas;
+use App\Entity\Stage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -23,27 +23,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class NextPageController extends AbstractController
 
 {
-
-
     var $user;
-    var $userId;
-    var $gameSession;
-    var $gameSessionChapterId;
-    var $ChapterElementId;
-    var $ChapterElement;
-    var $ChapterElementType;
-    var $ChapterElementIsALesson;
-    var $currentKataId;
-    var $currentLessonId;
-    var $currentKata;
-    var $currentKataPosition;
-    var $nextKataPosition;
-    var $nextKataInLesson;
-    var $nextKataInLessonId;
     var $gameHistoryEntry;
-    var $gameSessionUuid;
-    var $gameSessionGameId;
+    var $gameSession;
+    var $chapterElement;
+    var $nextKataInNewLesson;
+    var $currentKata;
+    var $nextKataInLesson;
+    var $nextKata;
+    var $nextKataInNewLessonId;
+    var $nextKataInLessonId;
+    var $nextChapterElement;
+    var $currentChapter;
+    var $nextChapter;
+    var $nextChapterInGameId;
     var $kataViewResponse;
+    var $stageViewResponse;
+    var $endOfGameResponse;
+
 
     /**
      * @Route("/next/page", name="next_page")
@@ -52,115 +49,191 @@ class NextPageController extends AbstractController
     public function index()
     {
         try {
+
             $this->user = $this->getUserRequestingNextPage();
-            $this->userId = $this->getUserIdRequestingNextPage();
             $this->gameSession = $this->getGameSession();
-            $this->gameSessionChapterId = $this->getGameSessionChapterId();
-            $this->ChapterElementId = $this->getCurrentChapterElementId();
-            $this->ChapterElement = $this->getCurrentChapterElement();
-            $this->ChapterElementType = $this->getCurrentChapterElementType();
-            $this->ChapterElementIsALesson = $this->checkIfCurrentChapterElementTypeIsALesson();
-            if ($this->ChapterElementIsALesson) {
-                $this->currentKataId = $this->getCurrentKataId();
-                $this->currentLessonId = $this->getCurrentLessonId();
-                $this->currentKata = $this->getCurrentKataInLessonKatasRepository();
-                $this->currentKataPosition = $this->getCurrentKataInLessonPosition();
+            $this->getChapterInGame();
+            $this->chapterElement = $this->getChapterElementInChapter();
+            $this->isChapterElementALesson();
+            //Si el chapter Element actual es una LESSON
+            if ($this->isChapterElementALesson()) {
                 $this->nextKataInLesson= $this->getNextKataInLesson();
+                if(!$this->isThereNoNextKataInThisLesson()) {
+                    $this->nextChapterElement = $this->getNextChapterElement();
+                    if(!$this->IsThereNoNextChapterElement()) {
+                        $this->nextChapter = $this->getNextChapterInGame();
+                        if (!$this->isThereNoNextChapter()) {
+                            $this->endOfGameResponse = $this->createEndOfGameResponse();
+                            return $this->endOfGameResponse;
+                        }
+                            $this->nextChapterInGameId = $this->getChapterInGameId();
+                            $this->setNextChapterToGameSession();
+                            $this->chapterElement = $this->getChapterElementInNextChapter();
+                            if ($this->isChapterElementALesson()) {
+                                $this->getNextKataInLesson();
+                                $this->nextKataInLessonId = $this->getNextKataInLessonId();
+                                $this->setNextChapterElementToGameSession();
+                                $this->setNextKataIdToGameSession();
+                                return $this->kataViewResponse;
+                            } else {
+                                $this->setKataToNull();
+                                $this->setNextChapterElementToGameSession();
+                                $this->createNewGameHistoryEntryService();
+                                $this->stageViewResponse = $this->createStageViewResponse();
+                                return $this->stageViewResponse;
+                            }
+                    }
+                    if ($this->isNextChapterElementALesson()) {
+                        $this->getNextKataInLesson();
+                        $this->nextKataInLessonId = $this->getNextKataInLessonId();
+                        $this->setNextChapterElementToGameSession();
+                        $this->setNextKataIdToGameSession();
+                        return $this->kataViewResponse;
+                    }
+                    $this->setKataToNull();
+                    $this->setNextChapterElementToGameSession();
+                    $this->createNewGameHistoryEntryService();
+                    $this->stageViewResponse = $this->createStageViewResponse();
+                    return $this->stageViewResponse;
+
+                } else //Si la Lesson actual tiene al menos una kata más
                 $this->nextKataInLessonId =$this->getNextKataInLessonId();
                 $this->setNextKataIdToGameSession();
                 $this->createNewGameHistoryEntryService();
                 $this->kataViewResponse = $this->createKataViewResponse();
                 return $this->kataViewResponse;
             }
-            return $this->render('registation/index.html.twig');
+            //Si el chapterElement actual es un STAGE
+            $this->nextChapterElement = $this->getNextChapterElement();
+            if(!$this->IsThereNoNextChapterElement()) {
+                $this->nextChapter = $this->getNextChapterInGame();
+                if (!$this->isThereNoNextChapter()) {
+                    $this->endOfGameResponse = $this->createEndOfGameResponse();
+                    return $this->endOfGameResponse;
+                }
+                $this->nextChapterInGameId = $this->getChapterInGameId();
+                $this->setNextChapterToGameSession();
+                $this->chapterElement = $this->getChapterElementInNextChapter();
+                if ($this->isChapterElementALesson()) {
+                    $this->setNewChapterElementToGameSession();
+                    $this->nextKataInNewLesson = $this->getNextKataInNewLesson();
+                    $this->nextKataInNewLessonId = $this->getNextKataInNewLessonId();
+                    $this->setNextKataInNewLessonIdToGameSession();
+                    $this->createNewGameHistoryEntryService();
+                    $this->kataViewResponse= $this->createKataViewResponse();
+                    return $this->kataViewResponse;
+                } else {
+                    $this->setKataToNull();
+                    $this->setNewChapterElementToGameSession();
+                    $this->createNewGameHistoryEntryService();
+                    $this->stageViewResponse = $this->createStageViewResponse();
+                    return $this->stageViewResponse;
+                }
+            }
+            if ($this->isNextChapterElementALesson()) {
+                $this->nextKataInNewLesson = $this->getNextKataInNewLesson();
+                $this->nextKataInNewLessonId = $this->getNextKataInNewLessonId();
+                $this->setNextChapterElementToGameSession();
+                $this->setNextKataInNewLessonIdToGameSession();
+                $this->createNewGameHistoryEntryService();
+                $this->kataViewResponse= $this->createKataViewResponse();
+                return $this->kataViewResponse;
+            }
+            $this->setKataToNull();
+            $this->setNextChapterElementToGameSession();
+            $this->createNewGameHistoryEntryService();
+            $this->stageViewResponse = $this->createStageViewResponse();
+            return $this->stageViewResponse;
+
         } catch (\Exception $exception) {
             $this->createErrorMessage($exception);
-            return $this->render('next_page/index.html.twig');
+            return $this->redirectToRoute('next_page');
         }
     }
 
-    private function createErrorMessage(\Exception $exception)
-    {
-        $errorMessage=$exception->getMessage();
-        $this->addFlash('error', $errorMessage);
-    }
     private function getUserRequestingNextPage()
     {
         return $this->getUser();
-    }
-
-    private function getUserIdRequestingNextPage()
-    {
-        return $this->user->getId();
     }
 
     private function getGameSession()
     {
         return $this->getDoctrine()
             ->getRepository(GameSession::class)
-            ->findOneBy(['idUser' => $this->userId]);
+            ->findOneBy(['idUser' => $this->user->getId()]);
     }
-
-    private function getGameSessionChapterId()
+    private function getChapterInGame()
     {
         return $this->gameSession->getIdChapter();
-    }
 
-    private function getCurrentChapterElementId()
-    {
-        return $this->gameSession->getIdChapterElement();
     }
-
-    private function getCurrentChapterElement()
+    private function getChapterElementInChapter()
     {
         $chapterElement = $this->getDoctrine()
             ->getRepository(ChapterElement::class)
-            ->findBy(['id' => $this->ChapterElementId]);
+            ->findBy(['id' => $this->gameSession->getIdChapterElement()]);
         return $chapterElement[0];
     }
 
-    private function getCurrentChapterElementType()
+    private function getNextChapterElement()
+    {   $nextChapterElementPosition = $this->chapterElement->getPosition()+1;
+        return $this->getDoctrine()
+            ->getRepository(ChapterElement::class)
+            ->findOneBy(['chapterId' => $this->gameSession->getIdChapter(),'position' => $nextChapterElementPosition]);
+    }
+    private function IsThereNoNextChapterElement() {
+        return $this->nextChapterElement;
+    }
+    private function isNextChapterElementALesson()
     {
-        return $this->ChapterElement->getChapterElementType();
+        return $this->nextChapterElement->getChapterElementType() === ChapterElement::ID_chapter_element_type_lesson;
+    }
+    private function setKataToNull() {
+        $this->gameSession->setIdKata(null);
+        $entity_manager = $this->getDoctrine()->getManager();
+        $entity_manager->persist($this->gameSession);
+        $entity_manager->flush();
+    }
+    private function setNextChapterElementToGameSession()
+    {
+        $this->gameSession->setIdChapterElement($this->nextChapterElement->getId());
+        $this->gameSession->setUpdatedAt(new \DateTime());
+        $entity_manager = $this->getDoctrine()->getManager();
+        $entity_manager->persist($this->gameSession);
+        $entity_manager->flush();
     }
 
-    private function checkIfCurrentChapterElementTypeIsALesson()
+    private function isChapterElementALesson()
     {
-        return $this->ChapterElementType == ChapterElement::ID_chapter_element_type_lesson;
+        return $this->chapterElement->getChapterElementType() === ChapterElement::ID_chapter_element_type_lesson;
     }
 
-    private function getCurrentKataId()
+    private function getNextKataInLesson()
     {
-        return $this->gameSession->getIdKata();
+        $this->currentKata = $this->getCurrentKataInLessonKatasRepository();
+        $this->nextKata= $this->getNextKata();
+        return $this->nextKata;
     }
-
-    private function getCurrentLessonId()
-    {
-        return $this->ChapterElement->getStageOrLessonId();
-    }
-
     private function getCurrentKataInLessonKatasRepository()
     {
         $lessonKata= $this->getDoctrine()
             ->getRepository(LessonKatas::class)
-            ->findOneBy(['lesson' => $this->currentLessonId, 'kata' => $this->currentKataId ]);
+            ->findOneBy(['lesson' => $this->chapterElement->getStageOrLessonId(), 'kata' => $this->gameSession->getIdKata()]);
         return $lessonKata;
     }
-    private function getCurrentKataInLessonPosition() {
-        return $this->currentKata->getPosition();
-    }
-    private function getNextKataInLesson() {
-        $this->nextKataPosition = $this->currentKataPosition+1;
-        $nextKata = $this->getDoctrine()
+    private function getNextKata() {
+        $nextKataPosition = $this->currentKata->getPosition()+1;
+        return  $this->getDoctrine()
             ->getRepository(LessonKatas::class)
-            ->findOneBy(['lesson'=>$this->currentLessonId, 'position'=> $this->nextKataPosition]);
-        return $nextKata;
+            ->findOneBy(['lesson'=>$this->chapterElement->getStageOrLessonId(), 'position'=> $nextKataPosition]);
     }
     private function getNextKataInLessonId() {
-     $kataInLessonKatas =  $this->nextKataInLesson->getKata();
-     return $kataInLessonKatas->getId();
+        $kataInLessonKatas =  $this->nextKata->getKata();
+        return $kataInLessonKatas->getId();
     }
-
+    private function isThereNoNextKataInThisLesson() {
+        return $this->nextKata;
+    }
 
     private function setNextKataIdToGameSession()
     {
@@ -171,28 +244,85 @@ class NextPageController extends AbstractController
         $entity_manager->flush();
     }
 
+    private function getNextChapterInGame()
+    {
+        $this->currentChapter = $this->getCurrentChapter();
+        $this->nextChapter= $this->getNextChapter();
+        return $this->nextChapter;
+    }
+    private function isThereNoNextChapter() {
+        return $this->nextChapter;
+    }
+    private function getCurrentChapter()
+    {   $chapter = $this->getDoctrine()
+        ->getRepository(Chapter::class)
+        ->findOneBy(['id' => $this->gameSession->getIdChapter()]);
+        return $this->getDoctrine()
+            ->getRepository(GameChapters::class)
+            ->findOneBy(['chapter' => $chapter]);
+    }
+
+    private function getNextChapter()
+    {
+        $nextChapterPosition = $this->currentChapter->getPosition()+1;
+        return $this->getDoctrine()
+            ->getRepository(GameChapters::class)
+            ->findOneBy(['position'=>$nextChapterPosition ]);
+    }
+    private function getChapterInGameId()
+    {
+        
+        $chapterInGameChapters =  $this->nextChapter->getChapter();
+        return $chapterInGameChapters->getId();
+    }
+    private function setNextChapterToGameSession()
+    {
+        $this->gameSession->setIdChapter($this->nextChapterInGameId);
+        $this->gameSession->setUpdatedAt(new \DateTime());
+        $entity_manager = $this->getDoctrine()->getManager();
+        $entity_manager->persist($this->gameSession);
+        $entity_manager->flush();
+    }
+
+
+
+    /*Create View Responses*/
     private function  createKataViewResponse()
     {
-        $kataUuid= $this->nextKataInLesson->getKata()->getUuid();
+        $kata = $this->getDoctrine()
+            ->getRepository(Kata::class)
+            ->findOneBy(['id' =>$this->gameSession->getIdKata()]);
         return $this->redirectToRoute('kata', [
-            'uuid' => $kataUuid,
+            'uuid' => $kata->getUuid(),
         ]);
     }
+    private function createStageViewResponse()
+    {
+        $chapterElement = $this->getDoctrine()
+            ->getRepository(ChapterElement::class)
+            ->findOneBy(['id'=>$this->gameSession->getIdChapterElement()]);
+        $stage= $this->getDoctrine()
+            ->getRepository(Stage::class)
+            ->findOneBy(['id' => $chapterElement->getStageOrLessonId()]);
+        return $this->redirectToRoute('stages', [
+            'stageUuid' => $stage->getUuid()
+        ]);
+    }
+    private function createEndOfGameResponse()
+    {
+        return $this->redirectToRoute('end_of_game');
+    }
+    /*New Game History Entry */
     private function createNewGameHistoryEntryService()
     {
         $this->createNewGameSessionHistoryEntry();
         $this->setGameHistoryCreatedAt();
-        $this->gameSessionUuid = $this->getGameSessionUuid();
         $this->setGameSessionHistoryUuid();
         $this->setGameSessionHistoryIdUser();
-        $this->gameSessionGameId = $this->getGameSessionGameId();
         $this->setDefaultGameToGameSessionHistory();
         $this->setChapterToGameSessionHistory();
         $this->setChapterElementToGameSessionHistory();
-        if ($this->ChapterElementIsALesson)
-        {
-            $this->setKataToGameSessionHistory();
-        }
+        $this->setKataToGameSessionHistory();
         $this->persistNewGameHistoryEntryToRepository();
     }
     private function createNewGameSessionHistoryEntry()
@@ -203,44 +333,82 @@ class NextPageController extends AbstractController
     {
         $this->gameHistoryEntry->setCreatedAt(new \DateTime());
     }
-    private function getGameSessionUuid()
-    {
-        return $this->gameSession->getUuid();
-    }
+
     private function setGameSessionHistoryUuid()
     {
-        $this->gameHistoryEntry->setUuidGameSession($this->gameSessionUuid);
+        $this->gameHistoryEntry->setUuidGameSession($this->gameSession->getUuid());
     }
     private function setGameSessionHistoryIdUser()
     {
-        $this->gameHistoryEntry->setIdUser($this->userId);
-    }
-    private function getGameSessionGameId()
-    {
-        return Game::ID_MYPHPISLAND;
+        $this->gameHistoryEntry->setIdUser($this->user->getId());
     }
     private function setDefaultGameToGameSessionHistory()
     {
-        $this->gameHistoryEntry->setIdGame($this->gameSessionGameId);
+        $this->gameHistoryEntry->setIdGame(Game::ID_MYPHPISLAND);
     }
     private function setChapterToGameSessionHistory()
     {
-        $this->gameHistoryEntry->setIdChapter($this->gameSessionChapterId);
+        $this->gameHistoryEntry->setIdChapter($this->gameSession->getIdChapter());
     }
 
     private function setChapterElementToGameSessionHistory()
     {
-        $this->gameHistoryEntry->setIdChapterElement($this->ChapterElementId);
+        $this->gameHistoryEntry->setIdChapterElement($this->gameSession->getIdChapterElement());
     }
-
     private function setKataToGameSessionHistory()
     {
-        $this->gameHistoryEntry->setIdKata($this->nextKataInLessonId);
+        $this->gameHistoryEntry->setIdKata($this->gameSession->getIdKata());
     }
     private function persistNewGameHistoryEntryToRepository()
     {
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($this->gameHistoryEntry);
         $entityManager->flush();
+    }
+    private function createErrorMessage(\Exception $exception)
+    {
+        $errorMessage=$exception->getMessage();
+        $this->addFlash('error', $errorMessage);
+    }
+
+    private function getChapterElementInNextChapter()
+    {
+        $this->gameSession->getIdChapter();
+        $chapterElement = $this->getDoctrine()
+            ->getRepository(ChapterElement::class)
+            ->findBy(['chapterId' => $this->gameSession->getIdChapter(), 'position' => 'ASC']);
+        return $chapterElement[0];
+    }
+
+    private function setNewChapterElementToGameSession()
+    {
+        $this->gameSession->setIdChapterElement($this->chapterElement->getId());
+        $this->gameSession->setUpdatedAt(new \DateTime());
+        $entity_manager = $this->getDoctrine()->getManager();
+        $entity_manager->persist($this->gameSession);
+        $entity_manager->flush();
+    }
+
+    private function getNextKataInNewLesson()
+    {
+        $lessonKata= $this->getDoctrine()
+            ->getRepository(LessonKatas::class)
+            ->findOneBy(['lesson' => $this->nextChapterElement->getStageOrLessonId(), 'position' => '0']);
+        return $lessonKata;
+    }
+
+    private function getNextKataInNewLessonId()
+    {
+        $kataInLessonKatas =  $this->nextKataInNewLesson->getKata();
+        return $kataInLessonKatas->getId();
+    }
+
+    private function setNextKataInNewLessonIdToGameSession()
+    {
+        $this->gameSession->setIdKata($this->nextKataInNewLessonId);
+        $this->gameSession->setUpdatedAt(new \DateTime());
+        $entity_manager = $this->getDoctrine()->getManager();
+        $entity_manager->persist($this->gameSession);
+        $entity_manager->flush();
     }
 }
