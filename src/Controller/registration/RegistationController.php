@@ -74,6 +74,10 @@ class RegistationController extends AbstractController
     }
     private function createNewUserEntityService($passwordEncoder) {
         $this->createNewUser();
+        $this->lookForUsernameInDataBase();
+        $this->checkIfUsernameExistsInDataBase();
+        $this->lookForEmailInDataBase();
+        $this->checkIfEmailExistsInDataBase();
         $this->setUsername();
         $this->setEmail();
         $this->getSignupDate();
@@ -122,6 +126,30 @@ class RegistationController extends AbstractController
     private function createNewUser()
     {
         $this->user = new User();
+    }
+    private function lookForUsernameInDataBase()
+    {
+        return $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['username'=>$this->form->get('username')->getData()]);
+    }
+    private function checkIfUsernameExistsInDataBase()
+    {
+        if ($this->lookForUsernameInDataBase()) {
+            throw new Exception("El usuario ya existe. Elija otro usuario");
+        }
+    }
+    private function lookForEmailInDataBase()
+    {
+        return $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['email'=>$this->form->get('email')->getData()]);
+    }
+    private function checkIfEmailExistsInDataBase()
+    {
+        if ($this->lookForEmailInDataBase()) {
+            throw new Exception("Ya existe un usuario registrado con este correo electrónico. Utilice otro correo electrónico.");
+        }
     }
     private function setUsername () {
         $this->user->setUsername($this->form->get('username')->getData());
