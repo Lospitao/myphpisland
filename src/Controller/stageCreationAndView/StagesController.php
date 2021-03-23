@@ -39,7 +39,7 @@ class StagesController extends AbstractController
         try {
             $this->setStageToLoadFromDatabase($stageUuid);
             $this->checkIfStageToLoadExists();
-            $stageViewResponse = $this->createKataViewResponse($stageUuid);
+            $stageViewResponse = $this->createStageViewResponse($stageUuid);
             return $stageViewResponse;
         } catch (\Exception $exception) {
             $this->createErrorMessage($exception);
@@ -90,7 +90,7 @@ class StagesController extends AbstractController
             ->getRepository(Stage::class)
             ->findOneBy(['uuid' => $stageUuid]);
     }
-    private function createKataViewResponse($stageUuid)
+    private function createStageViewResponse($stageUuid)
     {
         return $this->render('stages/index.html.twig', [
             'controller_name' => 'StagesController',

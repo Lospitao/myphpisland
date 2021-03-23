@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserRole
 {
+    const PLAYER_ROLE = 1;
+    const ADMIN_ROLE = 2;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
