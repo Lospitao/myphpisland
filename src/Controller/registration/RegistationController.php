@@ -11,6 +11,7 @@ use App\Entity\GameSession;
 use App\Entity\Kata;
 use App\Entity\LessonKatas;
 use App\Entity\User;
+use App\Entity\UserRole;
 use App\Form\UserRegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,7 @@ class RegistationController extends AbstractController
     var $katasInLesson;
     var $elementType;
     var $firstKataId;
+    var $userRole;
 
 
 
@@ -79,6 +81,8 @@ class RegistationController extends AbstractController
         $this->lookForEmailInDataBase();
         $this->checkIfEmailExistsInDataBase();
         $this->setUsername();
+        $this->userRole = $this->getUserRole();
+        $this->setRole();
         $this->setEmail();
         $this->getSignupDate();
         $this->getEncodedPassword($passwordEncoder);
@@ -153,6 +157,14 @@ class RegistationController extends AbstractController
     }
     private function setUsername () {
         $this->user->setUsername($this->form->get('username')->getData());
+    }
+    private function getUserRole() {
+        return $this->getDoctrine()
+            ->getRepository(UserRole::class)
+            ->findOneBy(['id'=>UserRole::PLAYER_ROLE]);
+    }
+    private function setRole() {
+        $this->user->setRoles([$this->userRole->getName()]);
     }
     private function setEmail() {
         $this->user->setEmail($this->form->get('email')->getData());

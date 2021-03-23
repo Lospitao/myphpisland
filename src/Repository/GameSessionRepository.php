@@ -20,7 +20,7 @@ class GameSessionRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return GameSession[] Returns an array of GameSession objects
+    //  * @return FindGameSessionMilestoneService[] Returns an array of FindGameSessionMilestoneService objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class GameSessionRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?GameSession
+    public function findOneBySomeField($value): ?FindGameSessionMilestoneService
     {
         return $this->createQueryBuilder('g')
             ->andWhere('g.exampleField = :val')

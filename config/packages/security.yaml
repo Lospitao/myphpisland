@@ -46,6 +46,7 @@ security:
          - { path: /lessons, roles: IS_AUTHENTICATED_FULLY }
          - { path: /stages, roles: IS_AUTHENTICATED_FULLY }
          - { path: /katas, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/login, roles: }
 
 
     role_hierarchy:

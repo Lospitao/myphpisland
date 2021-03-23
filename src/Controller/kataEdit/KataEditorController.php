@@ -6,7 +6,6 @@ use App\Entity\Kata;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class KataEditorController extends AbstractController
 {
     /**

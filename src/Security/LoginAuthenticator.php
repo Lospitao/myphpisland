@@ -19,6 +19,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use App\Domain\Entity\FindGameSessionMilestoneService;
+
 
 class LoginAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -93,12 +95,13 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+
+       if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        $credentials = [
-            'email' => $request->request->get('email')];
-        return new RedirectResponse($this->urlGenerator->generate('profile'));
+
+        $findGameSessionMilestoneService = new FindGameSessionMilestoneService($this->entityManager, $request, $this->urlGenerator);
+        return new RedirectResponse($findGameSessionMilestoneService->execute());
 
     }
 
