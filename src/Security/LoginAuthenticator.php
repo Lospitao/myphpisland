@@ -96,9 +96,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
 
-       if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
-        }
 
         $findGameSessionMilestoneService = new FindGameSessionMilestoneService($this->entityManager, $request, $this->urlGenerator);
         return new RedirectResponse($findGameSessionMilestoneService->execute());

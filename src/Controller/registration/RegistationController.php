@@ -161,7 +161,7 @@ class RegistationController extends AbstractController
     private function getUserRole() {
         return $this->getDoctrine()
             ->getRepository(UserRole::class)
-            ->findOneBy(['id'=>UserRole::PLAYER_ROLE]);
+            ->findOneBy(['id'=>UserRole::ROLE_PLAYER]);
     }
     private function setRole() {
         $this->user->setRoles([$this->userRole->getName()]);
