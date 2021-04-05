@@ -50,6 +50,10 @@ class RegistationController extends AbstractController
     {
 
         try {
+            if ($this->isUserAlreadyLoggedIn()) {
+                $this->throwAlreadyLoggedInUserMessage();
+                return $this->redirectToRoute('profile');
+            }
             $this->generateForm($request);
             if ($this->form->isSubmitted() && $this->form->isValid()) {
                 $this->createNewUserEntityService($passwordEncoder);
@@ -345,5 +349,15 @@ class RegistationController extends AbstractController
     {
         $errorMessage=$exception->getMessage();
         $this->addFlash('error', $errorMessage);
+    }
+
+    private function isUserAlreadyLoggedIn()
+    {
+        return $this->getUser();
+    }
+
+    private function throwAlreadyLoggedInUserMessage()
+    {
+        $this->addFlash('success', 'Ya se ha iniciado sesión. Es necesario salir de la sesión para acceder a las páginas de registro e inicio de sesión.');
     }
 }

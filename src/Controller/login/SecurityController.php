@@ -14,9 +14,10 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+         if ($this->isUserAlreadyLoggedIn()) {
+             $this->throwAlreadyLoggedInUserMessage();
+             return $this->redirectToRoute('profile');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -32,5 +33,14 @@ class SecurityController extends AbstractController
     public function logout()
     {
         return $this->redirectToRoute('app_login');
+    }
+
+    private function isUserAlreadyLoggedIn()
+    {
+        return $this->getUser();
+    }
+    private function throwAlreadyLoggedInUserMessage()
+    {
+        $this->addFlash('success', 'Ya se ha iniciado sesión. Es necesario salir de la sesión para acceder a las páginas de registro e inicio de sesión.');
     }
 }
