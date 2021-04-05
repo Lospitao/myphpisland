@@ -14,7 +14,7 @@ final class Version20210301115920 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return 'Add updatedAt attribute to Game Session entity';
+        return 'Mofification of Game_Session to include updatedAt attribute';
     }
 
     public function up(Schema $schema) : void

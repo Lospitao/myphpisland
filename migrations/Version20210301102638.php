@@ -14,8 +14,7 @@ final class Version20210301102638 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return 'Mofification of Game_Session to include createdAt attribute and change of updatedAt attribute in Game 
-        History Entity to createdAt';
+        return 'Mofification of Game_Session to include createdAt attribute';
     }
 
     public function up(Schema $schema) : void
@@ -23,8 +22,8 @@ final class Version20210301102638 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
 
         $this->addSql('ALTER TABLE game_session ADD created_at DATETIME NOT NULL');
-    }
 
+    }
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
