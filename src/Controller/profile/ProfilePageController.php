@@ -37,7 +37,7 @@ class ProfilePageController extends AbstractController
         try {
             /*passsword update*/
             $this->createProfilePictureForm();
-            $this->getUserToUpdate( $authenticationUtils);
+            $this->getUserToUpdate($authenticationUtils);
             $this->getValueOfEnteredCurrentPassword($request);
             $this->getValueOfEnteredNewPassword($request);
             $this->getValueOfEnteredRepeatedPassword($request);

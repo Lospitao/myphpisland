@@ -57,10 +57,16 @@
                         <li><a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Salir</a></li>
                     </ul>
                 {% else %}
-                    <ul class="right hide-on-med-and-down">
-                        <li><a class="waves-effect waves-light btn" href="{{ path('app_login') }}">Iniciar Sesión</a></li>
-                        <li><a class="waves-effect waves-light btn" href="{{ path('register') }}">Registrarse</a></li>
-                    </ul>
+                    {% if app.request.get('_route') == 'register' %}
+                        <ul class="right hide-on-med-and-down">
+                            <li><a class="waves-effect waves-light btn" href="{{ path('app_login') }}">Iniciar Sesión</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="right hide-on-med-and-down">
+                            <li><a class="waves-effect waves-light btn" href="{{ path('register') }}">Registrarse</a></li>
+                        </ul>
+                    {% endif %}
+
                 {% endif %}
             </div>
         </nav>
