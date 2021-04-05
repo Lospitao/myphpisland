@@ -10,20 +10,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainIndexController extends AbstractController
 {
 
-    var $gameUuid;
+    var $game;
     /**
-     * @Route("/main/{gameTitle}", name="main_index")
-     * @param $gameTitle
+     * @Route("/", name="main_index")
      */
-    public function index($gameTitle)
+    public function index()
     {
         try {
-            $this->findGameUuid($gameTitle);
+            $this->game = $this->findGame();
 
             return $this->render('main_index/index.html.twig', [
                 'controller_name' => 'MainIndexController',
-                'gameTitle' => $gameTitle,
-                'gameUuid' => $this->gameUuid
+                'gameTitle' => $this->game->getTitle(),
             ]);
         } catch (\Exception $exception) {
             $jsonResponseWithError = $this->createJsonResponseWithError($exception);
@@ -37,11 +35,10 @@ class MainIndexController extends AbstractController
         return $response;
     }
 
-    private function findGameUuid($gameTitle)
+    private function findGame()
     {
-        $game = $this->getDoctrine()
+        return  $this->getDoctrine()
             ->getRepository(Game::class)
-            ->findOneBy(['title' => $gameTitle]);
-        $this->gameUuid = $game->getUuid();
+            ->findOneBy(['id' => Game::ID_MYPHPISLAND]);
     }
 }
