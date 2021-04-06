@@ -47,7 +47,7 @@ Class TestExecutionsController extends AbstractController {
             $kataTestPath = $kataTestExecutionsPath . 'KataTest.php';
             $isSaved = file_put_contents($kataTestPath, $kataTestCode);
             if ($isSaved === false) {
-                throw new Exception('Kata test file has not could to be created.');
+                throw new Exception('Kata test file not could be created.');
             }
 
             // Execute the test
