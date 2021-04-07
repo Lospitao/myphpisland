@@ -1,5 +1,6 @@
+
 <!--Code Mirror Instance-->
-<script type="text/javascript" src="{{ asset('js/kataView/sample-test-kataPage.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/kataEdit/examples-editorPage.js') }}"></script>
 <!--Code Mirror plugins-->
 <script type="text/javascript" src="{{ asset('plugins/codemirror/lib/codemirror.js') }}"></script>
 <link rel="stylesheet" href={{ asset('plugins/codemirror/lib/codemirror.css') }}>
@@ -19,4 +20,7 @@
 <!--Theme plugins-->
 <link rel="stylesheet" href="{{ asset('plugins/codemirror/theme/eclipse.css') }}">
 
-<textarea name="sample-test" class="sample-test code view" id="sample-test">{{ sampleTest }}</textarea>
+
+
+    <textarea name="examples" class="examples code" id="examples" data-uuid="{{ uuid }}"></textarea>
+

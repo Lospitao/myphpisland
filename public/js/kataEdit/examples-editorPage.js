@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#sample-test').each(function (index) {
+    $('#examples').each(function (index) {
 
 
         var editor = CodeMirror.fromTextArea(this, {
@@ -18,11 +18,11 @@ $(document).ready(function() {
 
             let updateKataWebService = '/api/v1/katas/' + uuid;
 
-            let sampleTest = editor.getValue(index);
+            let examples = editor.getValue(index);
             $.ajax({
                 url : updateKataWebService,
                 data : {
-                    'sampleTest' : sampleTest,
+                    'examples' : examples,
                 },
                 type : 'PATCH',
                 dataType : 'json',

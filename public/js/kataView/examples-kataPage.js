@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#sample-test').each(function (index) {
+    $('#examples').each(function (index) {
 
 
         var editor = CodeMirror.fromTextArea(this, {

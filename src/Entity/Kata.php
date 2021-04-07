@@ -32,7 +32,7 @@ class Kata
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $testCode;
+    private $examples;
 
     /**
      * @ORM\Column(type="datetime")
@@ -97,14 +97,14 @@ class Kata
         return $this;
     }
 
-    public function getTestCode(): ?string
+    public function getExamples(): ?string
     {
-        return $this->testCode;
+        return $this->examples;
     }
 
-    public function setTestCode(string $testCode): self
+    public function setExamples(string $examples): self
     {
-        $this->testCode = $testCode;
+        $this->examples = $examples;
 
         return $this;
     }

@@ -100,24 +100,24 @@ Code editor component
     background-color: var(--blue-color);
 }
 /**
-Sample test component
+Examples component
  */
-.card.sample-test {
+.card.examples {
     width: 844px;
     height: 240px;
     margin: 5px;
     float: right;
 }
 
-.card.sample-test .code {
+.card.examples .code {
     height: 160px;
     max-height: 160px;
 }
-.card.sample-test .CodeMirror-scroll {
+.card.examples .CodeMirror-scroll {
     height: 130px;
     max-height: 140px;
 }
-.card.sample-test .CodeMirror.cm-s-eclipse {
+.card.examples .CodeMirror.cm-s-eclipse {
     height: 130px;
     max-height: 140px;
 }
