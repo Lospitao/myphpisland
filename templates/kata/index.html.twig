@@ -8,7 +8,7 @@
     <title>Kata view</title>
     <script>
         $(document).ready(function(){
-            $('.modal').modal();
+            $('#modal').modal();
         });
     </script>
 
@@ -54,7 +54,7 @@
             <p>¡Esa es la respuesta correcta!</p>
         </div>
         <div class="modal-footer">
-            <a href="{{ path('next_page') }}" class="modal-close waves-effect waves-blue btn-flat">Continuar</a>
+            <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Continuar</a>
         </div>
     </div>
     <!-- Modal Structure -->
@@ -63,6 +63,9 @@
             <h4>¡Por el amor de una madre!</h4>
             <p>¡Los dioses acaban de matar aun mono de tres cabezas!</p>
             <p>Revisa el código fuente.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Volver a intentar</a>
         </div>
     </div>
 </section>

@@ -198,5 +198,4 @@ class Kata
         return $this;
     }
 
-
 }

@@ -59,7 +59,7 @@ function submitRequestToTestExecutionWebService(testExecutionWebServicePath, tes
             console.log('Submission was successful.')
             console.log(data);
 
-            if ( ! data.isTestPassed) {
+            if ( !data.isTestPassed) {
                 $('#modal-fail-message').modal('open');
                 return ;
             }
@@ -68,6 +68,7 @@ function submitRequestToTestExecutionWebService(testExecutionWebServicePath, tes
         error: function (data) {
             console.log('An error occurred.');
             console.log(data);
+            console.log(testExecutionWebServiceData);
         },
     })
 }

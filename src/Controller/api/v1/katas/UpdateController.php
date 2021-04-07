@@ -25,7 +25,7 @@ Class UpdateController extends AbstractController {
 
         $title=$request->request->get('title');
         $description=$request->request->get('description');
-        $kataTestCode=$request->request->get('kataTestCode');
+        $kataTestCode=$request->request->get('kataTest');
         $editorCode=$request->request->get('editorCode');
         $sampleTest=$request->request->get('sampleTest');
         if($uuid) {

@@ -56,7 +56,7 @@ Class TestExecutionsController extends AbstractController {
             // Remove kata test path
             unlink($kataTestPath);
 
-            if ($this->hasAnErrorHadDuringTheTestExecution($testResult)) {
+            if ($this->thereHasBeenAnErrorDuringTestExecution($testResult)) {
                 throw new Exception('Se ha producido un error al ejecutar el test.');
             }
 
@@ -83,7 +83,7 @@ Class TestExecutionsController extends AbstractController {
      * @param TestResult $testResult
      * @return bool
      */
-    private function hasAnErrorHadDuringTheTestExecution(TestResult $testResult): bool
+    private function thereHasBeenAnErrorDuringTestExecution(TestResult $testResult): bool
     {
         return $testResult->getTestExecutionStatusUuid() === TestExecutionStatus::UUID_ERROR;
     }
