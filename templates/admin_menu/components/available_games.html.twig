@@ -1,0 +1,41 @@
+<head>
+<script>
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
+</script>
+</head>
+<div class="availableGamesList">
+    <ul id="availableGamesList" class="collection availableGames">
+        {% for availableGame in availableGames %}
+            <li class="ui-state-default availableGameElement" data-title="{{ availableGame['title'] }}" data-uuid="{{ availableGame['uuid'] }}">
+                <a class="link" href="{{ path('games_editor', {'gameUuid': availableGame['uuid'] }) }}">
+                {{ availableGame['title'] }} <i class="material-icons">create</i>
+                </a>
+                    <!-- Modal Trigger -->
+                    <a class="remove-link waves-effect waves-light modal-trigger" href="#{{ availableGame['uuid'] }}">
+                        <i data-uuid="{{ availableGame['uuid']}}" class="remove-icon material-icons" >delete_forever</i>
+                    </a>
+
+                    <!-- Modal Structure -->
+                    <div data-uuid="{{ availableGame['uuid'] }}" id="{{ availableGame['uuid'] }}" class="modal modal-dialog-centered">
+                        <div class="modal-content">
+                            <h4>Borrar Juego</h4>
+                            <p>Estás a punto de tirar por la borda este juego, grumete, ¿estás seguro?</p>
+                        </div>
+                        <div data-uuid="{{ availableGame['uuid'] }}" class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">No</a>
+                            <a data-uuid="{{ availableGame['uuid'] }}" href="{{ path('games_remove', {'gameUuid': availableGame['uuid']}) }}"  class="waves-effect waves-green btn-flat">Sí</a>
+
+                        </div>
+                    </div>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+</div>
+
+
+
+

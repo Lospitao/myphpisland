@@ -1,0 +1,34 @@
+<head>
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
+</head>
+<div class="availableKatasListAdminMenu">
+    <ul id="availableKatasListAdminMenu" class="collection availableKatasAdminMenu">
+        {% for availableKata in availableKatas %}
+            <li class="ui-state-default availableKataElementAdminMenu" data-title="{{ availableKata['title'] }}" data-uuid="{{ availableKata['uuid'] }}">
+                <a class="link" href="{{ path('katas_editor', {'uuid': availableKata['uuid'] }) }}">
+                    {{ availableKata['title'] }} <i class="material-icons">create</i>
+                </a>
+                <!-- Modal Trigger -->
+                <a class="remove-link waves-effect waves-light modal-trigger" href="#{{ availableKata['uuid'] }}">
+                    <i data-uuid="{{ availableKata['uuid']}}" class="remove-icon material-icons" >delete_forever</i>
+                </a>
+                <!-- Modal Structure -->
+                <div data-uuid="{{ availableKata['uuid'] }}" id="{{ availableKata['uuid'] }}" class="modal modal-dialog-centered">
+                    <div class="modal-content">
+                        <h4>Borrar Juego</h4>
+                        <p>Estás a punto de tirar por la borda este juego, grumete, ¿estás seguro?</p>
+                    </div>
+                    <div data-uuid="{{ availableKata['uuid'] }}" class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">No</a>
+                        <a data-uuid="{{ availableKata['uuid'] }}" href="{{ path('katas_remove', {'kataUuid': availableKata['uuid']}) }}"  class="waves-effect waves-green btn-flat">Sí</a>
+
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
