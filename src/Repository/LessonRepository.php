@@ -20,7 +20,7 @@ class LessonRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Lesson[] Returns an array of Lesson objects
+    //  * @return Lessons[] Returns an array of Lessons objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class LessonRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Lesson
+    public function findOneBySomeField($value): ?Lessons
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')

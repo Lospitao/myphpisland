@@ -168,7 +168,7 @@ class RegistationController extends AbstractController
             ->findOneBy(['id'=>UserRole::ROLE_PLAYER]);
     }
     private function setRole() {
-        $this->user->setRoles([$this->userRole->getName()]);
+        $this->user->setRoles(["ROLE_" . $this->userRole->getName()]);
     }
     private function setEmail() {
         $this->user->setEmail($this->form->get('email')->getData());

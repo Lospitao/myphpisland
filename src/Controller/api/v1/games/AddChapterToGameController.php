@@ -15,6 +15,7 @@ class AddChapterToGameController extends abstractController
 {
     /**
      * @Route("api/v1/games/{gameUuid}/chapters", methods={"POST"}, name="AddChapterToGameController")
+     * @param Request $request
      * @param $gameUuid
      * @return JsonResponse
      */

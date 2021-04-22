@@ -19,7 +19,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use App\Domain\Entity\FindGameSessionMilestoneService;
+use App\Domain\Services\FindGameSessionMilestoneService;
 
 
 class LoginAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
@@ -27,11 +27,15 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
-
+    public const ADMIN_ROUTE = 'admin_menu';
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    /**
+     * @var User|object|null
+     */
+    private $user;
 
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -70,14 +74,14 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $this->user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
-        if (!$user) {
+        if (!$this->user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('No se ha encontrado ningún usuario con ese correo electrónico.');
         }
 
-        return $user;
+        return $this->user;
     }
 
     public function checkCredentials($credentials, UserInterface $user)
@@ -96,6 +100,9 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
 
+        if ($this->isUserAnAdmin()) {
+            return new RedirectResponse($this->urlGenerator->generate(self::ADMIN_ROUTE));
+        }
 
         $findGameSessionMilestoneService = new FindGameSessionMilestoneService($this->entityManager, $request, $this->urlGenerator);
         return new RedirectResponse($findGameSessionMilestoneService->execute());
@@ -105,5 +112,11 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     protected function getLoginUrl()
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+    }
+
+    private function isUserAnAdmin()
+    {
+        return in_array("ROLE_ADMIN", $this->user->getRoles());
+
     }
 }
