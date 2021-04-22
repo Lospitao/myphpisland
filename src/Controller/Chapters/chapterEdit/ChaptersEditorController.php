@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\chapterEdit;
+namespace App\Controller\Chapters\chapterEdit;
 
 use App\Entity\Chapter;
 use App\Entity\ChapterElement;
@@ -43,7 +43,7 @@ class ChaptersEditorController extends AbstractController
             //If element is a lesson
             if ($elementType==1) {
                 $elementClass="tiny material-icons chapterLesson";
-                //get Lesson through ElementId
+                //get Lessons through ElementId
                 $lesson = $this->getDoctrine()
                 ->getRepository(Lesson::class)
                 ->findOneBy(['id'=>$elementId]);

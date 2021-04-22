@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\chapterCreate;
+namespace App\Controller\Chapters\chapterCreate;
 
 use App\Entity\Chapter;
 use App\Entity\ChapterElement;
