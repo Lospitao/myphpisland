@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\api\v1\chapters\chapterelements;
+namespace App\Controller\api\v1\chapters\chapterElements;
 
 use App\Entity\ChapterElement;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -18,7 +18,7 @@ Class UpdateChapterElementPositionController extends AbstractController
      * @param $chapterElementId
      * @return JsonResponse
      */
-    function UpdateChapterElementPositionController (Request $request) {
+    function index (Request $request) {
         try {
             $this->UpdatePositionOfNewDraggedDroppedElement($request);
             $jSonResponseWithoutContent = $this->returnJsonResponseWithoutContent();

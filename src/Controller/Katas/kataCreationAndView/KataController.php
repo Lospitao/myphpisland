@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\kataCreationAndView;
+namespace App\Controller\Katas\kataCreationAndView;
 
 
 use App\Entity\Kata;
@@ -117,7 +117,7 @@ class KataController extends AbstractController
             'title' => $this->kataToLoad->getKataTitle(),
             'description' => $this->kataToLoad->getDescription(),
             'codeEditor' => $this->kataToLoad->getEditorCode(),
-            'sampleTest' => $this->kataToLoad->getTestCode(),
+            'examples' => $this->kataToLoad->getExamples(),
             'uuid' => $uuid,
         ]);
     }

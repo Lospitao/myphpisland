@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\stageCreationAndView;
+namespace App\Controller\Stages\stageCreationAndView;
 
 use App\Entity\Stage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

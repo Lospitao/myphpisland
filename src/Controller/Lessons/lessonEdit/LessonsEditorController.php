@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\lessonEdit;
+namespace App\Controller\Lessons\lessonEdit;
 
 use App\Entity\Kata;
 use App\Entity\Lesson;

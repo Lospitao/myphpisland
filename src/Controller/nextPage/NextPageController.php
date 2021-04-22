@@ -1,11 +1,5 @@
 <?php
-
-
-
-
-namespace App\Controller;
-
-
+namespace App\Controller\nextPage;
 use App\Entity\Chapter;
 use App\Entity\ChapterElement;
 use App\Entity\Game;
@@ -17,9 +11,6 @@ use App\Entity\LessonKatas;
 use App\Entity\Stage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-
-
-
 class NextPageController extends AbstractController
 
 {
@@ -96,7 +87,7 @@ class NextPageController extends AbstractController
                     $this->stageViewResponse = $this->createStageViewResponse();
                     return $this->stageViewResponse;
 
-                } else //Si la Lesson actual tiene al menos una kata más
+                } else //Si la Lessons actual tiene al menos una kata más
                 $this->nextKataInLessonId =$this->getNextKataInLessonId();
                 $this->setNextKataIdToGameSession();
                 $this->createNewGameHistoryEntryService();

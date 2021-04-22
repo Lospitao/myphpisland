@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\kataCreationAndView;
+namespace App\Controller\Katas\kataCreationAndView;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

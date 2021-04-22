@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\Services;
 use App\Entity\ChapterElement;
 use App\Entity\GameSession;
 use App\Entity\Kata;
