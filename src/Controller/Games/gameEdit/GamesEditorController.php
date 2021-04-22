@@ -79,7 +79,6 @@ class GamesEditorController extends AbstractController
             'controller_name' => 'GamesEditorController',
             'gameUuid' => $gameUuid,
             'availableChapters' => $availableChapters,
-            'chapterUuid' => $chapterUuid,
             'gameChapters' => $gameChapters,
 
 

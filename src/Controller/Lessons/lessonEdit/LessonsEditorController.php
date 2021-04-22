@@ -77,7 +77,6 @@ class LessonsEditorController extends AbstractController
             'controller_name' => 'LessonsEditorController',
             'lesson_uuid' => $uuid,
             'availableKatas'=> $availableKatas,
-            'kata_uuid' => $kata_uuid,
             'lessonKatasArray'=> $lessonKatasArray,
             'lessonKatas' => $lessonKatas,
         ]);
