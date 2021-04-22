@@ -133,7 +133,7 @@ function addLessonToChapterByDragAndDrop (ui) {
         dataType : 'json',
         success: function (data) {
             console.log('Submission was successful.');
-            console.log('Lesson properly added');
+            console.log('Lessons properly added');
             let idChapterElement = data.idChapterElement;
             if (sortableSender) {
                 //define newLessonKata
