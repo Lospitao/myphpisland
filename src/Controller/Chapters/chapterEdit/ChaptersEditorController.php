@@ -32,14 +32,14 @@ class ChaptersEditorController extends AbstractController
         //Get all entries with chapterId
         $elementsInChapter = $this->getDoctrine()
             ->getRepository(ChapterElement::class)
-            ->findBy(['chapterId' => $chapterId]);
+            ->findBy(['chapterId' => $chapterId], ['position' => 'ASC']);
         //Iterate Through array ElementsInChapter to get the title and uuid of each element
         foreach ($elementsInChapter as $element) {
             //Get element type
             $elementType= $element->getChapterElementType();
             //Get element id
             $elementId = $element->getStageOrLessonId();
-            $elementTableId = $element->getId();
+            $position = $element->getPosition();
             //If element is a lesson
             if ($elementType==1) {
                 $elementClass="tiny material-icons chapterLesson";
@@ -55,7 +55,7 @@ class ChaptersEditorController extends AbstractController
                 $chapterElementsArray[$ChapterLessonUuid] = [
                     'title' => $ChapterLessonTitle,
                     'uuid' => $ChapterLessonUuid,
-                    'id' => $elementTableId,
+                    'position' => $position,
                 ];
             }
             //If element is a Stage
@@ -73,7 +73,7 @@ class ChaptersEditorController extends AbstractController
                 $chapterElementsArray[$ChapterStageUuid] = [
                     'title' => $ChapterStageTitle,
                     'uuid' => $ChapterStageUuid,
-                    'id' => $elementTableId,
+                    'position' => $position,
                 ];
 
             }
