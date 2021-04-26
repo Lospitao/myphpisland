@@ -39,7 +39,7 @@ class ChaptersEditorController extends AbstractController
             $elementType= $element->getChapterElementType();
             //Get element id
             $elementId = $element->getStageOrLessonId();
-            $position = $element->getPosition();
+            $chapterElementId = $element->getId();
             //If element is a lesson
             if ($elementType==1) {
                 $elementClass="tiny material-icons chapterLesson";
@@ -55,7 +55,7 @@ class ChaptersEditorController extends AbstractController
                 $chapterElementsArray[$ChapterLessonUuid] = [
                     'title' => $ChapterLessonTitle,
                     'uuid' => $ChapterLessonUuid,
-                    'position' => $position,
+                    'id' => $chapterElementId,
                 ];
             }
             //If element is a Stage
@@ -73,7 +73,7 @@ class ChaptersEditorController extends AbstractController
                 $chapterElementsArray[$ChapterStageUuid] = [
                     'title' => $ChapterStageTitle,
                     'uuid' => $ChapterStageUuid,
-                    'position' => $position,
+                    'id' => $chapterElementId,
                 ];
 
             }
