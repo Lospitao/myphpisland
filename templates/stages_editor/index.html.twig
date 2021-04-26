@@ -10,6 +10,12 @@
         <meta charset="UTF-8">
         <title>Stage view</title>
         <script type="text/javascript" src="{{ asset('js/stageEdit/stage-title-update.js') }}"></script>
+        <script>
+            $(document).ready(function(){
+                $('.materialboxed').materialbox();
+            });
+
+        </script>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/stages.css') }}">
     </head>
     <body>
@@ -19,7 +25,7 @@
             <div class="card-content">
                 <span id="title" class="card-title">
                      <label for="stage-title"></label>
-                    <textarea id="stage-title" name="stage-title" placeholder="Título del escenario" data-uuid="{{ stageUuid }}"></textarea>
+                    <textarea id="stage-title" name="stage-title" placeholder="Título del escenario" data-uuid="{{ stageUuid }}">{{ stageTitle }}</textarea>
                 </span>
             </div>
         </section>
@@ -28,7 +34,12 @@
             <div class="card-content">
                 <span class="card-title">Sonido ambiente</span>
                 {{ form(ambientSoundUploadForm) }}
-                <p>Pulsar para subir archivo de sonido ambiente</p>
+                <p>Pulsar para subir o modificar el actual archivo de sonido ambiente</p>
+                <audio controls autoplay>
+                    <source src="/resources/stages/{{ stageUuid }}/ambient.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <h6 class="saved-files">{{ stageAmbientSound }}</h6>
             </div>
         </section>
         <!-- Dialog section -->
@@ -36,7 +47,12 @@
             <div class="card-content">
                 <span class="card-title">Diálogo</span>
                 {{ form(dialogUploadForm) }}
-                <p>Pulsar para subir un diálogo</p>
+                <p>Pulsar para subir o modificar el actual archivo de diálogo</p>
+                <audio controls autoplay>
+                    <source src="/resources/stages/{{ stageUuid }}/dialog.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <h6 class="saved-files">{{ stageDialog }}</h6>
             </div>
         </section>
         <!-- Stage Background Image -->
@@ -44,7 +60,11 @@
             <div class="card-content">
                 <span class="card-title">Fondo de escenario</span>
                 {{ form(backgroundImageUploadForm) }}
-                <p>Pulsar para subir un fondo de escenario</p>
+                <p>Pulsar para subir o modificar el actual archivo de fondo de escenario</p>
+                <div class="saved-background-image">
+                    <img id="saved-image" class="materialboxed" width="300" src="/resources/stages/{{ stageUuid }}/background-image.jpeg" alt="saved image">
+                    <h6 class="saved-files">{{ stageBackgroundImage }}</h6>
+                </div>
             </div>
         </section>
         <footer class="footer">

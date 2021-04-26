@@ -68,25 +68,40 @@ Background Image Component
 */
 
 .card.background-image {
-    margin-top: 195px;
-    height: 500px;
+    margin-top: 280px;
+    height: 430px;
 
 }
 .card.background-image.view {
     margin-top: 50px;
     height: 600px;
     text-align: center;
-
 }
 #background_image_file_upload_background_image {
     margin: 6px;
-
 }
 #background_image_file_upload_submit {
     margin: 6px;
 }
  #background_image {
     height: 500px;
+}
+.saved-background-image {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.saved-files {
+    font-family: Georgia, serif;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: navy;
+    font-weight: 400;
+    font-style: italic;
+    font-variant: normal;
 }
  area {
      visibility: hidden;

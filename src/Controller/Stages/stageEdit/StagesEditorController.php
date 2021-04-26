@@ -119,6 +119,10 @@ class StagesEditorController extends AbstractController
             'ambientSoundUploadForm' => $ambientSoundUploadForm->createView(),
             'backgroundImageUploadForm' => $backgroundImageUploadForm->createView(),
             'dialogUploadForm' => $dialogUploadForm->createView(),
+            'stageTitle' => $stage->getTitle(),
+            'stageAmbientSound' => $stage->getAmbientSound(),
+            'stageDialog' => $stage->getDialog(),
+            'stageBackgroundImage' => $stage->getBackgroundImage(),
         ]);
     }
 }

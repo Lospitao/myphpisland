@@ -79,6 +79,7 @@ class LessonsEditorController extends AbstractController
             'availableKatas'=> $availableKatas,
             'lessonKatasArray'=> $lessonKatasArray,
             'lessonKatas' => $lessonKatas,
+            'lesson_title' => $lesson->getTitle(),
         ]);
     }
 }

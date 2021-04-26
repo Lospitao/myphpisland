@@ -129,7 +129,8 @@ class ChaptersEditorController extends AbstractController
             'availableStages' => $availableStages,
             'availableLessons' => $availableLessons,
             'chapterElementsArray' => $chapterElementsArray,
-            'elementClass' => $elementClass
+            'elementClass' => $elementClass,
+            'chapterTitle' => $chapter->getTitle(),
         ]);
     }
 }

@@ -13,10 +13,18 @@ class KataEditorController extends AbstractController
      */
     public function index($uuid)
     {
-
+        $kata = $this->getDoctrine()
+            ->getRepository(Kata::class)
+            ->findOneBy(['uuid' => $uuid]);
         return $this->render('kata_editor/index.html.twig', [
             'controller_name' => 'KataEditorController',
             'uuid' => $uuid,
+            'kataDescription' => $kata->getDescription(),
+            'kataEditorCode' => $kata->getEditorCode(),
+            'kataExamples' => $kata->getExamples(),
+            'kataTitle' => $kata->getKataTitle(),
+            'kataTest' => $kata->getKataTestCode(),
+
         ]);
     }
 

@@ -80,6 +80,7 @@ class GamesEditorController extends AbstractController
             'gameUuid' => $gameUuid,
             'availableChapters' => $availableChapters,
             'gameChapters' => $gameChapters,
+            'gameTitle' => $game->getTitle(),
 
 
         ]);
