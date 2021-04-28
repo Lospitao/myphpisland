@@ -31,7 +31,12 @@ Informtion Component
     width:1360px;
     height: 220px;
 }
+.information-title {
+    padding-left: 20px;
+    padding-top: 20px;
+}
 .card.information img{
+    padding-left: 20px;
     min-width:35px;
     width: 10%;
     border:none;
@@ -39,7 +44,7 @@ Informtion Component
 }
 .card.information .info{
     position: absolute;
-    top: 20px; left: 180px;
+    top: 35px; left: 400px;
 }
 #profile_picture_thumbnail {
     max-width: 100%;
@@ -50,11 +55,12 @@ Password component
  */
 .card.password {
     width: 1360px;
-    height: 250px;
+    height: 330px;
     text-align: center;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 8px;
 }
+
 .card.password input{
     width: 500px;
 }
@@ -63,55 +69,17 @@ Profile picture component
  */
 .card.profile-pic {
     width: 1360px;
-    height: 115px;
+    height: 200px;
     text-align: center;
     padding-bottom: 20px;
     padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
 }
 #profile_picture_update, #profile_picture {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-/**
-Social component
- */
-.card.social {
-    width: 1360px;
-    height: 190px;
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+.left-align {
+    padding-left: 20px;
 }
-
-
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
-
-.icon-block {
-    padding: 0 10px;
-}
-.icon-block .material-icons {
-    font-size: inherit;
-}
-
-pre{
-    padding: 12px 15px 0px;
-    background: #eee;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.info{
-    font-size: 1.3rem;
-    text-align: center;
-}
-

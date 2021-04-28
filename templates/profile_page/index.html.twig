@@ -14,18 +14,20 @@
 <div class="screen">
     <!-- Information section -->
     <section class="information card">
+        <h4 class="information-title">Datos de la cuenta</h4>
         <div class="card-content">
             <img id="profile_picture_thumbnail" src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
             <div class="info">
+                <br>
                 <h5 id="username" class={{ app.user.username }}>Nombre de usuario: {{ app.user.username }}</h5>
                 <h5>Correo electrónico: {{ app.user.email }}</h5>
             </div>
-
         </div>
     </section>
 
     <!-- Password section -->
     <section class="password card">
+        <h4 class="left-align">Modificar password</h4>
         <form action="{{ path('profile') }}" method="post">
             <label for="current_password">Contraseña actual</label>
             <input type="password" name="current_password" id="current_password" class="form-control" required autofocus><br>
@@ -40,13 +42,15 @@
     </section>
     <!-- Profile picture section -->
     <section class="profile-pic card">
+        <h4 class="left-align">Imagen de perfil</h4>
         {{ form_start(profilePictureForm) }}
         {{ form_row(profilePictureForm.profilePic) }}
         <br>
         {{ form_row(profilePictureForm.submit) }}
         {{ form_end(profilePictureForm) }}
     </section>
-    <!-- Social section -->
+    <!--
+    ##Social section##
     <section class="social card">
         <div class="card-content">
             <a
@@ -62,6 +66,6 @@
                 <i class="fa fa-twitter"></i>Sign in with twitter</a>
         </div>
     </section>
-
+-->
 </div>
 {% endblock %}

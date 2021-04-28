@@ -16,7 +16,7 @@ class ProfilePictureUpdateType extends AbstractType
         $builder
             ->add('profilePic', FileType::class,
                 [
-                'label' => 'Foto de perfil',
+                'label' => 'Foto de perfil   ',
                 'empty_data' => 'Seleccione un archivo.'])
 
             ->add('submit', SubmitType::class, [
