@@ -27,7 +27,7 @@ function addClickActionToExecuteButton(codeMirrorEditor)
         let uuid = this.getAttribute("data-uuid");
 
         // Test execution web service path
-        let testExecutionWebServicePath = '/api/v1/test_executions/' + uuid;
+        let testExecutionWebServicePath = API_DOMAIN+'/api/v1/test_executions/' + uuid;
 
         // Get uuid
         let testExecutionWebServiceData = {

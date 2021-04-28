@@ -10,7 +10,7 @@ function updatePositionOfGameChaptersAfterSorting() {
         let chapter_uuid = element.getAttribute("data-uuid");
 
         let position = index;
-        let updateGameWebService = 'https://localhost:8000/api/v1/games/' + uuid + '/chapters/' + chapter_uuid;
+        let updateGameWebService = API_DOMAIN+'/api/v1/games/' + uuid + '/chapters/' + chapter_uuid;
 
         $.ajax({
 
@@ -44,7 +44,7 @@ function addChapterToGameByDragAndDrop(ui) {
     let title = document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateGameWebService = 'https://localhost:8000/api/v1/games/' + uuid + '/chapters';
+    let updateGameWebService = API_DOMAIN+'/api/v1/games/' + uuid + '/chapters';
 
     $.ajax({
         url : updateGameWebService,
@@ -78,7 +78,7 @@ function removeChapterFromGameByDragAndDrop(ui) {
     let title= document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateChapterWebService = 'https://localhost:8000/api/v1/games/' + uuid + '/chapters/' + chapterToBeReturnedToAvailableUuid ;
+    let updateChapterWebService = API_DOMAIN+'/api/v1/games/' + uuid + '/chapters/' + chapterToBeReturnedToAvailableUuid ;
 
 
     $.ajax({

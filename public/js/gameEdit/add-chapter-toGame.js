@@ -7,7 +7,7 @@ function addChapterEvent(chapterToBeAddedUuid, chapterToBeAddedTitle, chapterToR
     let title = document.getElementById("title");
     //get game uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateGameWebService = 'https://localhost:8000/api/v1/games/' + uuid + '/chapters' ;
+    let updateGameWebService = API_DOMAIN + '/api/v1/games/' + uuid + '/chapters' ;
 
 
     $.ajax({

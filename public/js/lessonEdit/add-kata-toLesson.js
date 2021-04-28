@@ -10,7 +10,7 @@ function addKataEvent(kataToBeAddedUuid, kataToBeAddedTitle, kataToRemoveFromAva
     let title = document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas';
+    let updateLessonWebService = API_DOMAIN+'/api/v1/lessons/' + uuid + '/katas';
 
     $.ajax({
 

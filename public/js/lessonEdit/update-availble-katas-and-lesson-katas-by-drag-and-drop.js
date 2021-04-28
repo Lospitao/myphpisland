@@ -11,7 +11,7 @@ function updatePositionOfLessonKatasAfterSorting() {
         let lesson_uuid = title.getAttribute("data-uuid");
         let kata_uuid = element.getAttribute("data-uuid");
         let position = index;
-        let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + lesson_uuid + '/katas/' + kata_uuid;
+        let updateLessonWebService = API_DOMAIN+'/api/v1/lessons/' + lesson_uuid + '/katas/' + kata_uuid;
 
         $.ajax({
 
@@ -47,7 +47,7 @@ function addKataToLessonByDragAndDrop (ui) {
     let title = document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas';
+    let updateLessonWebService = API_DOMAIN+'/api/v1/lessons/' + uuid + '/katas';
 
     $.ajax({
         url : updateLessonWebService,
@@ -82,7 +82,7 @@ function removeKataFromLessonByDragAndDrop (ui) {
     let title= document.getElementById("title");
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
-    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas/' + kataToBeReturnedToAvailableUuid ;
+    let updateLessonWebService = API_DOMAIN+'/api/v1/lessons/' + uuid + '/katas/' + kataToBeReturnedToAvailableUuid ;
 
 
     $.ajax({

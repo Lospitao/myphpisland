@@ -4,7 +4,7 @@ $(document).ready(function() {
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid")
 
-    let updateLessonWebService = '/api/v1/chapters/' + chapterUuid + '/title';
+    let updateLessonWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid + '/title';
 
 
 

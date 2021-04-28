@@ -2,7 +2,7 @@ function removeLessonEvent(lessonToBeRemovedUuid, lessonTitleToBeRemovedFromChap
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid")
 
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idChapterElement;
+    let updateChapterWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idChapterElement;
 
     $.ajax({
 
@@ -36,7 +36,7 @@ function removeStageEvent(stageToBeRemovedUuid, stageTitleToBeRemovedFromChapter
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid")
 
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idChapterElement;
+    let updateChapterWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid+ '/chapterelements/' + idChapterElement;
 
 
     $.ajax({

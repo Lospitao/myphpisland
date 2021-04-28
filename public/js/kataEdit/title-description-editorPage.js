@@ -5,7 +5,7 @@ $(document).ready(function() {
     let title = document.getElementById("title");
     let uuid = title.getAttribute("data-uuid")
 
-    let updateKataWebService = '/api/v1/katas/' + uuid;
+    let updateKataWebService = API_DOMAIN+'/api/v1/katas/' + uuid;
 
 
     $('#title').focusout(function() {

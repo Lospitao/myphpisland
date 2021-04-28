@@ -79,7 +79,7 @@ function uploadStageBackgroundImageEvent(stageUuid, updateStageWebService) {
 $(document).ready(function() {
     let title = document.getElementById("stage-title");
     let stageUuid = title.getAttribute("data-uuid");
-    let updateStageWebService = '/api/v1/stages/' + stageUuid;
+    let updateStageWebService = API_DOMAIN+'/api/v1/stages/' + stageUuid;
     uploadStageAmbientSoundEvent(stageUuid, updateStageWebService);
     uploadStageDialogEvent(stageUuid, updateStageWebService);
     uploadStageBackgroundImageEvent(stageUuid, updateStageWebService);

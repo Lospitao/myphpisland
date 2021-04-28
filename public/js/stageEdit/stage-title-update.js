@@ -4,7 +4,7 @@ $(document).ready(function() {
     let title = document.getElementById("stage-title");
     let stageUuid = title.getAttribute("data-uuid")
 
-    let updateLessonWebService = '/api/v1/stages/' + stageUuid + '/title';
+    let updateLessonWebService = API_DOMAIN+'/api/v1/stages/' + stageUuid + '/title';
 
 
 

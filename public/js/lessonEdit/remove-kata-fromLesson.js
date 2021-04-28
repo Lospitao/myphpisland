@@ -4,7 +4,7 @@ function removeKataEvent(kataToBeRemovedUuid, kataTitleToBeRemovedFromLesson, ka
     //get lesson uuid
     let uuid = title.getAttribute("data-uuid");
 
-    let updateLessonWebService = 'https://localhost:8000/api/v1/lessons/' + uuid + '/katas/' + kataToBeRemovedUuid;
+    let updateLessonWebService = API_DOMAIN+'/api/v1/lessons/' + uuid + '/katas/' + kataToBeRemovedUuid;
 
     $.ajax({
 

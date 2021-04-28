@@ -6,7 +6,7 @@ function addStageEvent(stageToBeAddedUuid, stageToBeAddedTitle, stageToRemoveFro
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid")
 
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid + '/chapterelements';
+    let updateChapterWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid + '/chapterelements';
 
 
     $.ajax({
@@ -45,7 +45,7 @@ function addLessonEvent(lessonToBeAddedUuid, lessonToBeAddedTitle,lessonToRemove
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid")
 
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid + '/chapterelements';
+    let updateChapterWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid + '/chapterelements';
 
 
     $.ajax({

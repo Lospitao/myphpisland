@@ -7,7 +7,7 @@ function updatePositionOfChapterElementsAfterSorting (ui) {
         let chapterUuid = chapterTitle.getAttribute("data-uuid");
         let chapterElementId = element.getAttribute("data-id")
         let position = index;
-        let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid + '/chapterelements/' + chapterElementId;
+        let updateChapterWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid + '/chapterelements/' + chapterElementId;
         $.ajax({
 
             url : updateChapterWebService,
@@ -40,7 +40,7 @@ function removeStageFromChapterByDragAndDrop(ui) {
 
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid");
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid + '/chapterelements/' + chapterStageToBeRemovedId;
+    let updateChapterWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid + '/chapterelements/' + chapterStageToBeRemovedId;
 
     $.ajax({
 
@@ -77,7 +77,7 @@ function addStageToChapterByDragAndDrop(ui) {
 
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid");
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid + '/chapterelements';
+    let updateChapterWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid + '/chapterelements';
 
     $.ajax({
         url : updateChapterWebService,
@@ -120,7 +120,7 @@ function addLessonToChapterByDragAndDrop (ui) {
 
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid");
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid + '/chapterelements';
+    let updateChapterWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid + '/chapterelements';
 
     $.ajax({
         url : updateChapterWebService,
@@ -158,7 +158,7 @@ function removeLessonFromChapterByDragAndDrop (ui) {
 
     let chapterTitle = document.getElementById("chapter-title");
     let chapterUuid = chapterTitle.getAttribute("data-uuid");
-    let updateChapterWebService = 'https://localhost:8000/api/v1/chapters/' + chapterUuid + '/chapterelements/' + chapterLessonToBeRemovedId;
+    let updateChapterWebService = API_DOMAIN + '/api/v1/chapters/' + chapterUuid + '/chapterelements/' + chapterLessonToBeRemovedId;
 
     $.ajax({
 
