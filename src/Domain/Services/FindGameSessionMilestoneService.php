@@ -24,16 +24,16 @@ class FindGameSessionMilestoneService
     private $stageViewResponse;
     private $endOfGameResponse;
 
-    public function __construct($entityManager, $request, $urlGenerator)
+    public function __construct($entityManager, $user, $urlGenerator)
     {
         $this->entityManager = $entityManager;
-        $this->request = $request;
+        $this->user = $user;
         $this->urlGenerator = $urlGenerator;
 
     }
     public function execute() {
         try {
-        $this->user = $this->findUser();
+
         $this->userGameSession = $this->findUserGameSession();
         $this->isCurrentMilestoneAKata();
         if ($this->isCurrentMilestoneAKata()) {
@@ -59,12 +59,6 @@ class FindGameSessionMilestoneService
         return $errorMessage;
     }
 
-    private function findUser()
-    {
-        return $this->entityManager
-            ->getRepository(User::class)
-            ->findOneBy(['email' => $this->request->get('email')]);
-    }
     private function findUserGameSession()
     {
         return $this->entityManager

@@ -29,11 +29,11 @@ Informtion Component
 */
 .card.information {
     width:1360px;
-    height: 220px;
+    height: 200px;
 }
 .information-title {
     padding-left: 20px;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 .card.information img{
     padding-left: 20px;
@@ -69,10 +69,10 @@ Profile picture component
  */
 .card.profile-pic {
     width: 1360px;
-    height: 200px;
+    height: 180px;
     text-align: center;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 8px;
 
 }
 #profile_picture_update, #profile_picture {

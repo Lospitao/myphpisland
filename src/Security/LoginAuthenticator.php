@@ -104,7 +104,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             return new RedirectResponse($this->urlGenerator->generate(self::ADMIN_ROUTE));
         }
 
-        $findGameSessionMilestoneService = new FindGameSessionMilestoneService($this->entityManager, $request, $this->urlGenerator);
+        $findGameSessionMilestoneService = new FindGameSessionMilestoneService($this->entityManager, $this->user, $this->urlGenerator);
         return new RedirectResponse($findGameSessionMilestoneService->execute());
 
     }
