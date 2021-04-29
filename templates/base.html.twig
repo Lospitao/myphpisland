@@ -49,19 +49,47 @@
         <nav class="menu logged-user">
             <div class="nav-wrapper">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="{{ path('app_login') }}" class="avatar"><img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt=""></a>
-                    <ul class="right hide-on-med-and-down">
-                        <li><a class="waves-effect waves-light btn" href="{{ path('profile') }}"><i class="material-icons">settings</i></a></li>
-                        <li><a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Salir</a></li>
-                    </ul>
+                    {% if app.user.profilePic %}
+                        {% if app.request.get('_route') == 'profile' %}
+                            <a href="{{ path('profile') }}" class="avatar"><img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt=""></a>
+                            <ul class="right hide-on-med-and-down">
+                                <li><a href="{{ path('app_login') }}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Volver al juego</a></li>
+                                <li><a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Salir</a></li>
+                            </ul>
+                        {% else %}
+                        <a href="{{ path('profile') }}" class="avatar"><img src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt=""></a>
+                            <ul class="right hide-on-med-and-down">
+                                <li><a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Salir</a></li>
+                            </ul>
+                        {% endif %}
+                    {% else %}
+                        {% if app.request.get('_route') == 'profile' %}
+                            <a href="{{ path('profile') }}" class="avatar"><i  class="small material-icons default_avatar">account_box</i></a>
+                            <ul class="right hide-on-med-and-down">
+                                <li><a href="{{ path('app_login') }}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Volver al juego</a></li>
+                                <li><a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Salir</a></li>
+                            </ul>
+                        {% else %}
+                            <a href="{{ path('profile') }}" class="avatar"><i class="small material-icons default_avatar">account_box</i></a>
+                            <ul class="right hide-on-med-and-down">
+                                <li><a class="waves-effect waves-light btn" href="{{ path('app_logout') }}">Salir</a></li>
+                            </ul>
+                        {% endif %}
+                    {% endif %}
+
                 {% else %}
                     {% if app.request.get('_route') == 'register' %}
                         <ul class="right hide-on-med-and-down">
                             <li><a class="waves-effect waves-light btn" href="{{ path('app_login') }}">Iniciar Sesión</a></li>
                         </ul>
+                    {% elseif app.request.get('_route') == 'app_login' %}
+                        <ul class="right hide-on-med-and-down">
+                            <li><a class="waves-effect waves-light btn" href="{{ path('register') }}">Registrarse</a></li>
+                        </ul>
                     {% else %}
                         <ul class="right hide-on-med-and-down">
                             <li><a class="waves-effect waves-light btn" href="{{ path('register') }}">Registrarse</a></li>
+                            <li><a class="waves-effect waves-light btn" href="{{ path('app_login') }}">Iniciar Sesión</a></li>
                         </ul>
                     {% endif %}
 

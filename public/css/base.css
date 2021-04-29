@@ -2,11 +2,19 @@
 .nav-wrapper {
     background-color: #2aa198;
 }
-.avatar img {
+.avatar img  {
     margin-top: 5px;
     margin-left: 5px;
     min-width:30px;
     width: 2%;
+    border-radius: 60%;
+    border: 1px white;
+    vertical-align: baseline;
+}
+i.material-icons.default_avatar {
+    display: inline;
+    margin-top: 5px;
+    margin-left: 5px;
     border-radius: 60%;
     border: 1px white;
     vertical-align: baseline;
