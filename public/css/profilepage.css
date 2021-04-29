@@ -46,10 +46,7 @@ Informtion Component
     position: absolute;
     top: 35px; left: 400px;
 }
-#profile_picture_thumbnail {
-    max-width: 100%;
-    height: auto;
-}
+
 /**
 Password component
  */
@@ -69,10 +66,22 @@ Profile picture component
  */
 .card.profile-pic {
     width: 1360px;
-    height: 180px;
+    height: 200px;
     text-align: center;
     padding-bottom: 10px;
     padding-top: 8px;
+}
+#profile-pic-update-section {
+    width: 1360px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+}
+#profile_picture_thumbnail {
+
+    padding-right:150px;
 
 }
 #profile_picture_update, #profile_picture {

@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>Profile Page</title>
 
-
 </head>
 
 <body>
@@ -16,11 +15,6 @@
     <section class="information card">
         <h4 class="information-title">Datos de la cuenta</h4>
         <div class="card-content">
-            {% if app.user.profilePic %}
-            <img id="profile_picture_thumbnail" src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
-            {% else %}
-                <i class="large material-icons">account_box</i>
-            {% endif %}
             <div class="info">
                 <br>
                 <h5 id="username" class={{ app.user.username }}>Nombre de usuario: {{ app.user.username }}</h5>
@@ -47,13 +41,23 @@
     <!-- Profile picture section -->
     <section class="profile-pic card">
         <h4 class="left-align">Imagen de perfil</h4>
-        {{ form_start(profilePictureForm) }}
-        {{ form_row(profilePictureForm.profilePic) }}
-        <br>
-        {{ form_row(profilePictureForm.submit) }}
-        {{ form_end(profilePictureForm) }}
+        <div id="profile-pic-update-section">
+            <div class="profile_picture_thumbnail_section"></div>
+            {% if app.user.profilePic %}
+                <img width="200px" id="profile_picture_thumbnail" src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
+            {% else %}
+                <i id="profile_picture_thumbnail"class="large material-icons profile_picture_thumbnail">account_box</i>
+            {% endif %}
+            <div class="profile_picture_update_form"></div>
+            {{ form_start(profilePictureForm) }}
+            {{ form_row(profilePictureForm.profilePic) }}
+            <br>
+            {{ form_row(profilePictureForm.submit) }}
+            {{ form_end(profilePictureForm) }}
+        </div>
+
     </section>
-    <a href="{{ path('app_login') }}" class="right-align waves-light btn"><i class="material-icons left">arrow_back</i>Volver a juego</a>
+
     <!--
     ##Social section##
     <section class="social card">
