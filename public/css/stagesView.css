@@ -26,4 +26,8 @@
     flex: 0 1 auto;
     -webkit-align-self: auto;
     align-self: auto;
+    height: 700px;
+}
+.guidelines {
+    margin-top: 50px;
 }
