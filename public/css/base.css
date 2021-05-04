@@ -19,3 +19,31 @@ i.material-icons.default_avatar {
     border: 1px white;
     vertical-align: baseline;
 }
+
+.flash-success {
+    padding-top: 20px;
+    font-size: 16px;
+    color: #449592;
+    text-align: center;
+    background-color: #B2EEE0;
+    border:1px solid #449592;
+    border-radius: 10px;
+}
+.flash-error {
+    padding-top: 20px;
+    font-size: 16px;
+    color:#900C3F;
+    text-align: center;
+    background-color: #EEC0B2;
+    border:1px solid #900C3F;
+    border-radius: 10px;
+}
+.flash-alert {
+    padding-top: 20px;
+    font-size: 16px;
+    color:#e0a800;
+    text-align: center;
+    background-color: #eeff41;
+    border: 1px solid #e0a800;;
+    border-radius: 10px;
+}

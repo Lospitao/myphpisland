@@ -33,7 +33,7 @@
         <!-- Materialize icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--CSS stylesheet-->
-
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/cookies.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/games.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/chapters.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/katas.css') }}">
@@ -98,17 +98,17 @@
         </nav>
     </div>
     {% for message in app.flashes('success') %}
-        <div class="flash alert-success">
+        <div class="flash-success">
             {{ message }}
         </div>
     {% endfor %}
     {% for message in app.flashes('error') %}
-        <div class="flash alert-error">
+        <div class="flash-error">
             {{ message }}
         </div>
     {% endfor %}
-    {% for message in app.flashes('notice') %}
-        <div class="flash alert-notice">
+    {% for message in app.flashes('alert') %}
+        <div class="flash-alert">
             {{ message }}
         </div>
     {% endfor %}
