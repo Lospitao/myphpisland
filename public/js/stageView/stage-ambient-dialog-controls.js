@@ -10,8 +10,8 @@ $(document).ready(function() {
         mute: false,
     });
     sound.play();
-    // Dialog starts when we click the relevant character
-    $('#characterOne').click(function () {
+    // Dialog starts when user clicks anywhere on the image
+    $('#background_image').click(function () {
         var dialog = new Howl ({
             src:['/resources/stages/' + stageUuid + '/dialog.mp3'],
             volume: 0.5,
