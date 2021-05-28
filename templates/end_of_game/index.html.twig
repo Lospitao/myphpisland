@@ -1,17 +1,14 @@
 {% extends 'base.html.twig' %}
-
-{% block body %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
-
+{% block head %}
     <meta charset="UTF-8">
-    <title>Fin del juego</title>
+    {% block title %}<title>Fin del juego</title>{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
+    {% endblock %}
+{% endblock %}
+{% block body %}
 
-</head>
-<body>
 <div class="screen">
 
     <!-- End Of Game -->
@@ -27,5 +24,4 @@
 
 
 </div>
-</body>
 {% endblock %}

@@ -1,32 +1,17 @@
 {% extends 'base.html.twig' %}
-{% block title %}Log in!{% endblock %}
-{% block stylesheets %}
 
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Social Media materialize bundle-->
-    <link rel="stylesheet" href={{ asset('css/materialize-social.css') }}>
-    <!--Font Awesome -->
-    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Materialize icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- login stylesheet -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/password-recovery.css') }}">
+{% block head %}
+    {% block title %}<title>Página de reestablecimiento de la contraseña</title>{% endblock %}
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+        {{ parent() }}
+        <!-- login stylesheet -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/password-recovery.css') }}">
+    {% endblock %}
+
 {% endblock %}
 
 {% block body %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <title>Password Recovery Request</title>
-
-</head>
-<body>
 
 <div class="screen">
 
@@ -43,8 +28,6 @@
         </button>
 
     </form>
-
-
 </div>
-</body>
+
 {% endblock %}

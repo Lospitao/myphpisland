@@ -1,20 +1,16 @@
 {% extends 'base.html.twig' %}
-
-{% block body %}
-
-    <!DOCTYPE html>
-    <html lang="en">
-<head>
+{% block head %}
     <meta charset="UTF-8">
-    <title>Stage view</title>
-    <!-- Howler CDN Javascript -->
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.js'></script>
-    <script src={{ asset('js/stageView/stage-ambient-dialog-controls.js') }}></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/stagesView.css') }}">
-</head>
-<body>
-
-
+    {% block title %}<title>Página de Escenario</title>{% endblock %}
+    {% block stylesheets%}
+    {{ parent() }}
+        <!-- Howler CDN Javascript -->
+        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.js'></script>
+        <script src={{ asset('js/stageView/stage-ambient-dialog-controls.js') }}></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/stagesView.css') }}">
+    {% endblock %}
+{% endblock %}
+{% block body %}
 <div class="screen">
 
     <!-- Stage Background Image -->
@@ -39,5 +35,5 @@
     </div>
 </div>
 
-</body>
+
 {% endblock %}

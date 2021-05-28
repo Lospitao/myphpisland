@@ -17,6 +17,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "erusev/parsedown": "^1.7",
+        "jorge.sanchez/phpunit-execution-from-php": "0.2.*",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "5.1.*",
@@ -48,8 +49,7 @@
         "twbs/bootstrap": "4.0.0",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/markdown-extra": "^3.0",
-        "twig/twig": "^2.12|^3.0",
-        "jorge.sanchez/phpunit-execution-from-php": "0.2.*"
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "symfony/browser-kit": "^5.1",

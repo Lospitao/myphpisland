@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kata view</title>
-    <script type="text/javascript" src="{{ asset('js/kataEdit/title-description-editorPage.js') }}"></script>
+{% block head %}
 
-</head>
-<body>
+    {% block title %}<title>Editor de la kata</title>{% endblock %}
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('js/kataEdit/title-description-editorPage.js') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/katas.css') }}">
+    {% endblock %}
+
+{% endblock %}
+{% block body %}
+
 <div class="screen">
     <!-- Title section -->
     <section class="title card">
@@ -50,6 +53,5 @@
     </footer>
 </div>
 
-</body>
 {% endblock %}
 

@@ -1,0 +1,41 @@
+/*****************
+General editor_components
+ *****************/
+.card {
+
+}
+
+.card .card-content {
+    padding: 5px;
+}
+
+.screen {
+    width: 1366px;
+    height: 800px;
+    margin: auto;
+
+}
+h2{
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.33;
+    color: #1f7a72;
+}
+h4{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.33;
+    color: #2fb6ab;
+}
+.cookielawinfo-column-1 {
+width: 400px;
+}
+.cookielawinfo-column-3 {
+    width: 400px;
+}
+.cookielawinfo-column-4 {
+    width: 650px;
+}
+.cookielawinfo-row-cat-title-head {
+text-align: center;
+}

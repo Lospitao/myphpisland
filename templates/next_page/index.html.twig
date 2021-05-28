@@ -1,19 +1,11 @@
-
-
-
-{% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{{ asset('css/next-page.css') }}">
+{% block head %}
+    {% block title %}<title>¡Cargando nueva etapa!</title>{% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/next-page.css') }}">
+    {% endblock %}
 {% endblock %}
+
 {% block body %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <title>¡Cargando nueva etapa!</title>
-
-</head>
-<body>
 <div class="screen">
     <div class="loading-page">
         <h1 class="loading-element">
@@ -32,7 +24,4 @@
         </div>
     </div>
 </div>
-</body>
-
-
 {% endblock %}

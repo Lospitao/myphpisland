@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
+{% block head %}
+    {% block title %}<title>Página de inicio del juego</title>{% endblock %}
+    <meta charset="UTF-8">
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
+    {% endblock %}
+
+{% endblock %}
 
 {% block body %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
-
-    <meta charset="UTF-8">
-    <title>Inicio</title>
-
-</head>
-<body>
 <div class="screen">
 
     <!-- Game Trigger -->
@@ -28,7 +28,6 @@
         </div>
     </section>
 
-
 </div>
-</body>
+
 {% endblock %}

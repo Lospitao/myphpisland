@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 class PasswordRecoveryRequestController extends AbstractController
 {
 
@@ -21,7 +21,6 @@ class PasswordRecoveryRequestController extends AbstractController
     var $passwordRecoveryCode;
     var $subject;
     var $message;
-    var $headers;
     var $email;
     /**
      * @Route("/forgot_my_password", name="PasswordRecoveryRequest")
@@ -37,15 +36,15 @@ class PasswordRecoveryRequestController extends AbstractController
                 $this->generatePasswordGenerationCode();
                 $this->setEmailParameters();
                 $this->emailCodeForPasswordRecovery($mailer);
-
-                $this->addFlash('success', 'Se ha enviado un correo electrónico con el código para restablecer su contraseña. Si no está en la bandeja de entrada revise la carpeta de SPAM');
+                $this->addFlash('success',
+                    'Se ha enviado un correo electrónico con el código para restablecer su contraseña. Si no está en la bandeja de entrada revise la carpeta de SPAM');
 
                 return $this->redirectToRoute('password-recovery');
             }
             return $this->render('password_recovery_request/index.html.twig', [
                 'controller_name' => 'PasswordRecoveryRequestController',
             ]);
-        } catch (\Exception $exception) {
+        } catch (TransportExceptionInterface $exception) {
             $errorMessage=$exception->getMessage();
             $this->addFlash('error', $errorMessage);
             return $this->render('password_recovery_request/index.html.twig', [
@@ -81,10 +80,11 @@ class PasswordRecoveryRequestController extends AbstractController
 
     private function setEmailParameters()
     {
+
         $this->emailSender = "myphpisland@gmail.com";
         $this->subject = "Solicitud para restablecer la contraseña";
         $this->message = "
-        <html>
+        <html lang=\"en\">
         <head>
         <title>Solicitud para restablecer la contraseña</title>
         </head>
@@ -97,23 +97,19 @@ class PasswordRecoveryRequestController extends AbstractController
         </body>
         </html>
         ";
-        $this->headers = "MIME-Version: 1.0" . "\r\n";
-        $this->headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
     }
     private function emailCodeForPasswordRecovery($mailer)
     {
+
         $this->email = (new Email())
             ->from($this->emailSender)
             ->to($this->enteredEmail)
             ->bcc($this->emailSender)
             ->subject($this->subject)
             ->html($this->message);
-
         $mailer->send($this->email);
-    }
 
-    private function returnFlashResultMessage($mailer)
-    {
 
     }
 

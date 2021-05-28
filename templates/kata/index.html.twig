@@ -1,20 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kata view</title>
-    <script>
-        $(document).ready(function(){
-            $('#modal').modal();
-        });
-    </script>
+{% block head %}
 
-</head>
-<body>
-<div class="screen">
+    {% block title %}<title>Página de la kata</title>{% endblock %}
+    <meta charset="UTF-8">
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <script>
+            $(document).ready(function(){
+                $('#modal').modal();
+            });
+        </script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/katas.css') }}">
+    {% endblock %}
+
+{% endblock %}
+{% block body %}
+    <div class="screen">
 
     <!-- Description section -->
     <section class="description card show">
@@ -69,7 +72,6 @@
         </div>
     </div>
 </section>
-</body>
 {% endblock %}
 
 

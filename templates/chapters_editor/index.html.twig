@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
+{% block head %}
+    {% block title %}<title>Editor del capítulo</title>{% endblock %}
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/chapters.css') }}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="{{ asset('js/chapterEdit/chapter-title-update.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/chapterEdit/add-lesson-stage-toChapter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/chapterEdit/remove-lesson-stage-fromChapter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/chapterEdit/update-availble-chapter-elements-and-chapter-elements-by-drag-and-drop.js') }}"></script>
+    {% endblock %}
+
+{% endblock %}
 
 {% block body %}
-<head>
-    <title>Chapter Editor</title>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="{{ asset('js/chapterEdit/chapter-title-update.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/chapterEdit/add-lesson-stage-toChapter.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/chapterEdit/remove-lesson-stage-fromChapter.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/chapterEdit/update-availble-chapter-elements-and-chapter-elements-by-drag-and-drop.js') }}"></script>
-
-</head>
-    <body>
     <div class="screen chapter edit">
         <!-- title -->
         <section class="title card">
@@ -43,5 +47,4 @@
             </div>
         </section>
     </div>
-    </body>
 {% endblock %}

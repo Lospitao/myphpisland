@@ -1,18 +1,14 @@
 {% extends 'base.html.twig' %}
-
-
-{% block body %}
-    <!DOCTYPE html>
-    <html lang="en">
-<head>
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/credits.css') }}">
-
+  {% block head %}
     <meta charset="UTF-8">
-    <title>Créditos</title>
+    {% block title %}<title>Créditos</title>{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/credits.css') }}">
+    {% endblock %}
+{% endblock %}
+{% block body %}
 
-</head>
-<body>
 <div class="screen">
 
     <!-- Credits -->
@@ -32,5 +28,5 @@
    <!--UI WEB DESIGN USED https://codepen.io/KaioRocha/pen/YoEVvZ-->
 
 </div>
-</body>
+
 {% endblock %}

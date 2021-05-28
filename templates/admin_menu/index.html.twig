@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
-
-{% block body %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% block head %}
     <meta charset="UTF-8">
-    <title>Menú del administrador</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin-menu.css') }}">
-    <script>
-        $(document).ready(function(){
-            $('.tabs').tabs();
-        });
-    </script>
-</head>
-<body>
+    {% block title %}<title>Menú del administrador</title>{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/admin-menu.css') }}">
+        <script>
+            $(document).ready(function(){
+                $('.tabs').tabs();
+            });
+        </script>
+    {% endblock %}
+{% endblock %}
+{% block body %}
+
 <div class="screen">
 
                     <div class="col m4">
@@ -56,7 +56,6 @@
         <p>Este es un pie increible.</p>
     </footer>
 </div>
-</body>
 {% endblock %}
 
 

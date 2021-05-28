@@ -1,25 +1,24 @@
 {% extends 'base.html.twig' %}
+{% block head %}
 
+    {% block title %}<title>Editor de la lección</title>{% endblock %}
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/lessons.css') }}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="{{ asset('js/lessonEdit/lesson-title-editorPage.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/lessonEdit/add-kata-toLesson.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/lessonEdit/remove-kata-fromLesson.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/lessonEdit/update-availble-katas-and-lesson-katas-by-drag-and-drop.js') }}"></script>
+    {% endblock %}
 
+{% endblock %}
 
 {% block body %}
 
-    <!DOCTYPE html>
-    <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Lesson view</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="{{ asset('js/lessonEdit/lesson-title-editorPage.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/lessonEdit/add-kata-toLesson.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/lessonEdit/remove-kata-fromLesson.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/lessonEdit/update-availble-katas-and-lesson-katas-by-drag-and-drop.js') }}"></script>
-
-
-</head>
-<body>
 <div class="screen">
     <!-- Title section -->
     <section class="title card">
@@ -43,5 +42,5 @@
             {% include 'lessons_editor/editor_components/lessonKatas.html.twig' %}
         </div>
     </section>
-</body>
+
 {% endblock %}

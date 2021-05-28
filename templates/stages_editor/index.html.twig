@@ -1,24 +1,22 @@
 {% extends 'base.html.twig' %}
-
+{% block head %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Página de edición del escenario</title>{% endblock %}
+    {% block stylesheets%}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('js/stageEdit/stage-title-update.js') }}"></script>
+        <script>
+            $(document).ready(function(){
+                $('.materialboxed').materialbox();s
+            });
+        </script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/stages.css') }}">
+    {% endblock %}
+{% endblock %}
 
 
 {% block body %}
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Stage view</title>
-        <script type="text/javascript" src="{{ asset('js/stageEdit/stage-title-update.js') }}"></script>
-        <script>
-            $(document).ready(function(){
-                $('.materialboxed').materialbox();
-            });
-
-        </script>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/stages.css') }}">
-    </head>
-    <body>
     <div class="screen">
         <!-- Title section -->
         <section class="title card">
@@ -71,5 +69,4 @@
             <p>Este es un pie increible.</p>
         </footer>
     </div>
-    </body>
 {% endblock %}
