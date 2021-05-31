@@ -7,12 +7,12 @@
 
     {% block stylesheets %}
         {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/katas.css') }}">
         <script>
             $(document).ready(function(){
-                $('#modal').modal();
+                $('.modal').modal();
             });
         </script>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/katas.css') }}">
     {% endblock %}
 
 {% endblock %}
@@ -47,9 +47,7 @@
     <footer class="footer">
         <p>Este es un pie increible.</p>
     </footer>
-        <div class="next_button_section float-right">
-            <!--Next button appears here after kata is successfully executed-->
-        </div>
+
 </div>
 <section class="modals">
     <!-- Modal Structure -->
@@ -59,7 +57,9 @@
             <p>¡Esa es la respuesta correcta!</p>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Continuar</a>
+            <a href="{{ path('next_page') }}" class="modal-close waves-effect waves-blue btn-flat">Siguiente</a>
+            <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Cerrar</a>
+
         </div>
     </div>
     <!-- Modal Structure -->

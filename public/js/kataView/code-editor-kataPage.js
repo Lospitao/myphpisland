@@ -63,9 +63,7 @@ function submitRequestToTestExecutionWebService(testExecutionWebServicePath, tes
                 $('#modal-fail-message').modal('open');
                 return ;
             }
-            let nextPageRoute = 'https://localhost:8000/next/page'
-            let nextButton = `<a class="waves-effect waves-light btn-large float-right" href=${nextPageRoute}>Siguiente</a>`
-            $( ".next_button_section" ).append(nextButton);
+
             $('#modal-success-message').modal('open');
         },
         error: function (data) {
