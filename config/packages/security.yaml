@@ -43,7 +43,7 @@ security:
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: /forgot_my_password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: //password-recovery, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: /password-recovery, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: /create, roles: ROLE_ADMIN }
          - { path: /editor, roles: ROLE_ADMIN }
          - { path: /profile, roles: IS_AUTHENTICATED_FULLY }
