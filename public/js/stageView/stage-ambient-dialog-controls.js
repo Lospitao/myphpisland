@@ -18,7 +18,7 @@ $(document).ready(function() {
             src:['/resources/stages/' + stageUuid + '/dialog.mp3'],
             volume: 0.5,
             onend: function () {
-                let nextPageRoute = 'https://localhost:8000/next/page'
+                let nextPageRoute = '/next/page'
                 let nextButton = `<a class="waves-effect waves-light btn-large float-right" href=${nextPageRoute}>Siguiente</a>`
                 $( ".next_button_section" ).append(nextButton);
             }

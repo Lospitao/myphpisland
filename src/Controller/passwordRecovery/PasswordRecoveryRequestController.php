@@ -91,7 +91,7 @@ class PasswordRecoveryRequestController extends AbstractController
         <body>
         <p>Estimado usuario,</p><br>
         <p>se ha recibido una solicitud para restablecer su contraseña. Para poder llevarlo a cabo debe pulsar en el siguiente enlace:</p><br>
-        <a href=\"https://localhost:8000/password-recovery/\">Restablecer contraseña </a><br>
+        <a href=\"/password-recovery/\">Restablecer contraseña </a><br>
         <p>e introducir el código {$this->passwordRecoveryCode}</p>
         <p>Un saludo.</p>
         </body>
