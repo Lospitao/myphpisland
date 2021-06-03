@@ -8,6 +8,7 @@ parameters:
     stage_resources_ambient_dir: '%kernel.project_dir%/public/resources/stages/stageUuid'
     stage_resources_dialog_dir: '%kernel.project_dir%/public/resources/stages/stageUuid'
     stage_resources_background_images_dir: '%kernel.project_dir%/public/resources/stages/stageUuid'
+    api_host: '%env(API_HOST)%'
 services:
     # default configuration for services in *this* file
     _defaults:

@@ -131,6 +131,7 @@ class ChaptersEditorController extends AbstractController
             'chapterElementsArray' => $chapterElementsArray,
             'elementClass' => $elementClass,
             'chapterTitle' => $chapter->getTitle(),
+            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
 }

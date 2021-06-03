@@ -112,6 +112,7 @@ class KataController extends AbstractController
     }
     private function createKataViewResponse($uuid)
     {
+
         return $this->render('kata/index.html.twig', [
             'controller_name' => 'KataController',
             'title' => $this->kataToLoad->getKataTitle(),
@@ -119,6 +120,7 @@ class KataController extends AbstractController
             'codeEditor' => $this->kataToLoad->getEditorCode(),
             'examples' => $this->kataToLoad->getExamples(),
             'uuid' => $uuid,
+            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
 
