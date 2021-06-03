@@ -12,8 +12,8 @@ $(document).ready(function() {
     });
     sound.play();
 
-    // Dialog starts when user clicks anywhere on the image
-    $('#background_image').click(function () {
+    // Dialog starts playing once the stage is loaded
+
         var dialog = new Howl ({
             src:['/resources/stages/' + stageUuid + '/dialog.mp3'],
             volume: 0.5,
@@ -24,6 +24,6 @@ $(document).ready(function() {
             }
         });
         dialog.play();
-    })
+
 
 });
