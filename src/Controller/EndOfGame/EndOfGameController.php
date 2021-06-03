@@ -15,6 +15,7 @@ class EndOfGameController extends AbstractController
     {
         return $this->render('end_of_game/index.html.twig', [
             'controller_name' => 'EndOfGameController',
+            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
 }

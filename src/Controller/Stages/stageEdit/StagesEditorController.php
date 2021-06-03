@@ -123,6 +123,7 @@ class StagesEditorController extends AbstractController
             'stageAmbientSound' => $stage->getAmbientSound(),
             'stageDialog' => $stage->getDialog(),
             'stageBackgroundImage' => $stage->getBackgroundImage(),
+            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
 }

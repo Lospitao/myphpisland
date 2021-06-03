@@ -81,8 +81,7 @@ class GamesEditorController extends AbstractController
             'availableChapters' => $availableChapters,
             'gameChapters' => $gameChapters,
             'gameTitle' => $game->getTitle(),
-
-
+            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
 }

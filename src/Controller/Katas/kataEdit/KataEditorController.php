@@ -24,7 +24,7 @@ class KataEditorController extends AbstractController
             'kataExamples' => $kata->getExamples(),
             'kataTitle' => $kata->getKataTitle(),
             'kataTest' => $kata->getKataTestCode(),
-
+            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
 

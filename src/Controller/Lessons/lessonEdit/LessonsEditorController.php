@@ -80,6 +80,7 @@ class LessonsEditorController extends AbstractController
             'lessonKatasArray'=> $lessonKatasArray,
             'lessonKatas' => $lessonKatas,
             'lesson_title' => $lesson->getTitle(),
+            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
 }

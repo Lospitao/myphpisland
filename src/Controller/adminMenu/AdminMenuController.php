@@ -46,6 +46,7 @@ class AdminMenuController extends AbstractController
                 'availableStages' => $this->availableStages->execute(),
                 'availableChapters' => $this->availableChapters->execute(),
                 'availableGames' => $this->availableGames->execute(),
+                'apiHost' => $this->getParameter('api_host'),
             ]);
         } catch (\Exception $exception) {
             $jsonResponseWithError = $this->createJsonResponseWithError($exception);

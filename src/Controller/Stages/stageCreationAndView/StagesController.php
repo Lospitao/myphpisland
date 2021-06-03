@@ -24,7 +24,9 @@ class StagesController extends AbstractController
             $this->createStageCreationSuccessMessage();
 
             return $this->redirectToRoute('stages_editor', [
-                'stageUuid' => $this->newStageUuid]);
+                'stageUuid' => $this->newStageUuid,
+                'apiHost' => $this->getParameter('api_host')
+            ]);
         } catch (\Exception $exception) {
             $jsonResponseWithError = $this->createJsonResponseWithError($exception);
             return $jsonResponseWithError;
@@ -99,6 +101,7 @@ class StagesController extends AbstractController
             'stageAmbientSound' => $this->stageToLoad->getAmbientSound(),
             'stageDialog' => $this->stageToLoad->getDialog(),
             'stageBackgroundImage' => $this->stageToLoad->getBackgroundImage(),
+            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
 

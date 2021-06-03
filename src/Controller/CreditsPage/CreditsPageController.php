@@ -15,6 +15,7 @@ class CreditsPageController extends AbstractController
     {
         return $this->render('credits_page/index.html.twig', [
             'controller_name' => 'CreditsPageController',
+            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
 }

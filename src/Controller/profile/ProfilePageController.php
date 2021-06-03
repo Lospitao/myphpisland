@@ -64,12 +64,14 @@ class ProfilePageController extends AbstractController
             return $this->render('profile_page/index.html.twig', [
                 'controller_name' => 'ProfilePageController',
                 'profilePictureForm' => $this->profilePictureForm->createView(),
+                'apiHost' => $this->getParameter('api_host'),
             ]);
         } catch (\Exception $exception) {
             error_log($exception->getMessage());
             return $this->render('profile_page/index.html.twig', [
                 'controller_name' => 'ProfilePageController',
                 'profilePictureForm' => $this->profilePictureForm->createView(),
+                'apiHost' => $this->getParameter('api_host'),
             ]);
         }
     }
