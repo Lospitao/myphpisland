@@ -285,7 +285,6 @@ class NextPageController extends AbstractController
             ->findOneBy(['id' =>$this->gameSession->getIdKata()]);
         return $this->redirectToRoute('kata', [
             'uuid' => $kata->getUuid(),
-            'apiHost' => $this->getParameter('api_host'),
         ]);
     }
     private function createStageViewResponse()
@@ -298,7 +297,7 @@ class NextPageController extends AbstractController
             ->findOneBy(['id' => $chapterElement->getStageOrLessonId()]);
         return $this->redirectToRoute('stages', [
             'stageUuid' => $stage->getUuid(),
-            'apiHost' => $this->getParameter('api_host'),
+
         ]);
     }
     private function createEndOfGameResponse()
