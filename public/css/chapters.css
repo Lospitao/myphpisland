@@ -69,7 +69,7 @@ Title Component
 }
 .screen.chapter.edit .card.stages-and-lessons-for-a-chapter li i{
     float: right;
-    color: black;
+    color: #232531;
 }
 #availableLessonsList,#availableStagesList, #ChapterLessonsAndStagesCollectionList {
     list-style-type: none;
@@ -77,16 +77,18 @@ Title Component
 #availableLessonsList li , #availableStagesList li, #ChapterLessonsAndStagesCollectionList li{
     font-size: 1.2em;
     border: 1px solid #eee;
-    color: black;
+    color: #232531;
 }
 #availableLessonsList li {
-    background-color: #4fc3f7;
+    background-color: #5573EC;
+    color: #232531;
 }
 #availableStagesList li {
-    background-color: #20c997;
+    background-color: #6477C3;
 }
 #ChapterLessonsAndStagesCollectionList li {
-    background-color: #6B89FF;
+    background-color: #8898DA;
+    color: #232531;;
 }
 /**Chapter-View**/
 .screen.chapter .card.title {

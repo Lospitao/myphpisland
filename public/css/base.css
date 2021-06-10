@@ -47,3 +47,30 @@ i.material-icons.default_avatar {
     border: 1px solid #e0a800;;
     border-radius: 10px;
 }
+/*Overriding materialize properties for materialize default colors*/
+.btn, .btn-large, .btn-small {
+background-color: #5E6BA0;
+}
+.btn:hover, .btn-large:hover, .btn-small:hover{
+    background-color: #B8BFDB;
+}
+a {
+    color:#5E6BA0;
+    font-weight: bolder;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label{
+    color: #5E6BA0 !important;
+    font-weight: bolder;
+}
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly])
+{
+    -webkit-box-shadow: none !important;
+    color: #5E6BA0 !important;
+    box-shadow: #5E6BA0 !important;
+    border-bottom: #5E6BA0 !important;
+}

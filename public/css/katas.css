@@ -97,7 +97,7 @@ Code editor component
 
 .card.code-editor .btn.execute-test  {
     float: right;
-    background-color: var(--blue-color);
+    background-color: #5E6BA0;
 }
 /**
 Examples component

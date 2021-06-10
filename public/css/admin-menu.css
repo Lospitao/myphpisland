@@ -1,5 +1,5 @@
 .tabs .tab a.active {
-    background-color:#9ddfe9;
+    background-color:#5B6899;
     color:#000;
 }
 .tabs .tab a{
@@ -7,10 +7,14 @@
 } /*Black color to the text*/
 
 .tabs .tab a:hover {
-    background-color:#4fc3f7;
+    background-color:#707CAA;
     color:#000;
 } /*Text color on hover*/
 
+.tabs .tab a:focus {
+    background-color:#A3ACD1 !important;
+    color:#000;
+}
  /*Background and text color when a tab is active*/
 
 .tabs .indicator {
@@ -21,7 +25,7 @@
     font-size: 25px;
     letter-spacing: 0;
     word-spacing: 0;
-    color: #1A25B5;
+    color: #3A4982;
     font-weight: 400;
     text-decoration: none solid rgb(68, 68, 68);
     font-style: normal;
@@ -32,7 +36,7 @@
     font-size: 25px;
     letter-spacing: 0;
     word-spacing: 0;
-    color: #1A25B5;
+    color: #232531;
     font-weight: 700;
     text-decoration: none solid rgb(68, 68, 68);
     font-style: normal;
@@ -44,7 +48,7 @@
     font-size: 25px;
     letter-spacing: 0;
     word-spacing: 0;
-    color: #1A25B5;
+    color: #3A4982;
     font-weight: 400;
     text-decoration: none solid rgb(68, 68, 68);
     font-style: normal;
@@ -55,10 +59,34 @@
     font-size: 25px;
     letter-spacing: 0;
     word-spacing: 0;
-    color: #1A25B5;
+    color: #5B6899;
     font-weight: 700;
     text-decoration: none solid rgb(68, 68, 68);
     font-style: normal;
     font-variant: normal;
     text-transform: none;
+}
+#games.col.s12.teal.lighten-5.active {
+    background-color: #8993be !important;
+}
+#chapters.col.s12.teal.lighten-4.active {
+    background-color: #7581B2 !important;
+}
+#stages.col.s12.teal.lighten-5.active {
+    background-color: #7E8ABA !important;
+}
+#lessons.col.s12.teal.lighten-4.active {
+    background-color: #919CC9 !important;
+}
+#katas.col.s12.teal.lighten-5.active {
+    background-color: #9BA5CF !important;
+}
+.blue-text.text-darken-2 {
+    color: #3A4982 !important;
+}
+.add-icon    {
+    background-color: #3A4982 !important;
+}
+a i:hover {
+    color: #5B6899 !important;
 }

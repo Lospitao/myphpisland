@@ -74,12 +74,12 @@ Ordered Game Chapters List
     border: 1px solid #eee;
 }
 #availableChaptersList li {
-    background-color: #9ddfe9;
-    color: black;
+    background-color: #6477C3;
+    color: #232531;
 }
 #gameChaptersList li {
-    background-color: #4fc3f7;
-    color: black;
+    background-color: #8898DA;
+    color: #232531;
 }
 /**
 Ordered Game Chapters List View Template
@@ -90,4 +90,7 @@ Ordered Game Chapters List View Template
 }
 .title.view-card {
     border:none;
+}
+.tiny.material-icons {
+    color: #232531;
 }

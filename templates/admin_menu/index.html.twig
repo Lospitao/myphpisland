@@ -28,9 +28,11 @@
 
                     <!--Game menu-->
                     <div id="games" class="col s12 teal lighten-5">
-                        <a href="{{ path('games_create') }}" class="btn-floating right waves-effect waves-light"><i class="add-icon material-icons">add</i></a><br>
+                        <a href="{{ path('games_create') }}" class="btn-floating right waves-effect waves-light"><i class="add-icon material-icons">add</i></a>
                         {% include 'admin_menu/components/available_games.html.twig' %}
+
                     </div>
+
                     <!--Chapter menu-->
                     <div id="chapters" class="col s12 teal lighten-4">
                         <a href="{{ path('chapters_create') }}" class="btn-floating right waves-effect waves-light"><i class="add-icon material-icons">add</i></a>
