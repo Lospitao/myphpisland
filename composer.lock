@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "980d8e61c1dd012d82c788d191c38b88",
+    "content-hash": "4957ba79eeaf0679929486731c1f5977",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -8455,16 +8455,16 @@
         },
         {
             "name": "twig/markdown-extra",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/markdown-extra.git",
-                "reference": "48142a7727b2b84691f843056346d534933f1d3f"
+                "reference": "a9fe276dbb7f837c3f4ecc6dad89bcccb9fc8bc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/markdown-extra/zipball/48142a7727b2b84691f843056346d534933f1d3f",
-                "reference": "48142a7727b2b84691f843056346d534933f1d3f",
+                "url": "https://api.github.com/repos/twigphp/markdown-extra/zipball/a9fe276dbb7f837c3f4ecc6dad89bcccb9fc8bc9",
+                "reference": "a9fe276dbb7f837c3f4ecc6dad89bcccb9fc8bc9",
                 "shasum": ""
             },
             "require": {
@@ -8474,7 +8474,7 @@
             "require-dev": {
                 "erusev/parsedown": "^1.7",
                 "league/commonmark": "^1.0",
-                "league/html-to-markdown": "^4.8",
+                "league/html-to-markdown": "^4.8|^5.0",
                 "michelf/php-markdown": "^1.8",
                 "symfony/phpunit-bridge": "^4.4.9|^5.0.9"
             },
@@ -8511,6 +8511,9 @@
                 "markdown",
                 "twig"
             ],
+            "support": {
+                "source": "https://github.com/twigphp/markdown-extra/tree/v3.3.1"
+            },
             "funding": [
                 {
                     "url": "https://github.com/fabpot",
@@ -8521,7 +8524,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-01T14:58:18+00:00"
+            "time": "2021-04-01T12:19:25+00:00"
         },
         {
             "name": "twig/twig",

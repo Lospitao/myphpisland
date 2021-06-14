@@ -52,10 +52,16 @@ Description component
     border: none;
 }
 .card.description.show {
-    width: 500px;
+    width: 550px;
     height: 650px;
     margin: 5px;
     float: left;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+.card.description.show .card-content {
+    padding: 20px 20px 20px 20px;
 }
 /**
 Kata-test component
@@ -68,6 +74,19 @@ Kata-test component
 }
 .card.kata-test .code{
     width: 470px;
+    height: 160px;
+    margin: 5px;
+    float: left;
+    border: none;
+}
+.card.kata-test.show {
+    width: 450px;
+    height: 240px;
+    margin: 5px;
+    float: left;
+}
+.card.kata-test.show .code{
+    width: 420px;
     height: 160px;
     margin: 5px;
     float: left;
@@ -94,7 +113,16 @@ Code editor component
 .card.code-editor .code {
     height: 307px;
 }
+.card.code-editor.show {
+    width: 795px;
+    height: 400px;
+    margin: 5px;
+    float: right;
+}
 
+.card.code-editor.show .code {
+    height: 307px;
+}
 .card.code-editor .btn.execute-test  {
     float: right;
     background-color: #5E6BA0;
@@ -110,6 +138,17 @@ Examples component
 }
 
 .card.examples .code {
+    height: 160px;
+    max-height: 160px;
+}
+.card.examples.show {
+    width: 795px;
+    height: 240px;
+    margin: 5px;
+    float: right;
+}
+
+.card.examples.show .code {
     height: 160px;
     max-height: 160px;
 }
