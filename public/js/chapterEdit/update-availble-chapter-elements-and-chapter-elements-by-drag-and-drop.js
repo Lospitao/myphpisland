@@ -195,6 +195,7 @@ function draggedElementIsAChapterElement (ui) {
 function makeListsSortable () {
     $( "#availableLessonsList, #availableStagesList, #ChapterLessonsAndStagesCollectionList").sortable({
         connectWith: ".connectedSortable",
+        cursor: "pointer",
         receive: function (event, ui) {
             if (draggedElementIsALesson(ui)) {
                 if (draggedElementIsAChapterElement(ui)) {

@@ -72,10 +72,12 @@ Ordered Game Chapters List
 #availableChaptersList li , #gameChaptersList li{
     font-size: 1.2em;
     border: 1px solid #eee;
+    cursor: pointer;
 }
 #availableChaptersList li {
     background-color: #6477C3;
     color: #232531;
+    cursor: pointer;
 }
 #gameChaptersList li {
     background-color: #8898DA;

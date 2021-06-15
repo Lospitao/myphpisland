@@ -70,6 +70,7 @@ Ordered Lessons Katas List
 #availableKatasList li, #lessonKatasList li{
     font-size: 1.2em;
     border: 1px solid #eee;
+    cursor: pointer;
 }
 #availableKatasList li {
     background-color: #6477C3;

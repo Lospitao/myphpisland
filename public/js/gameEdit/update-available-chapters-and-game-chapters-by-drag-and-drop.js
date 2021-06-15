@@ -118,6 +118,7 @@ function makeChapterListSortableFromAndToAvailableAndGameSections(){
             updatePositionOfGameChaptersAfterSorting();
         },
         revert:true,
+        cursor: "pointer",
     }).disableSelection();
 }
 $(document).ready(function() {

@@ -113,6 +113,7 @@ function makeKataListSortableFromAndToAvailableAndLessonSections() {
 
     $( "#availableKatasList, #lessonKatasList").sortable({
         connectWith: ".connectedSortable",
+        cursor: "pointer",
         receive: function (event, ui) {
 
             if (kataIsALessonKata(ui)) {

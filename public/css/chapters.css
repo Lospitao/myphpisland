@@ -78,6 +78,7 @@ Title Component
     font-size: 1.2em;
     border: 1px solid #eee;
     color: #232531;
+    cursor: pointer;
 }
 #availableLessonsList li {
     background-color: #5573EC;
