@@ -1,3 +1,16 @@
+.screen.stage {
+    width: 1280px;
+    height: 720px;
+    margin: auto;
+    position: relative;
+}
+
+.screen.stage .next_button_section {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
 .stage-view {
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -17,17 +30,7 @@
     -ms-flex-align: center;
     align-items: center;
 }
-#background_image {
-    margin-top: 50px;
-    -ms-flex-order: 0;
-    order: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-    -webkit-align-self: auto;
-    align-self: auto;
-    height: 600px;
-}
+
 .guidelines {
     margin-top: 50px;
 }
