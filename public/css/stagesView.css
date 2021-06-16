@@ -1,14 +1,15 @@
-.screen.stage {
+.screen.stage-view {
     width: 1280px;
     height: 720px;
     margin: auto;
     position: relative;
 }
 
-.screen.stage .next_button_section {
+.screen .next_button_section {
     position: absolute;
     bottom: 5px;
     right: 5px;
+
 }
 
 .stage-view {
