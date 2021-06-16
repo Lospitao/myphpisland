@@ -21,7 +21,10 @@ i.material-icons.default_avatar {
 }
 
 .flash-success {
-    padding-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-size: 16px;
     color: #449592;
     text-align: center;
@@ -30,7 +33,10 @@ i.material-icons.default_avatar {
     border-radius: 10px;
 }
 .flash-error {
-    padding-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-size: 16px;
     color:#900C3F;
     text-align: center;
@@ -39,7 +45,10 @@ i.material-icons.default_avatar {
     border-radius: 10px;
 }
 .flash-alert {
-    padding-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-size: 16px;
     color:#e0a800;
     text-align: center;
