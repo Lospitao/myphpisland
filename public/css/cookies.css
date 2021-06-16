@@ -9,12 +9,6 @@ General editor_components
     padding: 5px;
 }
 
-.screen {
-    width: 1366px;
-    height: 800px;
-    margin: auto;
-
-}
 h2{
     font-size: 24px;
     font-weight: 900;
