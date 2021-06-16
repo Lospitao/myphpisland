@@ -27,7 +27,6 @@ General editor_components
 }
 
 .screen.main {
-    margin-top: 40px;
     background-image: url("/images/main_background.jpg");
     background-repeat: no-repeat;
     background-size: cover;

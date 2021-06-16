@@ -83,3 +83,11 @@ input[type=email]:focus:not([readonly])
     box-shadow: #5E6BA0 !important;
     border-bottom: #5E6BA0 !important;
 }
+
+.screen {
+    width: 1280px;
+    height: 720px;
+    margin: auto;
+    position: relative;
+}
+/**
