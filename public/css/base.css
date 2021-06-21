@@ -98,9 +98,10 @@ General editor_components
 }
 
 .screen {
-    width: 1366px;
-    height: 768px;
+    width: 1280px;
+    height: 720px;
     margin: auto;
+    position: relative;
 }
 /**
  Menu component
