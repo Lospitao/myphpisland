@@ -19,7 +19,7 @@ final class Version20210621161226 extends AbstractMigration
 
     public function up(Schema $schema) : void
     {
-        $this->addSql("INSERT INTO `chapter_element` (`id`,`chapter_id`,`chapter_element_type`,`stage_or_lesson_id`,`position`) VALUES (166, 1, 1, 9, 6);");
+        $this->addSql("INSERT INTO `chapter_element` (`id`,`chapter_id`,`chapter_element_type`,`stage_or_lesson_id`,`position`) VALUES (166, 1, 1, 1, 6);");
 
     }
 
