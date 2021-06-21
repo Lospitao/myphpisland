@@ -31,6 +31,7 @@ INSERT INTO `chapter_element` (`id`,`chapter_id`,`chapter_element_type`,`stage_o
 INSERT INTO `chapter_element` (`id`,`chapter_id`,`chapter_element_type`,`stage_or_lesson_id`,`position`) VALUES (4,1,2,4,3);
 INSERT INTO `chapter_element` (`id`,`chapter_id`,`chapter_element_type`,`stage_or_lesson_id`,`position`) VALUES (5,1,2,5,4);
 INSERT INTO `chapter_element` (`id`,`chapter_id`,`chapter_element_type`,`stage_or_lesson_id`,`position`) VALUES (6,1,2,6,5);");
+        $this->addSql("INSERT INTO `lesson` (`id`, `title`, `uuid`) VALUES (9, 'Lección 1', '5aac1001-7bad-4f5e-92ab-ba1684ccfba6')");
 
     }
 
