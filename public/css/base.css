@@ -98,8 +98,8 @@ General editor_components
 }
 
 .screen {
-    width: 1280px;
-    height: 720px;
+    width: 1366px;
+    height: 768px;
     margin: auto;
     position: relative;
 }
