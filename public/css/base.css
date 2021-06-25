@@ -101,6 +101,7 @@ General editor_components
     width: 1366px;
     height: 768px;
     margin: auto;
+    position: relative;
 }
 /**
  Menu component
