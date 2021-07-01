@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Menú del administrador</title>{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/admin-menu.css') }}">
+        <script>
+            $(document).ready(function(){
+                $('.tabs').tabs();
+            });
+        </script>
+    {% endblock %}
+{% endblock %}
+{% block body %}
+
+<div class="screen">
+
+                    <div class="col m4">
+                    <ul id="tabs-swipe-demo" class="tabs">
+                        <li class="tab col s3"><a class="active blue-text text-darken-2" href="#games">Juegos</a></li>
+                        <li class="tab col s3"><a class="blue-text text-darken-2" href="#chapters">Capítulos</a></li>
+                        <li class="tab col s3"><a class="blue-text text-darken-2" href="#stages">Escenarios</a></li>
+                        <li class="tab col s3"><a class="blue-text text-darken-2" href="#lessons">Lecciones</a></li>
+                        <li class="tab col s3"><a class="blue-text text-darken-2" href="#katas">Katas</a></li>
+                    </ul>
+                    </div>
+
+                    <!--Game menu-->
+                    <div id="games" class="col s12 teal lighten-5">
+                        <a href="{{ path('games_create') }}" class="btn-floating right waves-effect waves-light"><i class="add-icon material-icons">add</i></a>
+                        {% include 'admin_menu/components/available_games.html.twig' %}
+
+                    </div>
+
+                    <!--Chapter menu-->
+                    <div id="chapters" class="col s12 teal lighten-4">
+                        <a href="{{ path('chapters_create') }}" class="btn-floating right waves-effect waves-light"><i class="add-icon material-icons">add</i></a>
+                        {% include 'admin_menu/components/available_chapters.html.twig' %}
+                    </div>
+                    <!--Stage menu-->
+                    <div id="stages" class="col s12 teal lighten-5">
+                        <a href="{{ path('stages_create') }}" class="btn-floating right waves-effect waves-light"><i class="add-icon material-icons">add</i></a>
+                        {% include 'admin_menu/components/available_stages.html.twig' %}
+                    </div>
+                    <!--Lessons menu-->
+                    <div id="lessons" class="col s12 teal lighten-4">
+                        <a href="{{ path('lessons_create') }}" class="btn-floating right waves-effect waves-light"><i class="add-icon material-icons">add</i></a>
+                        {% include 'admin_menu/components/available_lessons.html.twig' %}
+                    </div>
+                    <!--Kata menu-->
+                    <div id="katas" class="col s12 teal lighten-5">
+                        <a href="{{ path('katas_create') }}" class="btn-floating right waves-effect waves-light"><i class="add-icon material-icons">add</i></a>
+                        {% include 'admin_menu/components/available_katas.html.twig' %}
+                    </div>
+
+    <footer class="footer">
+
+    </footer>
+</div>
+{% endblock %}
+
+
+

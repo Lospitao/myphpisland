@@ -1,0 +1,45 @@
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+    align-items: center;
+}
+
+.card .card-content {
+    padding: 5px;
+}
+/********Base component*********/
+
+.avatar img {
+    margin-top: 5px;
+    margin-left: 5px;
+    min-width:30px;
+    width: 2%;
+    border-radius: 60%;
+    border: 1px white;
+    vertical-align: baseline;
+}
+
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}
+.screen {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 80px;
+}
+.h3.mb-3.font-weight-normal {
+    color: #3A4982;
+}
+
+

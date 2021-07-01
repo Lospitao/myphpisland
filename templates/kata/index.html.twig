@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+
+    {% block title %}<title>Página de la kata</title>{% endblock %}
+    <meta charset="UTF-8">
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/katas.css') }}">
+        <script>
+            $(document).ready(function(){
+                $('.modal').modal();
+            });
+        </script>
+    {% endblock %}
+
+{% endblock %}
+{% block body %}
+    <div class="screen">
+
+        <!-- Description section -->
+        <section class="description card show">
+            <div class="card-content">
+                <span class="card-title">Descripción</span>
+                {% apply markdown_to_html %}
+                    {{ description|raw }}
+                {% endapply %}
+
+            </div>
+        </section>
+    <!-- Code editor section -->
+    <section class="code-editor card show">
+        <div class="card-content">
+            <span class="card-title" data-uuid={{ uuid }}>Editor de Código</span>
+            {% include 'kata/components/code-editor.html.twig' %}
+            <button id="test-executor" class="btn modal-trigger execute-test"  data-uuid={{ uuid }}>Ejecutar test</button>
+        </div>
+    </section>
+    <!-- Sample test -->
+    <section class="examples card show">
+        <div class="card-content">
+            <span class="card-title" data-uuid={{ uuid }}>Ejemplos</span>
+            {% include 'kata/components/examples.html.twig' %}
+        </div>
+    </section>
+    <footer class="footer">
+
+    </footer>
+
+</div>
+<section class="modals">
+    <!-- Modal Structure -->
+    <div id="modal-success-message" class="modal success-message">
+        <div class="modal-content">
+            <h4>¡Yo-ho-ho!</h4>
+            <p>¡Esa es la respuesta correcta!</p>
+        </div>
+        <div class="modal-footer">
+            <a href="{{ path('next_page') }}" class="modal-close waves-effect waves-light btn-small float-right">Siguiente</a>
+        </div>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal-fail-message" class="modal fail-message">
+        <div class="modal-content">
+            <h4>¡Por el amor de una madre!</h4>
+            <p>¡Los dioses acaban de matar aun mono de tres cabezas!</p>
+            <p>Revisa el código fuente.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Volver a intentar</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+

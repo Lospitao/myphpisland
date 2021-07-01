@@ -1,0 +1,122 @@
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+
+}
+
+.card .card-content {
+    padding: 5px;
+}
+
+.screen {
+    width: 1366px;
+    height: 768px;
+    margin: auto;
+}
+
+/**Chapter-Edit**/
+/**
+Title Component
+*/
+.card.title {
+    width:1360px;
+}
+.card.title textarea{
+    border:none
+}
+/*Available Stages*/
+.screen.chapter.edit .card.stages {
+    position: unset;
+    width: 672px;
+    height: 250px;
+    float: left;
+    margin: 5px;
+    overflow: auto;
+}
+.screen.chapter.edit .card.stages li{
+    border-top: #0c0c0d;
+    border-bottom: #0c0c0d;
+}
+.screen.chapter.edit .card.stages li i{
+    float: right;
+}
+/*Available Lessons*/
+.screen.chapter.edit .card.lessons {
+    position: unset;
+    width: 672px;
+    height: 250px;
+    float: left;
+    margin: 5px;
+    overflow: auto;
+}
+.screen.chapter.edit .card.lessons li {
+    border-top: #0c0c0d;
+    border-bottom: #0c0c0d;
+}
+.screen.chapter.edit .card.lessons li i{
+    float: right;
+}
+/*Chapter Elements*/
+.screen.chapter.edit .card.stages-and-lessons-for-a-chapter {
+    clear: both;
+    height: 330px;
+    margin: 5px;
+    overflow: auto;
+}
+.screen.chapter.edit .card.stages-and-lessons-for-a-chapter li i{
+    float: right;
+    color: #232531;
+}
+#availableLessonsList,#availableStagesList, #ChapterLessonsAndStagesCollectionList {
+    list-style-type: none;
+}
+#availableLessonsList li , #availableStagesList li, #ChapterLessonsAndStagesCollectionList li{
+    font-size: 1.2em;
+    border: 1px solid #eee;
+    color: #232531;
+    cursor: pointer;
+}
+#availableLessonsList li {
+    background-color: #5573EC;
+    color: #232531;
+}
+#availableStagesList li {
+    background-color: #6477C3;
+}
+#ChapterLessonsAndStagesCollectionList li {
+    background-color: #8898DA;
+    color: #232531;;
+}
+/**Chapter-View**/
+.screen.chapter .card.title {
+    font-size: x-large;
+/*Available Stages*/
+}
+.screen.chapter .card.stages {
+    position: unset;
+    width: 672px;
+    height: 250px;
+    float: left;
+    margin: 5px;
+    overflow: auto;
+}
+/*Available Lessons*/
+.screen.chapter .card.lessons {
+    position: unset;
+    width: 672px;
+    height: 250px;
+    float: left;
+    margin: 5px;
+    overflow: auto;
+}
+/*Chapter Elements*/
+.screen.chapter .card.stages-and-lessons-for-a-chapter {
+    clear: both;
+    height: 330px;
+    margin: 5px;
+    overflow: auto;
+}

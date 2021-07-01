@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+  {% block head %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Créditos</title>{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/credits.css') }}">
+    {% endblock %}
+{% endblock %}
+{% block body %}
+
+<div class="screen">
+
+    <!-- Credits -->
+
+    <section class="credits-page-card">
+        <div class="card-content">
+            <h4 class="credits-page-title">CRÉDITOS DEL JUEGO</h4>
+            <br><br>
+
+
+            <h4><span>"Diseño del juego: <a href="https://github.com/eltortuganegra"><span>Jorge"</span></a></span></h4>
+            <h4><span>"Equipo de desarrollo: </span><span><a href="https://github.com/Lospitao">Laura</a>/<a href="https://github.com/eltortuganegra">Jorge</a></span></h4>
+            <h4><span>"Diseño artístico: </span><span>TBD"</span></h4>
+
+        </div>
+    </section>
+   <!--UI WEB DESIGN USED https://codepen.io/KaioRocha/pen/YoEVvZ-->
+
+</div>
+
+{% endblock %}

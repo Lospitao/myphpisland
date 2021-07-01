@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Página de Escenario</title>{% endblock %}
+    {% block stylesheets%}
+    {{ parent() }}
+        <!-- Howler CDN Javascript -->
+        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.js'></script>
+        <script src={{ asset('js/stageView/stage-ambient-dialog-controls.js') }}></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/stagesView.css') }}">
+    {% endblock %}
+{% endblock %}
+{% block body %}
+<div class="screen">
+
+    <!-- Stage Background Image -->
+    <section class="background-image view">
+        <div class="stage-view" id="stage-view" data-uuid="{{ stageUuid }}">
+            <img class="small" id="background_image" alt="Imagen de fondo del escenario" src="/resources/stages/{{ stageUuid }}/background-image.jpeg" >
+
+        </div>
+    </section>
+    <div class="next_button_section">
+        <!--Next button appears here after sound is played-->
+    </div>
+
+</div>
+{% endblock %}

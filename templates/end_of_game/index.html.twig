@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Fin del juego</title>{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
+    {% endblock %}
+{% endblock %}
+{% block body %}
+
+<div class="screen">
+
+    <!-- End Of Game -->
+
+    <section class="end-of-game-card">
+        <div class="card-content">
+            <h1 class="end-of-game-title">¡Enhorabuena!</h1>
+            <h4>Ya eres un gran pirata conocido cuyo nombre se reconoce en todos los mares.</h4>
+            <h4>Esperemos que pronto puedas abordar nuevas aventuras.</h4>
+            <a href="{{ path('credits_page') }}" class="waves-effect waves-light btn-large">Pulsa para ver los créditos</a>
+        </div>
+    </section>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% block head %}
+    {% block title %}<title>¡Cargando nueva etapa!</title>{% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/next-page.css') }}">
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+<div class="screen">
+    <div class="loading-page">
+        <h1 class="loading-element">
+            Cargando...
+        </h1>
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

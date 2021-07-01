@@ -1,0 +1,111 @@
+
+/********Base component*********/
+.nav-wrapper {
+    background-color: #8993be ;
+}
+.avatar img  {
+    margin-top: 5px;
+    margin-left: 5px;
+    min-width:30px;
+    width: 2%;
+    border-radius: 60%;
+    border: 1px white;
+    vertical-align: baseline;
+}
+i.material-icons.default_avatar {
+    display: inline;
+    margin-top: 5px;
+    margin-left: 5px;
+    border-radius: 60%;
+    border: 1px white;
+    vertical-align: baseline;
+}
+
+.flash-success {
+    margin: 30px 247px 20px 240px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    color: #449592;
+    text-align: center;
+    background-color: #B2EEE0;
+    border:1px solid #449592;
+    border-radius: 10px;
+}
+.flash-error {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    color:#900C3F;
+    text-align: center;
+    background-color: #EEC0B2;
+    border:1px solid #900C3F;
+    border-radius: 10px;
+}
+.flash-alert {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    color:#e0a800;
+    text-align: center;
+    background-color: #eeff41;
+    border: 1px solid #e0a800;;
+    border-radius: 10px;
+}
+/*Overriding materialize properties for materialize default colors*/
+.btn, .btn-large, .btn-small {
+background-color: #5E6BA0;
+}
+.btn:hover, .btn-large:hover, .btn-small:hover{
+    background-color: #B8BFDB;
+}
+a {
+    color:#5E6BA0;
+    font-weight: bolder;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label{
+    color: #5E6BA0 !important;
+    font-weight: bolder;
+}
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly])
+{
+    -webkit-box-shadow: none !important;
+    color: #5E6BA0 !important;
+    box-shadow: #5E6BA0 !important;
+    border-bottom: #5E6BA0 !important;
+}
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+
+}
+
+.card .card-content {
+    padding: 5px;
+}
+
+.screen {
+    width: 1366px;
+    height: 768px;
+    margin: auto;
+    position: relative;
+}
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}

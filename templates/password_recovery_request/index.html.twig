@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+
+    {% block title %}<title>Página de solicitud de recuperación de contraseña</title>{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/password-recovery.css') }}">
+    {% endblock %}
+{% endblock %}
+
+
+{% block body %}
+<div class="screen">
+    <!-- Password Recovery -->
+
+    <form action="{{ path('PasswordRecoveryRequest') }}" method=post>
+        <p>Por favor, introduce tu correo electrónico</p>
+        <label for="email_for_password_recovery">Correo electrónico</label>
+        <input type="text" name="email_for_password_recovery" id="email_for_password_recovery" class="form-control" required autofocus><br><br><br>
+        <button class="btn btn-lg btn-primary" id="submit_email_for_password_recovery" type="submit">
+            Enviar Código para reestablecer la contraseña
+        </button>
+
+    </form>
+
+
+</div>
+
+{% endblock %}

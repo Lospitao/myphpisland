@@ -1,0 +1,11 @@
+<div class="availableKatasList">
+    <ul id="availableKatasList" class="connectedSortable availableKatas">
+        {% for availableKata in availableKatas %}
+                <li class="ui-state-default availableKataElement" data-title="{{ availableKata['title'] }}" data-uuid="{{ availableKata['uuid'] }}">
+                    {{ availableKata['title'] }}
+                    <a href="#"><i class="tiny material-icons availableKata"  data-title="{{ availableKata['title'] }}" data-uuid="{{ availableKata['uuid'] }}" >add_circle</i></a>
+                </li>
+
+        {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,98 @@
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+
+}
+
+.card .card-content {
+    padding: 5px;
+}
+
+.modal .success-message {
+
+}
+.screen {
+    width: 1366px;
+    height: 768px;
+    margin: auto;
+}
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}
+/**
+Title Component
+*/
+.card.title {
+    width:1360px;
+}
+.card.title textarea{
+    border:none
+}
+/**
+Available Chapters Component
+*/
+.card.available-chapters {
+    width: 670px;
+    height: 680px;
+    margin: 5px;
+    float: left;
+}
+.card.available-chapters li {
+    border-top: #0c0c0d;
+    border-bottom: #0c0c0d;
+}
+.card.available-chapters li i {
+    float: right;
+}
+
+
+/**
+Ordered Game Chapters List
+*/
+.card.game-chapters {
+    width: 670px;
+    height: 680px;
+    margin: 5px;
+    float: right;
+}
+.card.game-chapters li i {
+    float: right;
+}
+/*Drag and Drop Style*/
+#availableChaptersList, #gameChaptersList {
+    list-style-type: none;
+}
+#availableChaptersList li , #gameChaptersList li{
+    font-size: 1.2em;
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+#availableChaptersList li {
+    background-color: #6477C3;
+    color: #232531;
+    cursor: pointer;
+}
+#gameChaptersList li {
+    background-color: #8898DA;
+    color: #232531;
+}
+/**
+Ordered Game Chapters List View Template
+*/
+.card.game-chapters-view {
+    width: 1360px;
+    height: 600px;
+}
+.title.view-card {
+    border:none;
+}
+.tiny.material-icons {
+    color: #232531;
+}

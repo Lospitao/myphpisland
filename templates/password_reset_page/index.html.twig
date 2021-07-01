@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+    {% block title %}<title>Página de reestablecimiento de la contraseña</title>{% endblock %}
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+        {{ parent() }}
+        <!-- login stylesheet -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/password-recovery.css') }}">
+    {% endblock %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="screen">
+
+    <!-- Password Recovery -->
+
+    <form action="{{ path('password-recovery') }}"method=post>
+        <p>Por favor, introduce el código para restablecer la contraseña</p>
+        <label for="code_for_password_recovery">Código para restaurar la constraseña</label>
+        <input type="text" name="code_for_password_recovery" id="code_for_password_recovery" class="form-control" required autofocus><br><br><br>
+        <label for="new_password">Nueva contraseña</label>
+        <input type="password" name="new_password" id="new_password" class="form-control" required><br><br><br>
+        <button class="btn btn-lg btn-primary" id="submit_code_for_password_recovery" type="submit">
+            Establecer nueva contraseña
+        </button>
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,7 +1,15 @@
 security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -9,7 +17,18 @@ security:
         main:
             anonymous: true
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\LoginAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: app_login
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -19,6 +38,22 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+    #Note: All the role names must be in capital letters and be preceded by ROLE_ otherwise it won't work
+
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: /forgot_my_password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: /password-recovery, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: /create, roles: ROLE_ADMIN }
+         - { path: /editor, roles: ROLE_ADMIN }
+         - { path: /profile, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /games, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /chapters, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /lessons, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /stages, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /katas, roles: IS_AUTHENTICATED_FULLY }
+
+
+
+    role_hierarchy:
+
