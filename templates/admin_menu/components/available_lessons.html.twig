@@ -1,0 +1,34 @@
+<head>
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
+</head>
+<div class="availableLessonList">
+    <ul id="availableLessonList" class="collection availableLesson">
+        {% for availableLesson in availableLessons %}
+            <li class="ui-state-default availableLessonElement" data-title="{{ availableLesson['title'] }}" data-uuid="{{ availableLesson['uuid'] }}">
+                <a class="link" href="{{ path('lessons_editor', {'uuid': availableLesson['uuid'] }) }}">
+                    {{ availableLesson['title'] }} <i class="material-icons">create</i>
+                </a>
+                <!-- Modal Trigger -->
+                <a class="remove-link waves-effect waves-light modal-trigger" href="#{{ availableLesson['uuid'] }}">
+                    <i data-uuid="{{ availableLesson['uuid']}}" class="remove-icon material-icons" >delete_forever</i>
+                </a>
+                <!-- Modal Structure -->
+                <div data-uuid="{{ availableLesson['uuid'] }}" id="{{ availableLesson['uuid'] }}" class="modal modal-dialog-centered">
+                    <div class="modal-content">
+                        <h4>Borrar Juego</h4>
+                        <p>Estás a punto de tirar por la borda este juego, grumete, ¿estás seguro?</p>
+                    </div>
+                    <div data-uuid="{{ availableLesson['uuid'] }}" class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">No</a>
+                        <a data-uuid="{{ availableLesson['uuid'] }}" href="{{ path('lessons_remove', {'lessonUuid': availableLesson['uuid']}) }}"  class="waves-effect waves-green btn-flat">Sí</a>
+
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -3,4 +3,10 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/templates/games/components/availableChapters.html.twig" />
+  </component>
+>>>>>>> 6bac92cc636d17e3dde4fd6160c44f9fc7b555db
 </project>

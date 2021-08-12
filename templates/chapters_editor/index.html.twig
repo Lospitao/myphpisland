@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    {% block title %}<title>Editor del capítulo</title>{% endblock %}
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/chapters.css') }}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="{{ asset('js/chapterEdit/chapter-title-update.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/chapterEdit/add-lesson-stage-toChapter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/chapterEdit/remove-lesson-stage-fromChapter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/chapterEdit/update-availble-chapter-elements-and-chapter-elements-by-drag-and-drop.js') }}"></script>
+    {% endblock %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="screen chapter edit">
+        <!-- title -->
+        <section class="title card">
+            <div class="card-content">
+                <textarea class="title-text" id="chapter-title"  name="chapter-title" placeholder="Título del capítulo" data-uuid={{ chapterUuid }}>{{ chapterTitle }}</textarea>
+            </div>
+        </section>
+        <!-- Stages section -->
+        <section class="stages card">
+            <div class="card-content">
+                <span class="card-title">Escenarios</span>
+                {% include 'chapters_editor/editor_components/availableStages.html.twig' %}
+            </div>
+        </section>
+        <!-- Lessons section -->
+        <section class="lessons card">
+            <div class="card-content">
+                <span class="card-title">Lecciones</span>
+                {% include 'chapters_editor/editor_components/availableLessons.html.twig' %}
+            </div>
+        </section>
+        <!-- Chapter section -->
+        <section class="stages-and-lessons-for-a-chapter card">
+            <div class="card-content">
+                <span class="card-title">Escenarios y lecciones del capítulo</span>
+                {% include 'chapters_editor/editor_components/stagesLessonsCollection.html.twig' %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

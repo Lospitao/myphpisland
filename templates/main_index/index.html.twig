@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    {% block title %}<title>Página de inicio del juego</title>{% endblock %}
+    <meta charset="UTF-8">
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
+    {% endblock %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="screen main">
+
+    <!-- Game Trigger -->
+
+
+    <section class="game-card-trigger">
+        <div class="card-content">
+            <a id="game-trigger-button" class="waves-effect waves-dark btn" href="{{ path('app_login') }}">Jugar</a>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

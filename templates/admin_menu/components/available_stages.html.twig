@@ -1,0 +1,35 @@
+<head>
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
+</head>
+<div class="availableStageList">
+    <ul id="availableStageList" class="collection availableStage">
+        {% for availableStage in availableStages%}
+            <li class="ui-state-default availableStageElement" data-title="{{ availableStage['title'] }}" data-uuid="{{ availableStage['uuid'] }}">
+                <a class="link" href="{{ path('stages_editor', {'stageUuid': availableStage['uuid']}) }}">
+                    {{ availableStage['title'] }} <i class="material-icons">create</i>
+                </a>
+                <!-- Modal Trigger -->
+                <a class="remove-link waves-effect waves-light modal-trigger" href="#{{ availableStage['uuid'] }}">
+                    <i data-uuid="{{ availableStage['uuid']}}" class="remove-icon material-icons" >delete_forever</i>
+                </a>
+
+                <!-- Modal Structure -->
+                <div data-uuid="{{ availableStage['uuid'] }}" id="{{ availableStage['uuid'] }}" class="modal modal-dialog-centered">
+                    <div class="modal-content">
+                        <h4>Borrar Juego</h4>
+                        <p>Estás a punto de tirar por la borda este juego, grumete, ¿estás seguro?</p>
+                    </div>
+                    <div data-uuid="{{ availableStage['uuid'] }}" class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">No</a>
+                        <a data-uuid="{{ availableStage['uuid'] }}" href="{{ path('stages_remove', {'stageUuid': availableStage['uuid'] }) }}"  class="waves-effect waves-green btn-flat">Sí</a>
+
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

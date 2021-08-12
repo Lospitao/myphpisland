@@ -1,0 +1,10 @@
+<div class="availableLessonsList">
+<ul id="availableLessonsList" class="connectedSortable availableLessons">
+    {% for availableLesson in availableLessons %}
+        <li class="ui-state-default availableLessonElement" data-title="{{ availableLesson['lessonTitle'] }}" data-uuid="{{ availableLesson['lessonUuid'] }}">
+            {{ availableLesson['lessonTitle'] }}
+            <a href="#"><i class="tiny material-icons availableLesson"  data-title="{{ availableLesson['lessonTitle'] }}" data-uuid="{{ availableLesson['lessonUuid'] }}" >add_circle</i></a>
+        </li>
+    {% endfor %}
+</ul>
+</div>

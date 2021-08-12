@@ -1,0 +1,97 @@
+:root {
+    --blue-color: #1E90FF;
+}
+/*****************
+General editor_components
+ *****************/
+.card {
+
+}
+
+.card .card-content {
+    padding: 5px;
+}
+
+.screen {
+    width: 1366px;
+    height: 768px;
+    margin: auto;
+}
+
+/**
+ Menu component
+ */
+.screen .menu {
+    background-color: var(--blue-color);
+}
+/**
+Informtion Component
+*/
+.card.information {
+    width:1360px;
+    height: 200px;
+}
+.information-title {
+    padding-left: 20px;
+    padding-top: 10px;
+}
+.card.information img{
+    padding-left: 20px;
+    min-width:35px;
+    width: 10%;
+    border:none;
+    border-radius: 8%;
+}
+.card.information .info{
+    position: absolute;
+    top: 35px; left: 400px;
+}
+
+/**
+Password component
+ */
+.card.password {
+    width: 1360px;
+    height: 330px;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 8px;
+}
+
+.card.password input{
+    width: 500px;
+}
+/**
+Profile picture component
+ */
+.card.profile-pic {
+    width: 1360px;
+    height: 200px;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 8px;
+}
+#profile-pic-update-section {
+    width: 1360px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+}
+#profile_picture_thumbnail {
+
+    padding-right:150px;
+
+}
+#profile_picture_update, #profile_picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.left-align {
+    padding-left: 20px;
+}
+h4 {
+    color: #3A4982;
+}

@@ -1,0 +1,140 @@
+
+/**
+Title Component
+*/
+.card.title {
+    width:1360px;
+}
+.card.title textarea{
+    border:none
+}
+/**
+Description component
+ */
+.card.description {
+    width: 500px;
+    height: 400px;
+    margin: 5px;
+    float: left;
+}
+.card.description textarea{
+    width: 470px;
+    height: 307px;
+    margin: 5px;
+    float: left;
+    border: none;
+}
+.card.description.show {
+    width: 550px;
+    height: 650px;
+    margin: 5px;
+    float: left;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+.card.description.show .card-content {
+    padding: 20px 20px 20px 20px;
+}
+/**
+Kata-test component
+ */
+.card.kata-test {
+    width: 844px;
+    height: 240px;
+    margin: 5px;
+    float: right;
+}
+.card.kata-test .code{
+    height: 160px;
+    max-height: 160px;
+}
+.card.kata-test.show {
+    width: 450px;
+    height: 240px;
+    margin: 5px;
+    float: left;
+}
+.card.kata-test.show .code{
+    width: 420px;
+    height: 160px;
+    margin: 5px;
+    float: left;
+    border: none;
+}
+.card.kata-test .CodeMirror-scroll {
+    height: 190px;
+    max-height: 180px;
+}
+.card.kata-test .CodeMirror.cm-s-eclipse {
+    height: 190px;
+    max-height: 180px;
+}
+/**
+Code editor component
+ */
+.card.code-editor {
+    width: 844px;
+    height: 400px;
+    margin: 5px;
+    float: right;
+}
+
+.card.code-editor .code {
+    height: 307px;
+}
+.card.code-editor.show {
+    width: 795px;
+    height: 400px;
+    margin: 5px;
+    float: right;
+}
+
+.card.code-editor.show .code {
+    height: 307px;
+}
+.card.code-editor .btn.execute-test  {
+    float: right;
+    background-color: #5E6BA0;
+}
+/**
+Examples component
+ */
+.card.examples {
+    width: 500px;
+    height: 240px;
+    margin: 5px;
+    float: left;
+
+}
+
+.card.examples .code {
+    width: 470px;
+    height: 160px;
+    margin: 5px;
+    float: left;
+    border: none;
+}
+.card.examples.show {
+    width: 795px;
+    height: 240px;
+    margin: 5px;
+    float: right;
+}
+
+.card.examples.show .code {
+    height: 160px;
+    max-height: 160px;
+}
+.card.examples .CodeMirror-scroll {
+    height: 190px;
+    max-height: 180px;
+}
+.card.examples .CodeMirror.cm-s-eclipse {
+    height: 180px;
+    max-height: 160px;
+}
+
+.footer {
+    text-align: center;
+}

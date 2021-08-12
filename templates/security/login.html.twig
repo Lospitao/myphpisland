@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    {% block title %}<title>Página de inicio de sesión</title>{% endblock %}
+    {% block stylesheets %}
+    {{ parent () }}
+      <!-- login stylesheet -->
+     <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}">
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="screen">
+
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    Has iniciado sesión como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Pulsa aquí</a> para salir de la sesión.
+                </div>
+            {% endif %}
+
+
+            <h2 class="h3 mb-3 font-weight-normal">Por favor, inicie sesión</h2>
+            <label for="inputEmail">Correo electrónico</label>
+            <input type="text" name="email" id="inputEmail" class="form-control" required autofocus>
+            <label for="inputPassword">Contraseña</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <br>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"/>
+                    <span>Recuérdame</span>
+                </label>
+            </div>
+
+            <br>
+            <button class="btn btn-lg btn-primary" type="submit">
+                Iniciar sesión
+            </button>
+
+            <br><br>
+            <p><a class="register-link" href="{{ path('register') }}">Regístrate</a>, si aún no tienes una cuenta.</p>
+            <br>
+            <a class="password-recovery" href="{{ path('PasswordRecoveryRequest') }}">¿Has olvidado tu contraseña?</a>
+        </form>
+    </div>
+
+{% endblock %}

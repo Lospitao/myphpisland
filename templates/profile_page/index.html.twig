@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    {% block title %}<title>Página de perfil</title>{% endblock %}
+    <meta charset="UTF-8">
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/profilepage.css') }}">
+    {% endblock %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="screen">
+    <!-- Information section -->
+    <section class="information card">
+        <h4 class="information-title">Datos de la cuenta</h4>
+        <div class="card-content">
+            <div class="info">
+                <br>
+                <h5 id="username" class={{ app.user.username }}>Nombre de usuario: {{ app.user.username }}</h5>
+                <h5>Correo electrónico: {{ app.user.email }}</h5>
+            </div>
+        </div>
+    </section>
+
+    <!-- Password section -->
+    <section class="password card">
+        <h4 class="left-align">Modificar password</h4>
+        <form action="{{ path('profile') }}" method="post">
+            <label for="current_password">Contraseña actual</label>
+            <input type="password" name="current_password" id="current_password" class="form-control" required autofocus><br>
+            <label for="new_password">Nueva contraseña</label>
+            <input type="password" name="new_password" id="new_password" class="form-control" required><br>
+            <label for="repeat_password">Repetir contraseña</label>
+            <input type="password" name="repeat_password" id="repeat_password" class="form-control" required ><br><br>
+            <button class="btn btn-lg btn-primary" id="update_password" type="submit">
+            Establecer nueva contraseña
+        </button>
+        </form>
+    </section>
+    <!-- Profile picture section -->
+    <section class="profile-pic card">
+        <h4 class="left-align">Imagen de perfil</h4>
+        <div id="profile-pic-update-section">
+            <div class="profile_picture_thumbnail_section"></div>
+            {% if app.user.profilePic %}
+                <img width="200px" id="profile_picture_thumbnail" src="/resources/users/{{ app.user.username }}/{{ app.user.profilePic }}" alt="">
+            {% else %}
+                <i id="profile_picture_thumbnail"class="large material-icons profile_picture_thumbnail">account_box</i>
+            {% endif %}
+            <div class="profile_picture_update_form"></div>
+            {{ form_start(profilePictureForm) }}
+            {{ form_row(profilePictureForm.profilePic) }}
+            <br>
+            {{ form_row(profilePictureForm.submit) }}
+            {{ form_end(profilePictureForm) }}
+        </div>
+
+    </section>
+
+    <!--
+    ##Social section##
+    <section class="social card">
+        <div class="card-content">
+            <a
+                    id="github-link"
+                    class="waves-effect waves-light btn-large social github"
+                    href="https://github.com/login/oauth/authorize?redirect_uri=https://localhost:8000/profile"
+                    SameSite=None
+                    Secure
+            >
+                <i class="fa fa-github"></i> Sign in with github</a>
+            <br><br><br>
+            <a id="twitter-link" class="waves-effect waves-light btn-large social twitter">
+                <i class="fa fa-twitter"></i>Sign in with twitter</a>
+        </div>
+    </section>
+-->
+</div>
+{% endblock %}

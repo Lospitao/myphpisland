@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Página de edición del escenario</title>{% endblock %}
+    {% block stylesheets%}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('js/stageEdit/stage-title-update.js') }}"></script>
+        <script>
+            $(document).ready(function(){
+                $('.materialboxed').materialbox();
+            });
+        </script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/stages.css') }}">
+    {% endblock %}
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="screen">
+        <!-- Title section -->
+        <section class="title card">
+            <div class="card-content">
+                <span id="title" class="card-title">
+                     <label for="stage-title"></label>
+                    <textarea id="stage-title" name="stage-title" placeholder="Título del escenario" data-uuid="{{ stageUuid }}">{{ stageTitle }}</textarea>
+                </span>
+            </div>
+        </section>
+        <!-- Ambient Sound section -->
+        <section class="ambient-sound card">
+            <div class="card-content">
+                <span class="card-title">Sonido ambiente</span>
+                {{ form(ambientSoundUploadForm) }}
+                <p>Pulsar para subir o modificar el actual archivo de sonido ambiente</p>
+                <audio controls autoplay>
+                    <source src="/resources/stages/{{ stageUuid }}/ambient.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <h6 class="saved-files">{{ stageAmbientSound }}</h6>
+            </div>
+        </section>
+        <!-- Dialog section -->
+        <section class="dialog card">
+            <div class="card-content">
+                <span class="card-title">Diálogo</span>
+                {{ form(dialogUploadForm) }}
+                <p>Pulsar para subir o modificar el actual archivo de diálogo</p>
+                <audio controls autoplay>
+                    <source src="/resources/stages/{{ stageUuid }}/dialog.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <h6 class="saved-files">{{ stageDialog }}</h6>
+            </div>
+        </section>
+        <!-- Stage Background Image -->
+        <section class="background-image card">
+            <div class="card-content">
+                <span class="card-title">Fondo de escenario</span>
+                {{ form(backgroundImageUploadForm) }}
+                <p>Pulsar para subir o modificar el actual archivo de fondo de escenario</p>
+                <div class="saved-background-image">
+                    <img id="saved-image" class="materialboxed" width="300" src="/resources/stages/{{ stageUuid }}/background-image.jpeg" alt="saved image">
+                    <h6 class="saved-files">{{ stageBackgroundImage }}</h6>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+
+        </footer>
+    </div>
+{% endblock %}
